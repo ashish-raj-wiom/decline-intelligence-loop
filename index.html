@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Decline Intelligence — a self-learning loop for CSP declines</title>
+<title>Decline Intelligence — Service not available · a self-learning loop</title>
 <style>
   :root{
     color-scheme: light;
@@ -53,142 +53,147 @@
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
   @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
-  body{
-    background:var(--plane); color:var(--ink);
-    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-    font-size:15.5px; line-height:1.58; -webkit-font-smoothing:antialiased;
-  }
+  body{background:var(--plane); color:var(--ink); font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; font-size:15.5px; line-height:1.58; -webkit-font-smoothing:antialiased}
   .wrap{max-width:1000px; margin:0 auto; padding:0 26px}
   main{padding-bottom:100px}
 
-  h1{font-size:clamp(30px,5vw,46px); font-weight:780; letter-spacing:-.025em; line-height:1.04; text-wrap:balance}
+  h1{font-size:clamp(30px,5vw,46px); font-weight:780; letter-spacing:-.025em; line-height:1.05; text-wrap:balance}
   h2{font-size:25px; font-weight:730; letter-spacing:-.015em; text-wrap:balance}
   h3{font-size:17px; font-weight:680; letter-spacing:-.01em}
   h4{font-size:13.5px; font-weight:680}
   p{color:var(--ink2); max-width:74ch}
   strong{color:var(--ink); font-weight:660}
+  em{font-style:italic}
   code{font-family:ui-monospace,"Cascadia Mono",Consolas,monospace; font-size:.9em; background:var(--sys-wash); color:var(--sys-ink); padding:1px 6px; border-radius:5px}
-
   .eyebrow{font-size:11.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--sys-ink)}
 
-  /* hero */
-  header.hero{
-    background:
-      radial-gradient(1100px 380px at 82% -8%, var(--sys-wash), transparent 62%),
-      radial-gradient(760px 320px at 4% 6%, var(--csp-wash), transparent 60%);
-    border-bottom:1px solid var(--line);
-    padding:74px 0 52px;
-  }
-  .hero .kick{display:flex; gap:9px; align-items:center; margin-bottom:20px}
-  .hero .kick .dot{width:8px;height:8px;border-radius:50%;background:var(--sys)}
-  .hero p.lede{font-size:19px; line-height:1.5; margin-top:22px; max-width:68ch; color:var(--ink2)}
-  .hero p.lede b{color:var(--ink); font-weight:640}
-  .metastrip{display:flex; flex-wrap:wrap; gap:8px 26px; margin-top:26px; font-size:12.5px; color:var(--muted)}
-  .metastrip b{color:var(--ink2); font-weight:640}
   .theme-toggle{position:fixed; top:16px; right:16px; z-index:20; appearance:none; border:1px solid var(--hair); background:var(--surface); color:var(--ink2); width:38px;height:38px;border-radius:10px; cursor:pointer; font-size:16px; box-shadow:0 1px 3px rgba(0,0,0,.06)}
   .theme-toggle:hover{color:var(--ink)}
 
-  section{padding:58px 0; border-bottom:1px solid var(--line)}
-  .sec-head{margin-bottom:26px}
-  .sec-head .eyebrow{margin-bottom:9px}
+  header.hero{background:radial-gradient(1100px 380px at 82% -8%, var(--sys-wash), transparent 62%), radial-gradient(760px 320px at 4% 6%, var(--learn-wash), transparent 60%); border-bottom:1px solid var(--line); padding:70px 0 48px}
+  .hero .kick{display:flex; gap:9px; align-items:center; margin-bottom:20px}
+  .hero .kick .dot{width:8px;height:8px;border-radius:50%;background:var(--sys)}
+  .hero p.lede{font-size:18.5px; line-height:1.5; margin-top:20px; max-width:70ch; color:var(--ink2)}
+  .hero p.lede b{color:var(--ink); font-weight:640}
+  .metastrip{display:flex; flex-wrap:wrap; gap:8px 26px; margin-top:24px; font-size:12.5px; color:var(--muted)}
+  .metastrip b{color:var(--ink2); font-weight:640}
+  .principle{display:flex; gap:12px; align-items:flex-start; margin-top:26px; background:var(--learn-wash); border:1px solid var(--learn); border-radius:12px; padding:14px 17px}
+  .principle .ic{color:var(--learn); font-size:19px; font-weight:800; line-height:1.2}
+  .principle p{max-width:none; font-size:14px; color:var(--ink2)}
+  .principle b{color:var(--ink)}
+
+  section{padding:56px 0; border-bottom:1px solid var(--line)}
+  .sec-head{margin-bottom:24px}
+  .sec-head .eyebrow{margin-bottom:9px; display:block}
   .sec-head p{margin-top:10px; font-size:16px}
 
-  /* the loop ring */
-  .loop{margin:34px 0 6px; display:grid; grid-template-columns:repeat(5,1fr); gap:10px; position:relative}
-  .node{background:var(--surface); border:1px solid var(--tile); border-radius:13px; padding:16px 15px 15px; position:relative}
-  .node .n{font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--muted)}
-  .node h4{margin:7px 0 5px; font-size:15px; color:var(--ink)}
-  .node p{font-size:12.6px; line-height:1.42; color:var(--ink2); max-width:none}
-  .node::after{content:"→"; position:absolute; right:-13px; top:50%; transform:translateY(-50%); color:var(--muted); font-size:15px; z-index:2}
+  /* 5-step loop ribbon */
+  .loop{margin:30px 0 6px; display:grid; grid-template-columns:repeat(5,1fr); gap:10px; position:relative}
+  .node{background:var(--surface); border:1px solid var(--tile); border-radius:13px; padding:15px 14px 14px; position:relative}
+  .node .n{font-size:10.5px; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--muted)}
+  .node h4{margin:7px 0 5px; font-size:14.5px; color:var(--ink)}
+  .node p{font-size:12.3px; line-height:1.4; color:var(--ink2); max-width:none}
+  .node::after{content:"→"; position:absolute; right:-13px; top:34px; color:var(--muted); font-size:15px; z-index:2}
   .node:last-child::after{content:""}
-  .node.s1{border-top:3px solid var(--csp)} .node.s2{border-top:3px solid var(--sys)}
-  .node.s3{border-top:3px solid var(--sys)} .node.s4{border-top:3px solid var(--ink2)}
+  .node.s1{border-top:3px solid var(--csp)} .node.s2{border-top:3px solid var(--csp)}
+  .node.s3{border-top:3px solid var(--sys)} .node.s4{border-top:3px solid var(--sys)}
   .node.s5{border-top:3px solid var(--learn)}
   .loopback{margin-top:12px; display:flex; align-items:center; gap:12px; background:var(--learn-wash); border:1px dashed var(--learn); border-radius:11px; padding:12px 16px; color:var(--ink2); font-size:13.5px}
   .loopback .ico{color:var(--learn); font-size:19px; font-weight:700}
   .loopback b{color:var(--ink)}
   @media (max-width:760px){.loop{grid-template-columns:1fr 1fr} .node::after{content:""}}
 
-  /* generic cards */
   .grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px}
   .grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
   @media (max-width:760px){.grid2,.grid3{grid-template-columns:1fr}}
-  .card{background:var(--surface); border:1px solid var(--tile); border-radius:13px; padding:20px}
+  .card{background:var(--surface); border:1px solid var(--tile); border-radius:13px; padding:19px}
   .card h3{margin-bottom:6px}
   .card p{font-size:14px}
-  .card.sys{border-top:3px solid var(--sys)}
-  .card.csp{border-top:3px solid var(--csp)}
-  .card.learn{border-top:3px solid var(--learn)}
+  .card.sys{border-top:3px solid var(--sys)} .card.csp{border-top:3px solid var(--csp)} .card.learn{border-top:3px solid var(--learn)}
 
-  /* stat row */
-  .stats{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin:8px 0 4px}
-  @media (max-width:760px){.stats{grid-template-columns:1fr 1fr}}
-  .stat{background:var(--raise); border:1px solid var(--tile); border-radius:12px; padding:15px 16px}
-  .stat .v{font-size:27px; font-weight:750; letter-spacing:-.02em; font-variant-numeric:tabular-nums}
-  .stat .k{font-size:12px; color:var(--muted); margin-top:3px}
-  .stat.csp .v{color:var(--csp)} .stat.sys .v{color:var(--sys-ink)}
+  .stats{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:6px 0 4px}
+  @media (max-width:680px){.stats{grid-template-columns:1fr}}
+  .stat{background:var(--raise); border:1px solid var(--tile); border-radius:12px; padding:16px 17px}
+  .stat .dir{font-size:12px; font-weight:750; letter-spacing:.02em}
+  .stat.down .dir{color:var(--learn)} .stat.up .dir{color:var(--learn)}
+  .stat .m{font-size:15.5px; font-weight:680; color:var(--ink); margin:6px 0 3px; letter-spacing:-.01em}
+  .stat .k{font-size:12.5px; color:var(--muted)}
 
-  /* tables */
-  .twrap{overflow-x:auto; border:1px solid var(--tile); border-radius:12px; background:var(--surface); margin:6px 0}
-  table{border-collapse:collapse; width:100%; font-size:13.7px}
-  th{text-align:left; font-size:10.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); padding:11px 15px; border-bottom:1px solid var(--line); white-space:nowrap}
-  td{padding:10px 15px; border-bottom:1px solid var(--line); color:var(--ink2); vertical-align:middle}
-  tr:last-child td{border-bottom:none}
-  td.num,th.num{text-align:right; font-variant-numeric:tabular-nums}
-  td b{color:var(--ink); font-weight:660}
-  .bar{height:8px; border-radius:0 4px 4px 0; background:var(--sys); display:inline-block; vertical-align:middle; margin-right:8px}
-  .tag{display:inline-block; font-size:10.5px; font-weight:680; padding:2px 8px; border-radius:20px; letter-spacing:.02em; white-space:nowrap}
-  .tag.keep{background:var(--learn-wash); color:var(--learn)}
-  .tag.drop{background:rgba(208,67,63,.12); color:var(--stop)}
-  .tag.club{background:var(--csp-wash); color:var(--csp)}
-  .tag.new{background:var(--sys-wash); color:var(--sys-ink)}
+  /* step rail */
+  .steprail{margin-top:12px}
+  .step{display:grid; grid-template-columns:54px 1fr; gap:20px; padding-bottom:30px; position:relative}
+  .step:not(:last-child)::before{content:""; position:absolute; left:26px; top:56px; bottom:2px; width:2px; background:var(--line)}
+  .step .mk{width:52px;height:52px;border-radius:15px; display:flex;align-items:center;justify-content:center; font-weight:770; font-size:19px; position:relative; z-index:1; background:var(--sys-wash); color:var(--sys-ink); border:1px solid var(--hair)}
+  .step.cap .mk{background:var(--csp-wash); color:var(--csp)}
+  .step.act .mk{background:var(--learn-wash); color:var(--learn)}
+  .step .body{padding-top:3px; min-width:0}
+  .step .body .lbl{font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--muted)}
+  .step .body h3{margin:4px 0 7px; font-size:19px}
+  .step .body>p{font-size:14.5px}
+  .owner{display:inline-block; font-size:10.5px; font-weight:700; letter-spacing:.03em; padding:2px 9px; border-radius:20px; margin-left:8px; vertical-align:middle}
+  .owner.here{background:var(--csp-wash); color:var(--csp)}
+  .owner.genie{background:var(--learn-wash); color:var(--learn)}
+  .owner.das{background:var(--sys-wash); color:var(--sys-ink)}
 
-  /* phone mock */
-  .mock{background:var(--raise); border:1px solid var(--tile); border-radius:16px; padding:20px; display:flex; flex-direction:column; gap:11px}
-  .mock .mhead{font-size:12px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); display:flex; align-items:center; gap:8px}
-  .mock .sheet{background:var(--surface); border:1px solid var(--hair); border-radius:13px; overflow:hidden}
-  .mock .sheet .title{padding:13px 15px 4px; font-weight:680; font-size:14.5px; color:var(--ink)}
-  .mock .sheet .sub{padding:0 15px 11px; font-size:12.5px; color:var(--muted)}
-  .opt{display:flex; align-items:center; gap:11px; padding:12px 15px; border-top:1px solid var(--line); font-size:14px; color:var(--ink2)}
-  .opt .rad{width:16px;height:16px;border-radius:50%;border:2px solid var(--muted); flex:none}
-  .opt.sel .rad{border-color:var(--sys); box-shadow:inset 0 0 0 3px var(--sys)}
-  .opt.sel{color:var(--ink); font-weight:600}
-  .opt .shuf{margin-left:auto; font-size:10.5px; color:var(--muted)}
-  .interrupt{background:var(--sys-wash); border:1px solid var(--sys); border-radius:13px; padding:15px 16px}
+  /* mock popup */
+  .interrupt{background:var(--surface); border:1px solid var(--sys); border-radius:13px; padding:15px 16px; max-width:420px}
   .interrupt .ttl{font-weight:700; font-size:14.5px; color:var(--ink); display:flex; align-items:center; gap:8px; margin-bottom:7px}
   .interrupt p{font-size:13px; color:var(--ink2); max-width:none}
   .connlist{display:flex; flex-direction:column; gap:7px; margin:11px 0}
-  .conn{display:flex; align-items:center; gap:10px; background:var(--surface); border:1px solid var(--hair); border-radius:9px; padding:8px 11px; font-size:12.5px}
+  .conn{display:flex; align-items:center; gap:10px; background:var(--raise); border:1px solid var(--hair); border-radius:9px; padding:8px 11px; font-size:12.5px}
   .conn .pin{color:var(--learn)} .conn .d{color:var(--muted); margin-left:auto; font-variant-numeric:tabular-nums}
-  .btnrow{display:flex; gap:9px; margin-top:6px}
+  .btnrow{display:flex; gap:9px; margin-top:8px}
   .btn{flex:1; text-align:center; padding:10px; border-radius:9px; font-size:13px; font-weight:640; border:1px solid var(--hair)}
   .btn.primary{background:var(--sys); color:#fff; border-color:var(--sys)}
   .btn.ghost{background:transparent; color:var(--ink2)}
 
-  /* branch diagram */
-  .branch{display:grid; grid-template-columns:1fr; gap:12px; margin-top:6px}
-  .brow{display:grid; grid-template-columns:200px 1fr; gap:14px; align-items:stretch}
-  @media (max-width:680px){.brow{grid-template-columns:1fr}}
-  .bq{background:var(--csp-wash); border:1px solid var(--tile); border-left:3px solid var(--csp); border-radius:10px; padding:13px 15px; font-size:13.5px; color:var(--ink); font-weight:600; display:flex; align-items:center}
-  .bans{background:var(--surface); border:1px solid var(--tile); border-radius:10px; padding:13px 15px}
-  .bans .act{font-size:11px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; margin-bottom:4px}
-  .bans.stop .act{color:var(--stop)} .bans.go .act{color:var(--learn)} .bans.hold .act{color:var(--muted)}
-  .bans p{font-size:13px; max-width:none}
+  /* verification signals */
+  .vsig{display:flex; gap:12px; align-items:flex-start; padding:13px 0; border-bottom:1px solid var(--line)}
+  .vsig:last-child{border-bottom:none}
+  .vsig .conf{flex:none; width:96px; font-size:10.5px; font-weight:700; letter-spacing:.03em; text-transform:uppercase; padding-top:2px}
+  .vsig.hi .conf{color:var(--learn)} .vsig.md .conf{color:var(--sys-ink)} .vsig.lo .conf{color:var(--muted)}
+  .vsig .vb h4{font-size:14.5px; color:var(--ink); margin-bottom:2px}
+  .vsig .vb p{font-size:13.3px; max-width:none}
 
-  /* signal destinations */
-  .dest{display:flex; gap:14px; align-items:flex-start; padding:16px 0; border-bottom:1px solid var(--line)}
-  .dest:last-child{border-bottom:none}
-  .dest .badge{flex:none; width:112px; font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; padding-top:2px}
-  .dest.genie .badge{color:var(--learn)} .dest.quality .badge{color:var(--sys-ink)} .dest.taxo .badge{color:var(--csp)}
-  .dest .body h4{font-size:15px; color:var(--ink); margin-bottom:3px}
-  .dest .body p{font-size:13.6px}
+  /* threshold consequence */
+  .thresh{display:flex; align-items:center; gap:14px; flex-wrap:wrap; background:var(--raise); border:1px solid var(--tile); border-radius:12px; padding:16px 18px; margin-top:6px}
+  .thresh .pt{flex:none; text-align:center}
+  .thresh .pt .cnt{font-size:22px; font-weight:770; font-variant-numeric:tabular-nums; color:var(--ink)}
+  .thresh .pt .lab{font-size:11px; color:var(--muted)}
+  .thresh .arrow{color:var(--muted); font-size:20px}
+  .thresh .res{font-size:13.5px; color:var(--ink2)}
+  .thresh .res b{color:var(--learn)}
 
   .callout{border:1px solid var(--tile); border-left:3px solid var(--sys); background:var(--surface); border-radius:0 12px 12px 0; padding:15px 18px; margin:18px 0}
-  .callout.warn{border-left-color:var(--csp)}
+  .callout.warn{border-left-color:var(--csp)} .callout.good{border-left-color:var(--learn)}
   .callout h4{color:var(--ink); margin-bottom:5px; font-size:14.5px}
   .callout p{font-size:13.8px}
 
-  /* phases */
+  /* scope table */
+  .twrap{overflow-x:auto; border:1px solid var(--tile); border-radius:12px; background:var(--surface)}
+  table{border-collapse:collapse; width:100%; font-size:13.7px}
+  th{text-align:left; font-size:10.5px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); padding:11px 15px; border-bottom:1px solid var(--line); white-space:nowrap}
+  td{padding:11px 15px; border-bottom:1px solid var(--line); color:var(--ink2); vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  td b{color:var(--ink); font-weight:660}
+  .yes{color:var(--csp); font-weight:700} .no{color:var(--muted)}
+
+  /* archive */
+  details.archive{margin-top:8px; border:1px solid var(--tile); border-radius:13px; background:var(--surface); overflow:hidden}
+  details.archive summary{list-style:none; cursor:pointer; padding:17px 20px; display:flex; align-items:center; gap:12px; font-weight:680; color:var(--ink)}
+  details.archive summary::-webkit-details-marker{display:none}
+  details.archive summary .chev{margin-left:auto; color:var(--muted); transition:transform .2s}
+  details.archive[open] summary .chev{transform:rotate(90deg)}
+  details.archive summary .tag{font-size:10.5px; font-weight:680; padding:2px 9px; border-radius:20px; background:var(--tile); color:var(--muted); letter-spacing:.03em}
+  .archbody{padding:2px 20px 22px; border-top:1px solid var(--line)}
+  .archbody .brow{display:grid; grid-template-columns:210px 1fr; gap:14px; margin-top:12px}
+  @media (max-width:680px){.archbody .brow{grid-template-columns:1fr}}
+  .bq{background:var(--csp-wash); border:1px solid var(--tile); border-left:3px solid var(--csp); border-radius:10px; padding:12px 14px; font-size:13.5px; color:var(--ink); font-weight:600; display:flex; align-items:center}
+  .bans{background:var(--raise); border:1px solid var(--tile); border-radius:10px; padding:12px 14px}
+  .bans .act{font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; margin-bottom:4px}
+  .bans.stop .act{color:var(--stop)} .bans.go .act{color:var(--learn)} .bans.hold .act{color:var(--muted)}
+  .bans p{font-size:13px; max-width:none}
+
   ol.phases{list-style:none; counter-reset:p; display:flex; flex-direction:column; gap:11px; margin-top:8px}
   ol.phases li{counter-increment:p; background:var(--surface); border:1px solid var(--tile); border-radius:12px; padding:15px 18px 15px 56px; position:relative; font-size:14px; color:var(--ink2)}
   ol.phases li::before{content:counter(p); position:absolute; left:16px; top:14px; width:26px;height:26px; border-radius:8px; background:var(--sys-wash); color:var(--sys-ink); font-weight:750; font-size:13px; display:flex; align-items:center; justify-content:center; border:1px solid var(--hair)}
@@ -197,7 +202,6 @@
 
   footer{padding:30px 0 60px; color:var(--muted); font-size:12.5px}
   footer p{max-width:none; color:var(--muted)}
-  .lead-in{color:var(--sys-ink); font-weight:640}
 </style>
 </head>
 <body>
@@ -205,280 +209,249 @@
 
 <header class="hero">
   <div class="wrap">
-    <div class="kick"><span class="dot"></span><span class="eyebrow">CSP Decline Intelligence · Product Concept</span></div>
-    <h1>Closing the intelligence gap<br>between the CSP and Wiom</h1>
-    <p class="lede">Every day CSPs tell us <b>why they won't install a booking</b> — and we throw the signal away. Not because it's worthless, but because we can't trust it: we don't know if the CSP picked the reason <b>thoughtfully</b>, and we don't know if the list even <b>covers</b> their real reason. This is a plan to fix the input, help the CSP decide well, verify what they claim, and <b>feed every confirmed signal back into the system</b> — a self-learning loop.</p>
+    <div class="kick"><span class="dot"></span><span class="eyebrow">CSP Decline Intelligence · Scope 1 · one reason, end-to-end</span></div>
+    <h1>Send each CSP only the bookings<br>he'll actually install</h1>
+    <p class="lede">When a CSP says <b>"service not available at this location"</b> and declines, today we throw the signal away and re-offer the booking blindly — often to the wrong CSP, again. This turns that one reason into a <b>self-learning loop</b>: capture it in context, help the CSP avoid a careless decline, verify it's real, and let <b>Genie</b> stop routing that pocket to a CSP who won't serve it. The objective is simple — <b>filter the clutter, so every CSP gets only quality, serviceable bookings.</b></p>
     <div class="metastrip">
+      <span><b>Reason in scope:</b> "Service not available at this location" (~65% of all declines)</span>
       <span><b>Builds on:</b> the CSP decline analysis (Jun–Aug 2026)</span>
-      <span><b>Data:</b> ES install candidates + transition log · last 30–45 days</span>
       <span><b>Status:</b> concept for review</span>
+    </div>
+    <div class="principle">
+      <span class="ic">✓</span>
+      <p><b>A decline is not a bad thing.</b> It doesn't count against the CSP and it's never framed as a strike. It's the most useful signal he can give us — it tells us where <em>not</em> to send him next time. The entire design treats a decline as a gift, not a failure.</p>
     </div>
   </div>
 </header>
 
 <main>
 
-<!-- THE LOOP -->
+<!-- LOOP -->
 <section id="loop">
   <div class="wrap">
     <div class="sec-head">
-      <div class="eyebrow">The idea in one picture</div>
-      <h2>A decline is not an endpoint — it's a signal to learn from</h2>
-      <p>Today the loop dead-ends at "capture". The goal is to carry every decline all the way around: capture it well, help the CSP decide, verify the claim, act on it, and <strong>learn back into routing, serviceability and quality</strong>.</p>
+      <span class="eyebrow">The loop in one picture</span>
+      <h2>Five steps, one reason, all the way around</h2>
+      <p>Every step is scoped to a single reason — "service not available". The loop only counts as built if it runs end-to-end: from the CSP's tap to Genie actually changing who gets routed there.</p>
     </div>
     <div class="loop">
-      <div class="node s1"><div class="n">1 · Capture</div><h4>Better reasons</h4><p>A cleaner, unbiased, more complete reason set the CSP actually engages with.</p></div>
-      <div class="node s2"><div class="n">2 · Assist</div><h4>Informed decision</h4><p>At the moment of decline, show the CSP what we know so they choose the right option.</p></div>
-      <div class="node s3"><div class="n">3 · Verify</div><h4>Close the trust gap</h4><p>Check the claim — against our own data, or by asking the customer directly.</p></div>
-      <div class="node s4"><div class="n">4 · Act</div><h4>Route / cancel / hold</h4><p>Re-route to a new CSP, stop routing, or cancel — based on the verified truth.</p></div>
-      <div class="node s5"><div class="n">5 · Learn</div><h4>Feed the system</h4><p>Send confirmed signals to Genie serviceability, Quality, and the reason taxonomy.</p></div>
+      <div class="node s1"><div class="n">Step 1 · Show</div><h4>Reason in context</h4><p>Surface the reason at the right moment, framed as neutral signal.</p></div>
+      <div class="node s2"><div class="n">Step 2 · Assist &amp; capture</div><h4>Informed decline</h4><p>Show what we know, let him decide, and capture the area he's rejecting.</p></div>
+      <div class="node s3"><div class="n">Step 3 · Verify</div><h4>Is it a false decline?</h4><p>Test the claim against our own data and aligned-incentive ground truth.</p></div>
+      <div class="node s4"><div class="n">Step 4 · Signal</div><h4>Emit to Genie</h4><p>Hand the verified signal to serviceability. We don't act — we inform.</p></div>
+      <div class="node s5"><div class="n">Step 5 · Consequence</div><h4>Genie stops routing</h4><p>Past a threshold, Genie de-lists that pocket for that CSP.</p></div>
     </div>
-    <div class="loopback"><span class="ico">↻</span><span><b>The self-learning loop:</b> stage 5 rewrites the inputs to stages 1–4 — serviceability maps get sharper, CSP profiles get truer, and the reason list evolves from what CSPs actually type. The system gets less wrong every week.</span></div>
+    <div class="loopback"><span class="ico">↻</span><span><b>The self-learning loop:</b> once Genie de-lists a pocket for a CSP, no new booking from there reaches him — so <b>the clutter he used to decline never arrives again</b>. Fewer bad offers → fewer coverage declines → a cleaner supply map every month.</span></div>
   </div>
 </section>
 
-<!-- THE GAP -->
-<section id="gap">
+<!-- WHY -->
+<section id="why">
   <div class="wrap">
     <div class="sec-head">
-      <div class="eyebrow">Why we do nothing today</div>
-      <h2>Two confidence gaps make the signal unusable</h2>
+      <span class="eyebrow">Why we're doing this</span>
+      <h2>The objective, and how we'll know it worked</h2>
+      <p>For this reason, the goal is to <strong>send only quality serviceable bookings to the CSP and filter out the clutter</strong> — automatically, by learning from every decline. Success is measured where it matters: the CSP's feed gets cleaner, and the customer gets installed faster.</p>
     </div>
-    <div class="grid2">
-      <div class="card csp">
-        <h3>1 · Did the CSP choose thoughtfully?</h3>
-        <p>The reason sits at the top of a fixed list, one tap away from "done". We can't tell a considered answer from a reflex tap — so we can't act on any single decline as fact. <strong>~65% of declines are one reason</strong> ("service not available"), which is exactly what position-bias would produce.</p>
-      </div>
-      <div class="card csp">
-        <h3>2 · Does the list even cover the truth?</h3>
-        <p>Six fixed options, no free-text, no "other". If the real reason is "I couldn't find the address", the CSP is forced into the nearest wrong box. We never learn what the list is missing, so it never improves.</p>
-      </div>
-    </div>
-
-    <h3 style="margin:30px 0 10px">The raw material we're sitting on</h3>
     <div class="stats">
-      <div class="stat csp"><div class="v">3,151</div><div class="k">declines · last 30 days</div></div>
-      <div class="stat csp"><div class="v">15.9%</div><div class="k">of all install candidates</div></div>
-      <div class="stat"><div class="v">1,653</div><div class="k">install-failures · last 45 days</div></div>
-      <div class="stat sys"><div class="v">2</div><div class="k">capture points · one shared reason set</div></div>
+      <div class="stat down"><div class="dir">▼ should fall</div><div class="m">% declines for "location too far / not serviceable"</div><div class="k">the clutter is leaving the system</div></div>
+      <div class="stat down"><div class="dir">▼ should fall</div><div class="m">Median distance of a booking from the CSP</div><div class="k">CSPs get bookings genuinely near them</div></div>
+      <div class="stat down"><div class="dir">▼ should fall</div><div class="m">Customer wait-time to install</div><div class="k">next booking lands on the right CSP first time</div></div>
     </div>
-    <p style="margin-top:14px; font-size:13.5px; color:var(--muted)">Two moments capture a "won't install" reason: a <strong>decline</strong> (before the CSP accepts) and an <strong>install-failure report</strong> (after). <strong>They use the same reason set</strong> — coverage, customer-refused, price, backhaul, schedule, device — so every change in this plan is defined once and applies to both. Redesign the list in one place, fix both capture points.</p>
+    <div class="callout good">
+      <h4>How this helps the customer — the answer to "what happens after Step 5"</h4>
+      <p>A customer in a genuinely-serviced pocket stops being routed to a CSP who'll refuse them. Their booking lands on a CSP who <em>will</em> install — first time — instead of bouncing through re-offers until it times out. The loop's payoff is not a cleaner dashboard; it's a customer who waits days less to get online.</p>
+    </div>
   </div>
 </section>
 
-<!-- PART 1 -->
-<section id="part1">
+<!-- THE FIVE STEPS -->
+<section id="steps">
   <div class="wrap">
     <div class="sec-head">
-      <div class="eyebrow">Part 1 · Fix the input</div>
-      <h2>Redefine the reason set</h2>
-      <p>Before we can trust a reason, the menu has to be clean, unbiased, and complete. Four changes.</p>
+      <span class="eyebrow">Service not available · end to end</span>
+      <h2>The one reason, through all five steps</h2>
     </div>
 
-    <h3 style="margin-bottom:8px">What's on the menu today, and how it's used</h3>
+    <div class="steprail">
+
+      <!-- STEP 1 -->
+      <div class="step cap">
+        <div class="mk">1</div>
+        <div class="body">
+          <div class="lbl">Show</div>
+          <h3>Capture the reason, in the right context <span class="owner here">this layer</span></h3>
+          <p>Present "service not available at this location" as one clear, neutral option at the moment of decline — no penalty language, no friction. Randomise position so it isn't chosen just because it sits on top. The only job here is to record an honest, unbiased tap.</p>
+        </div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="step cap">
+        <div class="mk">2</div>
+        <div class="body">
+          <div class="lbl">Assist &amp; capture</div>
+          <h3>Help him avoid a false decline — and capture the area he's rejecting <span class="owner here">this layer</span></h3>
+          <p>Before we accept the decline, we show the CSP what we already know: he has <strong>active connections a few doors away</strong>. If he backs off, a false decline never happens. If he still declines, we capture two things — the <strong>decision</strong> (a deliberate "I won't serve here"), and <strong>the specific active points / pocket he is declaring un-serviceable</strong>. That pocket, not just the booking, is the unit we learn on.</p>
+          <div class="grid2" style="margin-top:15px; align-items:start">
+            <div class="interrupt">
+              <div class="ttl">⚠︎ Are you sure service isn't available here?</div>
+              <p>You have <strong>3 active connections</strong> within 150&nbsp;m of this address:</p>
+              <div class="connlist">
+                <div class="conn"><span class="pin">●</span> House 42, same lane <span class="d">40 m</span></div>
+                <div class="conn"><span class="pin">●</span> Green Apt, Block B <span class="d">95 m</span></div>
+                <div class="conn"><span class="pin">●</span> Shop 7, main road <span class="d">150 m</span></div>
+              </div>
+              <div class="btnrow">
+                <div class="btn ghost">Let me re-check</div>
+                <div class="btn primary">Still not serviceable</div>
+              </div>
+            </div>
+            <div>
+              <h4 style="color:var(--ink); margin-bottom:7px">What we record</h4>
+              <div class="card" style="padding:14px 16px">
+                <p style="font-size:13.3px; margin-bottom:8px"><strong>"Let me re-check"</strong> → decline avoided. The booking keeps its best CSP. Nothing else happens.</p>
+                <p style="font-size:13.3px"><strong>"Still not serviceable"</strong> → a <em>deliberate</em> decline, made despite seeing live neighbours. We log it against the <strong>nearby active points</strong> as one flag: <em>"this CSP won't serve this pocket."</em></p>
+              </div>
+              <div class="callout" style="margin-top:12px"><p style="font-size:12.8px">Showing the neighbours is what converts a careless tap into a high-confidence claim. It's the cheapest false-decline filter we have — and it happens before Step 3 ever runs.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="step">
+        <div class="mk">3</div>
+        <div class="body">
+          <div class="lbl">Verify</div>
+          <h3>The verification layer — how we detect a false decline <span class="owner here">this layer</span></h3>
+          <p>A single decline is never trusted or acted on. "False decline" here means <em>the pocket is actually serviceable / installable, but this CSP said no</em>. We test that claim from three independent angles and only accumulate confidence when they agree — a decline is acted on only when the evidence says it's real and repeated.</p>
+          <div class="card" style="margin-top:14px; padding:6px 18px">
+            <div class="vsig hi">
+              <div class="conf">High conf</div>
+              <div class="vb"><h4>Aligned-incentive ground truth — Dominance calling</h4>
+                <p>Ops already does follow-up calling on every <strong>Dominance CSP</strong>, who has a strong incentive to install (trending 75%+ SE). Their declines are near-ground-truth, and the calling flow can directly confirm whether a pocket was really un-serviceable. This is the calibration set that tells us what a <em>true</em> "not serviceable" looks like versus a brush-off. <span style="color:var(--muted)">(Data source to be wired — currently behind login.)</span></p>
+              </div>
+            </div>
+            <div class="vsig md">
+              <div class="conf">Med conf</div>
+              <div class="vb"><h4>Cross-CSP contradiction</h4>
+                <p>If another CSP later <strong>installs the same booking or an address in that pocket</strong>, the first CSP's "not serviceable" was false — the area <em>is</em> serviceable, just not by him. That's exactly the signal we want: don't route him here, but keep routing others.</p>
+              </div>
+            </div>
+            <div class="vsig md">
+              <div class="conf">Med conf</div>
+              <div class="vb"><h4>Own-data contradiction</h4>
+                <p>The nearby active connections from Step 2, logged over time. Repeated deliberate declines against a pocket where the CSP <em>already runs live connections</em> is strong evidence the "not serviceable" is really "I won't go there".</p>
+              </div>
+            </div>
+          </div>
+          <div class="callout warn" style="margin-top:14px"><h4>The design question this answers</h4><p>"How does this detect false negatives?" — by never trusting one tap, and by triangulating each pocket-level claim against aligned-incentive calling, cross-CSP installs, and our own connection map. Confidence accrues per pocket; only a corroborated, repeated claim graduates to Step 4.</p></div>
+        </div>
+      </div>
+
+      <!-- STEP 4 -->
+      <div class="step">
+        <div class="mk">4</div>
+        <div class="body">
+          <div class="lbl">Signal</div>
+          <h3>Emit the verified signal to Genie <span class="owner genie">Genie acts</span></h3>
+          <p>This is the scope boundary. We <strong>do not change routing, de-list anyone, or touch the splitter map ourselves</strong>. We publish a clean, verified, pocket-level signal — <em>"CSP X, ≥N deliberate not-serviceable flags for pocket P"</em> — and Genie reads it. We are the trusted system-of-record; Genie owns the decision.</p>
+        </div>
+      </div>
+
+      <!-- STEP 5 -->
+      <div class="step act">
+        <div class="mk">5</div>
+        <div class="body">
+          <div class="lbl">Consequence</div>
+          <h3>Genie de-lists the pocket for that CSP <span class="owner genie">Genie acts</span></h3>
+          <p>Using the signal, Genie applies a threshold: once a CSP's active point / pocket crosses the flag bar, Genie <strong>removes it from that CSP's active-connection / splitter list</strong>. From then on, <strong>new bookings from that pocket never route to him</strong> — because we've learned he won't install there. The clutter is gone from his feed, and the booking goes to a CSP who will.</p>
+          <div class="thresh">
+            <div class="pt"><div class="cnt">&gt;2</div><div class="lab">verified flags on a pocket</div></div>
+            <div class="arrow">→</div>
+            <div class="res"><b>Genie removes that point</b> from the CSP's active-connection / splitter list → future bookings there route elsewhere.</div>
+          </div>
+          <p style="font-size:12.6px; color:var(--muted); margin-top:10px">Threshold (&gt;2) is illustrative — Genie owns the exact bar and can tune it per confidence source.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SCOPE -->
+<section id="scope">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Bounds of this feature</span>
+      <h2>We capture and expose. Other services read and act.</h2>
+      <p>This is deliberately a <strong>capture + system-of-record layer</strong>, not a controller. It holds the reason taxonomy, the informed-decline surface, the pocket-level flags, and the verified signal — and publishes them. Every <em>action</em> belongs to the service that owns it.</p>
+    </div>
     <div class="twrap">
       <table>
-        <thead><tr><th>Decline reason (today)</th><th class="num">Share</th><th style="width:44%">Distribution</th><th>Verdict</th></tr></thead>
+        <thead><tr><th>Concern</th><th>This feature</th><th>Who acts on it</th></tr></thead>
         <tbody>
-          <tr><td>Service not available at this location</td><td class="num"><b>64.7%</b></td><td><span class="bar" style="width:97%"></span></td><td><span class="tag keep">keep · Part 2 targets it</span></td></tr>
-          <tr><td>Network setup is currently not possible</td><td class="num">13.6%</td><td><span class="bar" style="width:20%"></span></td><td><span class="tag drop">remove · redundant</span></td></tr>
-          <tr><td>Customer is not interested anymore</td><td class="num">7.4%</td><td><span class="bar" style="width:11%"></span></td><td><span class="tag club">club → customer refused</span></td></tr>
-          <tr><td>Required device is currently unavailable</td><td class="num">7.1%</td><td><span class="bar" style="width:11%"></span></td><td><span class="tag keep">keep</span></td></tr>
-          <tr><td>Installation could not be scheduled</td><td class="num">3.7%</td><td><span class="bar" style="width:6%"></span></td><td><span class="tag keep">keep</span></td></tr>
-          <tr><td>Customer did not agree with the plan price</td><td class="num">3.4%</td><td><span class="bar" style="width:5%"></span></td><td><span class="tag club">club → customer refused</span></td></tr>
+          <tr><td>Reason taxonomy + capture (incl. context, randomisation)</td><td class="yes">Owns</td><td class="no">—</td></tr>
+          <tr><td>Informed-decline surface (nearby connections)</td><td class="yes">Owns the surface</td><td>reads active-connection data</td></tr>
+          <tr><td>Pocket-level flags + verification + verified signal</td><td class="yes">Owns</td><td class="no">—</td></tr>
+          <tr><td>De-listing a pocket / changing the splitter list</td><td class="no">Emits signal only</td><td><b>Genie</b> decides &amp; acts</td></tr>
+          <tr><td>Routing / re-offer / who gets the next booking</td><td class="no">Emits signal only</td><td><b>DAS</b> decides</td></tr>
+          <tr><td>Evaluating repeated declines / CSP patterns</td><td class="no">Records raw declines</td><td><b>Quality</b> evaluates</td></tr>
         </tbody>
       </table>
     </div>
-
-    <div class="grid2" style="margin-top:22px">
-      <div class="card">
-        <h4 style="color:var(--stop); text-transform:uppercase; font-size:11px; letter-spacing:.06em">Remove — redundant</h4>
-        <h3 style="margin:5px 0 4px">"Network setup is currently not possible"</h3>
-        <p>This is a coverage/backhaul claim — the same physical fact as "service not available". Making the CSP choose between two coverage reasons adds guesswork, not signal. Fold it into <strong>Service not available</strong>; recover the finer distinction downstream from the serviceability check, not from the CSP's tap. Coverage then becomes ~78% of declines — and Part 2's coverage intervention covers even more.</p>
-      </div>
-      <div class="card">
-        <h4 style="color:var(--csp); text-transform:uppercase; font-size:11px; letter-spacing:.06em">Club — same intent, same action</h4>
-        <h3 style="margin:5px 0 4px">"Customer refused"</h3>
-        <p>"Not interested" (7.4%) and "didn't agree with price" (3.4%) are the same signal — <strong>the customer doesn't want it</strong> — and both trigger the exact same next step (verify with the customer). Splitting them adds no downstream value and dilutes the count. One reason: <strong>Customer refused</strong>, with an optional detail chip for price.</p>
-      </div>
-      <div class="card sys">
-        <h4 style="color:var(--sys-ink); text-transform:uppercase; font-size:11px; letter-spacing:.06em">Add — a real gap</h4>
-        <h3 style="margin:5px 0 4px">"Could not understand the address"</h3>
-        <p>Address quality has no box today, so it hides inside coverage and customer reasons. It's a distinct, fixable cause — the fix is address correction, not de-serviceability. Capturing it cleanly stops it from poisoning the coverage signal.</p>
-      </div>
-      <div class="card sys">
-        <h4 style="color:var(--sys-ink); text-transform:uppercase; font-size:11px; letter-spacing:.06em">Add — let them tell us</h4>
-        <h3 style="margin:5px 0 4px">"Other — tell us more"</h3>
-        <p>A free-text catch-all. This is the <strong>engine of the self-learning loop's Part 1</strong>: what CSPs type into "Other" is the evidence for the <em>next</em> reason we should add. The list stops being frozen and starts evolving from reality.</p>
-      </div>
-    </div>
-
-    <div class="callout warn" style="margin-top:22px">
-      <h4>Randomise the order — every time</h4>
-      <p>"Service not available" is always first and gets ~65% of taps — the shape of position bias, not necessarily of reality. <strong>Shuffle the reason order on every render</strong> (keeping "Other" pinned last). Over thousands of declines the true rates surface, and no single reason gets a free ride to the top. This is the cheapest way to buy back confidence in gap&nbsp;#1.</p>
-    </div>
-
-    <h3 style="margin:26px 0 10px">Before → after</h3>
-    <div class="grid2">
-      <div class="mock">
-        <div class="mhead">Today · fixed order · 6 options</div>
-        <div class="sheet">
-          <div class="title">Why can't you install this?</div>
-          <div class="opt"><span class="rad"></span>Service not available at this location</div>
-          <div class="opt"><span class="rad"></span>Network setup is currently not possible</div>
-          <div class="opt"><span class="rad"></span>Customer is not interested anymore</div>
-          <div class="opt"><span class="rad"></span>Required device is currently unavailable</div>
-          <div class="opt"><span class="rad"></span>Installation could not be scheduled</div>
-          <div class="opt"><span class="rad"></span>Customer did not agree with the plan price</div>
-        </div>
-      </div>
-      <div class="mock">
-        <div class="mhead" style="color:var(--sys-ink)">Proposed · shuffled · 5 + Other</div>
-        <div class="sheet">
-          <div class="title">Why can't you install this?</div>
-          <div class="sub">Order changes each time</div>
-          <div class="opt"><span class="rad"></span>Required device is currently unavailable <span class="shuf">shuffled</span></div>
-          <div class="opt sel"><span class="rad"></span>Service not available at this location <span class="shuf">shuffled</span></div>
-          <div class="opt"><span class="rad"></span>Could not understand the address <span class="shuf">new</span></div>
-          <div class="opt"><span class="rad"></span>Customer refused <span class="shuf">clubbed</span></div>
-          <div class="opt"><span class="rad"></span>Installation could not be scheduled <span class="shuf">shuffled</span></div>
-          <div class="opt"><span class="rad"></span>Other — tell us more <span class="shuf">pinned last</span></div>
-        </div>
-      </div>
-    </div>
-
-    <h3 style="margin:34px 0 10px">One more capture stream — the rawest signal</h3>
-    <div class="card sys" style="margin-top:6px">
-      <div style="display:flex; align-items:center; gap:9px; margin-bottom:5px">
-        <span class="tag new">Release TBD</span><span class="eyebrow" style="color:var(--sys-ink)">Captured at the moment of decline</span>
-      </div>
-      <h3 style="margin-bottom:4px">🎙 Voice recording on decline</h3>
-      <p>When a CSP declines, capture a short voice note describing why. This is the <strong>rawest possible signal</strong> — if the fixed list and the "Other" free-text still miss the nuance, voice recovers what a tap never could: the actual words, tone, and context. Mined the same way as "Other" — recurring themes graduate into the taxonomy. Built as a fallback for when we discover the reason list still doesn't cover the real cases. <strong>Rollout timing TBD.</strong></p>
-    </div>
+    <div class="callout"><p>Net: this feature <strong>does not influence DAS directly, does not de-list CSPs itself, and asks no one to act</strong>. It makes the right action <em>possible</em> by being the one clean, trusted source of decline truth. Consumers pull.</p></div>
   </div>
 </section>
 
-<!-- PART 2 -->
-<section id="part2">
+<!-- ARCHIVE -->
+<section id="archive">
   <div class="wrap">
     <div class="sec-head">
-      <div class="eyebrow">Part 2 · Help the CSP decide well</div>
-      <h2>Informed decline — reason by reason</h2>
-      <p>A cleaner list still relies on the CSP choosing correctly. So at the moment of decline, for the reasons that matter most, we <strong>interrupt with what we already know</strong> and let them make an informed call. <strong>We start with the two biggest reasons</strong> — the rest follow later (see scope note below).</p>
+      <span class="eyebrow">Archive · out of current scope</span>
+      <h2>Parked for later</h2>
+      <p>Scope 1 is one reason, built fully. The material below is kept for reference — it applies the same five-step spine to other reasons and capture ideas, to be picked up once the coverage loop is live.</p>
     </div>
 
-    <!-- 2A coverage -->
-    <div class="card csp" style="margin-bottom:26px">
-      <div class="eyebrow" style="color:var(--csp)">Reason A · ~65% of all declines</div>
-      <h3 style="margin:6px 0 6px; font-size:20px">"Service not available at this location"</h3>
-      <p>The single biggest reason — and the one we trust least. When a CSP says a spot isn't serviceable, we have no idea if it's true or a reflex. But we often <strong>already have active connections a few doors away</strong>. So we show them.</p>
-      <div class="grid2" style="margin-top:16px; align-items:start">
-        <div class="interrupt">
-          <div class="ttl">⚠︎ Are you sure service isn't available here?</div>
-          <p>We can see <strong>3 active Wiom connections</strong> within 150&nbsp;m of this address:</p>
-          <div class="connlist">
-            <div class="conn"><span class="pin">●</span> House 42, same lane <span class="d">40 m</span></div>
-            <div class="conn"><span class="pin">●</span> Green Apt, Block B <span class="d">95 m</span></div>
-            <div class="conn"><span class="pin">●</span> Shop 7, main road <span class="d">150 m</span></div>
-          </div>
-          <div class="btnrow">
-            <div class="btn ghost">Let me re-check</div>
-            <div class="btn primary">Still not serviceable</div>
-          </div>
+    <details class="archive">
+      <summary><span class="tag">Reason</span> "Customer refused" — customer-side verification loop <span class="chev">›</span></summary>
+      <div class="archbody">
+        <p style="font-size:13.8px; margin-top:12px">When a CSP says the customer refused, today we don't validate it — we just re-offer to the next CSP, breaking their experience if the first CSP was right. The same spine applies, but the verification and the action live on the <strong>customer side</strong>, not here: this layer would only emit a <em>"customer-refused, needs verification"</em> signal, and the customer-side system owns the contact and the outcome.</p>
+        <div class="brow">
+          <div class="bq">Customer: "Yes, I don't want it"</div>
+          <div class="bans stop"><div class="act">▣ Cancel &amp; stop routing</div><p>CSP was right. Customer-side cancels + fast-refunds; no other CSP wastes a visit.</p></div>
         </div>
-        <div>
-          <h4 style="margin-bottom:8px; color:var(--ink)">What each answer buys us</h4>
-          <div class="branch">
-            <div class="brow">
-              <div class="bq">"Let me re-check"</div>
-              <div class="bans go"><div class="act">Decline avoided</div><p>The CSP reconsiders — a false decline never happens, the booking keeps its best CSP.</p></div>
-            </div>
-            <div class="brow">
-              <div class="bq">"Still not serviceable"</div>
-              <div class="bans go"><div class="act">High-confidence signal</div><p>A decline made <em>despite</em> seeing nearby live connections is worth 100× a reflex tap. This is gold for Part&nbsp;3.</p></div>
-            </div>
-          </div>
-          <div class="callout" style="margin-top:14px"><p style="font-size:13px"><strong>Either way we win.</strong> We either save a good booking, or we turn an untrusted tap into a deliberate, high-confidence coverage claim.</p></div>
+        <div class="brow">
+          <div class="bq">Customer: "No, I do want it"</div>
+          <div class="bans go"><div class="act">▶ Keep routing + record</div><p>Booking stays alive. The disproven claim is recorded for Quality to evaluate — never surfaced to the CSP as a strike.</p></div>
+        </div>
+        <div class="brow">
+          <div class="bq">Customer: no response</div>
+          <div class="bans hold"><div class="act">◷ As usual</div><p>No new information — fall back to today's behaviour. We lose nothing.</p></div>
         </div>
       </div>
-    </div>
+    </details>
 
-    <!-- 2B customer refused -->
-    <div class="card csp">
-      <div class="eyebrow" style="color:var(--csp)">Reason B · ~11% of declines · the customer-intent bucket</div>
-      <h3 style="margin:6px 0 6px; font-size:20px">"Customer refused"</h3>
-      <p>When CSP&nbsp;#1 says the customer refused, today we <strong>don't validate it — we just re-offer to CSP&nbsp;#2</strong>. If #1 was telling the truth, we've now sent CSP&nbsp;#2 on a wild-goose chase and burned their experience for a dead booking. The fix: <strong>ask the customer</strong> before we route onward.</p>
-      <div style="margin-top:16px">
-        <h4 style="margin-bottom:10px; color:var(--ink)">Customer verification loop — three branches</h4>
-        <div class="branch">
-          <div class="brow">
-            <div class="bq">Customer: "Yes, I don't want it"</div>
-            <div class="bans stop"><div class="act">▣ Cancel &amp; stop routing</div><p>CSP&nbsp;#1 was right. Cancel the booking, stop re-offering, fast-refund. No other CSP wastes a visit. <span style="color:var(--muted)">→ Part 3</span></p></div>
-          </div>
-          <div class="brow">
-            <div class="bq">Customer: "No, I do want it"</div>
-            <div class="bans go"><div class="act">▶ Keep routing + flag the CSP</div><p>The booking is alive — routing continues normally. But CSP&nbsp;#1's claim was false: <strong>send a signal to Quality</strong> to profile them. <span style="color:var(--muted)">→ Part 3</span></p></div>
-          </div>
-          <div class="brow">
-            <div class="bq">Customer: no response</div>
-            <div class="bans hold"><div class="act">◷ As usual</div><p>No new information — fall back to today's behaviour and re-offer. We lose nothing.</p></div>
-          </div>
-        </div>
+    <details class="archive" style="margin-top:12px">
+      <summary><span class="tag">Reason-set</span> Redefining the full reason list (remove / club / add / randomise) <span class="chev">›</span></summary>
+      <div class="archbody">
+        <p style="font-size:13.8px; margin-top:12px">A broader clean-up of the shared decline / install-failure reason set: fold the redundant "network setup not possible" into coverage, club "not interested" + "price" into one "customer refused", add "could not understand address", add a free-text "Other", and randomise order everywhere. Deferred so Scope 1 stays focused on one full loop rather than a wide input-only change.</p>
       </div>
-    </div>
+    </details>
 
-    <div class="callout warn" style="margin-top:26px">
-      <h4>Scope — we start with these two reasons only</h4>
-      <p>This first cut deliberately tackles just the two highest-impact reasons — <strong>"Service not available"</strong> (~65%) and <strong>"Customer refused"</strong> (~11%), together ~76% of all declines. <strong>The remaining reasons get their own informed-decline treatment in later iterations</strong> — <em>device unavailable</em> (cross-check stock/custody before accepting the claim), <em>could not be scheduled</em> (offer a re-slot in place of a decline), <em>could not understand the address</em> (surface a map pin / address correction), and whatever <em>"Other"</em> free-text surfaces as the next reason worth its own flow. Same pattern each time: interrupt with what we know, verify, then learn back.</p>
-    </div>
-  </div>
-</section>
-
-<!-- PART 3 -->
-<section id="part3">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="eyebrow">Part 3 · Close the loop</div>
-      <h2>Feed every confirmed signal back into the system</h2>
-      <p>This is what makes it <em>self-learning</em>. Each verified signal from Parts 1–2 has a home — a system that gets smarter because of it.</p>
-    </div>
-
-    <div style="border:1px solid var(--tile); border-radius:14px; background:var(--surface); padding:6px 22px">
-      <div class="dest genie">
-        <div class="badge">→ Genie</div>
-        <div class="body">
-          <h4>Serviceability influence</h4>
-          <p>High-confidence coverage declines (made <em>after</em> seeing nearby live connections) and their opposite (CSPs who backed off when shown) flow to Genie. Where many independent CSPs confirm "not serviceable despite neighbours", Genie sharpens the serviceability map so we <strong>stop generating offers we can't fulfil</strong>. Where they back off, the area stays open. The 65% coverage bucket becomes a live feedback channel, not a graveyard.</p>
-        </div>
+    <details class="archive" style="margin-top:12px">
+      <summary><span class="tag">Capture · TBD</span> Voice recording on decline <span class="chev">›</span></summary>
+      <div class="archbody">
+        <p style="font-size:13.8px; margin-top:12px">Optional short voice note at decline — the rawest signal, a fallback for when the fixed list still misses the nuance. Mined for themes that graduate into the taxonomy. Rollout timing TBD.</p>
       </div>
-      <div class="dest quality">
-        <div class="badge">→ Quality</div>
-        <div class="body">
-          <h4>CSP truthfulness profile</h4>
-          <p>When the customer verification loop proves a CSP's "customer refused" was false, that's a durable fact about the CSP. Quality accumulates it: a CSP who repeatedly makes false customer claims gets profiled and down-weighted. Honest declines cost nothing; false ones build a record.</p>
-        </div>
-      </div>
-      <div class="dest taxo">
-        <div class="badge">→ Taxonomy</div>
-        <div class="body">
-          <h4>The reason list evolves itself</h4>
-          <p>Everything typed into <strong>"Other"</strong> is mined for recurring themes. When a theme crosses a threshold, it graduates into a first-class reason — and a rarely-chosen reason gets retired. The menu in Part 1 stops being a one-time redesign and becomes a living list that tracks reality.</p>
-        </div>
-      </div>
-    </div>
+    </details>
 
-    <div class="callout" style="margin-top:22px">
-      <h4>The loop, closed</h4>
-      <p>Sharper serviceability (Genie) means fewer bad offers reach a CSP — so <strong>fewer coverage declines to capture next month</strong>. Truer CSP profiles (Quality) mean better routing — so <strong>fewer false "customer refused" claims</strong>. A living taxonomy means <strong>the next decline is captured more precisely</strong>. Stage 5 rewrites stages 1–4. That's the self-learning loop.</p>
-    </div>
-
-    <div class="card learn" style="margin-top:22px">
-      <div style="display:flex; align-items:center; gap:9px; margin-bottom:5px">
-        <span class="tag keep">→ Serviceability</span><span class="eyebrow" style="color:var(--learn)">Alongside the loop · offline analysis</span>
+    <details class="archive" style="margin-top:12px">
+      <summary><span class="tag">Analysis</span> Where does the CSP actually install? (offline) <span class="chev">›</span></summary>
+      <div class="archbody">
+        <p style="font-size:13.8px; margin-top:12px">A separate offline analysis of existing install data — which attributes move install probability (zone, distance, address quality, plan, tenure, nearby density) across cuts. Not part of the live loop; findings feed serviceability, the same target as Step 5.</p>
       </div>
-      <h3 style="margin-bottom:4px">📊 Where does the CSP actually install?</h3>
-      <p>Not part of the live decline loop — a <strong>separate analysis that learns purely from existing install data</strong>. Study where installs succeed vs where they don't, and find which attributes move install probability: zone, distance from the CSP, address quality, plan, time of day, CSP tenure, density of nearby active connections, and more. Slicing installs and declines by these cuts tells us which offers are worth making. <strong>Findings feed serviceability</strong> — the same target as Genie above — so we stop generating the offers most likely to be declined in the first place.</p>
-    </div>
+    </details>
   </div>
 </section>
 
@@ -486,28 +459,27 @@
 <section id="build">
   <div class="wrap">
     <div class="sec-head">
-      <div class="eyebrow">Sequencing</div>
-      <h2>How this rolls out</h2>
-      <p>Each part ships value on its own; together they compound. Build in this order.</p>
+      <span class="eyebrow">Scope 1 · sequencing</span>
+      <h2>Build order for the one full loop</h2>
+      <p>The rule: ship at least one reason end-to-end — input <em>and</em> feedback — not an input layer with no consequence.</p>
     </div>
     <ol class="phases">
-      <li><b>Reason-set redesign + randomisation</b> <span class="pill">Part 1</span> — app-side change to the decline/failure sheet: remove, club, add two reasons, shuffle order, add free-text "Other". Ships confidence immediately; needs no backend intelligence.</li>
-      <li><b>Coverage interrupt — "nearby active connections"</b> <span class="pill">Part 2A</span> — the popup on "service not available", reading existing active-connection geodata. Highest-volume reason, biggest single win.</li>
-      <li><b>Customer verification loop</b> <span class="pill">Part 2B</span> — automated customer callback/WhatsApp on "customer refused", with the three-branch outcome. Reuses the verification channel already scoped in the decline plan.</li>
-      <li><b>Signal pipes to Genie &amp; Quality</b> <span class="pill">Part 3</span> — wire the verified outputs into serviceability and CSP profiling. This is where the loop closes and the compounding begins.</li>
-      <li><b>Taxonomy mining from "Other"</b> <span class="pill">Part 3</span> — periodic review of free-text to evolve the reason list. Lowest urgency, highest long-term leverage.</li>
+      <li><b>Capture in context + randomisation</b> <span class="pill">Step 1</span> — the neutral, unbiased "service not available" tap.</li>
+      <li><b>Informed-decline surface + pocket capture</b> <span class="pill">Step 2</span> — nearby-connections popup, reading active-connection geodata; record the decision and the pocket.</li>
+      <li><b>Verification layer</b> <span class="pill">Step 3</span> — accumulate pocket-level confidence from cross-CSP installs and own-data; wire Dominance calling as ground truth.</li>
+      <li><b>Verified signal to Genie</b> <span class="pill">Step 4</span> — the published, pocket-level record Genie consumes.</li>
+      <li><b>Genie consequence live</b> <span class="pill">Step 5</span> — threshold de-listing that changes who future bookings route to. <b>This is what makes it a loop, not a UX change.</b></li>
     </ol>
-
-    <div class="callout warn" style="margin-top:22px">
+    <div class="callout warn" style="margin-top:20px">
       <h4>Open questions for review</h4>
-      <p>① Radius &amp; count threshold for the coverage interrupt (150&nbsp;m / 3 connections is illustrative). ② Which channel and how long a wait for the customer verification loop before falling back to "as usual". ③ Does a false "customer refused" count once, or need a pattern, before Quality acts. ④ Where the interrupt geodata is read from (active-connection service vs Genie directly).</p>
+      <p>① Exact radius &amp; count for the Step 2 popup (150&nbsp;m / 3 is illustrative). ② How a "pocket" is defined — active-point cluster, splitter, or geo-cell — since it's the unit Genie de-lists. ③ Dominance-calling data access (a queryable source, not the login-gated app) to calibrate Step 3. ④ Genie's threshold and whether it differs by confidence source. ⑤ Reversal — how a de-listed pocket can be re-opened for a CSP if conditions change.</p>
     </div>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
-    <p><strong>Decline Intelligence — self-learning loop.</strong> Product concept built on the CSP decline analysis (Jun–Aug 2026). Figures: declines &amp; candidates from ES <code>install_state_transition_log</code> / <code>install_execution_candidates</code>, last 30 days; install-failures last 45 days; Snowflake, IST. Illustrative UI and thresholds are for discussion, not final spec. Ashish Raj.</p>
+    <p><strong>Decline Intelligence — "Service not available" loop.</strong> Scope 1 concept built on the CSP decline analysis (Jun–Aug 2026). This reason is ~65% of all declines. This feature is a capture + system-of-record layer; Genie, DAS, Quality and the customer-side systems act on the signals it publishes. A decline is treated as neutral, valuable signal — never a strike against the CSP. Illustrative UI, thresholds and the "pocket" unit are for discussion, not final spec. Ashish Raj.</p>
   </div>
 </footer>
 
