@@ -147,6 +147,16 @@
   .btn.primary{background:var(--sys); color:#fff; border-color:var(--sys)}
   .btn.ghost{background:transparent; color:var(--ink2)}
 
+  /* reason list (Step 1) */
+  .rlist{background:var(--surface); border:1px solid var(--hair); border-radius:12px; overflow:hidden; max-width:420px}
+  .rlist .rt{padding:13px 15px 12px; font-weight:680; font-size:14px; color:var(--ink)}
+  .rrow{display:flex; align-items:center; gap:11px; padding:11px 15px; border-top:1px solid var(--line); font-size:13.7px; color:var(--ink2)}
+  .rrow .rd{width:15px;height:15px;border-radius:50%;border:2px solid var(--muted);flex:none}
+  .rrow.sel{color:var(--ink); font-weight:640}
+  .rrow.sel .rd{border-color:var(--csp); box-shadow:inset 0 0 0 3px var(--csp)}
+  .rrow .sh{margin-left:auto; font-size:10px; color:var(--muted)}
+  .owner.tbd{background:var(--tile); color:var(--muted)}
+
   /* verification signals */
   .vsig{display:flex; gap:12px; align-items:flex-start; padding:13px 0; border-bottom:1px solid var(--line)}
   .vsig:last-child{border-bottom:none}
@@ -276,8 +286,29 @@
         <div class="mk">1</div>
         <div class="body">
           <div class="lbl">Show</div>
-          <h3>Capture the reason, in the right context <span class="owner here">this layer</span></h3>
-          <p>Present "service not available at this location" as one clear, neutral option at the moment of decline — no penalty language, no friction. Randomise position so it isn't chosen just because it sits on top. The only job here is to record an honest, unbiased tap.</p>
+          <h3>Show the reason list <span class="owner here">this layer</span></h3>
+          <p>Step 1 does one thing: show the CSP the list of decline reasons and let him pick the one that fits. What matters here is <strong>which reasons are visible</strong>, that they read as neutral options, and that their <strong>order is randomised</strong> on every render so a reason isn't chosen just because it sits on top. The CSP taps the option matching his situation — for this exercise, that's <strong>"service not available at this location"</strong>.</p>
+          <div class="grid2" style="margin-top:15px; align-items:start">
+            <div>
+              <div class="rlist">
+                <div class="rt">Why can't you install this?</div>
+                <div class="rrow sel"><span class="rd"></span>Service not available at this location <span class="sh">in scope</span></div>
+                <div class="rrow"><span class="rd"></span>Required device is currently unavailable</div>
+                <div class="rrow"><span class="rd"></span>Customer refused</div>
+                <div class="rrow"><span class="rd"></span>Installation could not be scheduled</div>
+                <div class="rrow"><span class="rd"></span>Could not understand the address</div>
+                <div class="rrow"><span class="rd"></span>Other — tell us more <span class="sh">pinned last</span></div>
+              </div>
+              <p style="font-size:12.3px; color:var(--muted); margin-top:8px">Order shuffles each time; "Other" stays pinned last.</p>
+            </div>
+            <div>
+              <h4 style="color:var(--ink); margin-bottom:7px">What Step 1 owns</h4>
+              <div class="card" style="padding:14px 16px">
+                <p style="font-size:13.3px">Which reasons are visible, neutral framing, randomised order, and recording one honest tap. Nothing is interpreted or acted on yet — that starts at Step 2.</p>
+              </div>
+              <div class="callout" style="margin-top:12px"><h4>More about it →</h4><p style="font-size:12.8px">The full reason-set design — which reasons to keep, remove, club or add, and why — sits in the <a href="#archive" style="color:var(--sys-ink)">archive</a>. Scope 1 only needs the list shown correctly.</p></div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -319,29 +350,23 @@
         <div class="mk">3</div>
         <div class="body">
           <div class="lbl">Verify</div>
-          <h3>The verification layer — how we detect a false decline <span class="owner here">this layer</span></h3>
-          <p>A single decline is never trusted or acted on. "False decline" here means <em>the pocket is actually serviceable / installable, but this CSP said no</em>. We test that claim from three independent angles and only accumulate confidence when they agree — a decline is acted on only when the evidence says it's real and repeated.</p>
+          <h3>Verify the claim — data &amp; ops-calling driven <span class="owner tbd">TBD</span></h3>
+          <p>We never act on a single tap. For <em>this</em> reason the verification is <strong>data-driven and ops-calling driven</strong>, and the exact mechanism is still to be worked out. Coverage is largely self-verifying by accumulation — the same pocket flagged repeatedly, cross-checked against data and calling — so a heavy verification layer matters far more for intent reasons like <strong>"customer said no"</strong> (where you actually have to ask the customer) than it does here.</p>
           <div class="card" style="margin-top:14px; padding:6px 18px">
             <div class="vsig hi">
-              <div class="conf">High conf</div>
-              <div class="vb"><h4>Aligned-incentive ground truth — Dominance calling</h4>
-                <p>Ops already does follow-up calling on every <strong>Dominance CSP</strong>, who has a strong incentive to install (trending 75%+ SE). Their declines are near-ground-truth, and the calling flow can directly confirm whether a pocket was really un-serviceable. This is the calibration set that tells us what a <em>true</em> "not serviceable" looks like versus a brush-off. <span style="color:var(--muted)">(Data source to be wired — currently behind login.)</span></p>
+              <div class="conf">Ops calling</div>
+              <div class="vb"><h4>Dominance calling as the data check</h4>
+                <p>Ops already calls every <strong>Dominance CSP</strong> (high install incentive, ~75%+ SE), so their declines are near-ground-truth and the calling flow can confirm whether a pocket was really un-serviceable. The natural calibration set — <span style="color:var(--muted)">queryable data source still to be wired.</span></p>
               </div>
             </div>
             <div class="vsig md">
-              <div class="conf">Med conf</div>
-              <div class="vb"><h4>Cross-CSP contradiction</h4>
-                <p>If another CSP later <strong>installs the same booking or an address in that pocket</strong>, the first CSP's "not serviceable" was false — the area <em>is</em> serviceable, just not by him. That's exactly the signal we want: don't route him here, but keep routing others.</p>
-              </div>
-            </div>
-            <div class="vsig md">
-              <div class="conf">Med conf</div>
-              <div class="vb"><h4>Own-data contradiction</h4>
-                <p>The nearby active connections from Step 2, logged over time. Repeated deliberate declines against a pocket where the CSP <em>already runs live connections</em> is strong evidence the "not serviceable" is really "I won't go there".</p>
+              <div class="conf">Data</div>
+              <div class="vb"><h4>Cross-CSP installs + our own connection map</h4>
+                <p>A pocket where another CSP later installs, or where this CSP already runs live connections, contradicts "not serviceable". Repeated deliberate declines against such a pocket are the accumulation signal.</p>
               </div>
             </div>
           </div>
-          <div class="callout warn" style="margin-top:14px"><h4>The design question this answers</h4><p>"How does this detect false negatives?" — by never trusting one tap, and by triangulating each pocket-level claim against aligned-incentive calling, cross-CSP installs, and our own connection map. Confidence accrues per pocket; only a corroborated, repeated claim graduates to Step 4.</p></div>
+          <div class="callout warn" style="margin-top:14px"><h4>TBD</h4><p>The precise verification mechanism for coverage — how much weight to give calling vs data, and how confidence accumulates per pocket — needs to be figured out. It's lighter here than for customer-intent reasons.</p></div>
         </div>
       </div>
 
@@ -372,31 +397,6 @@
       </div>
 
     </div>
-  </div>
-</section>
-
-<!-- SCOPE -->
-<section id="scope">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow">Bounds of this feature</span>
-      <h2>We capture and expose. Other services read and act.</h2>
-      <p>This is deliberately a <strong>capture + system-of-record layer</strong>, not a controller. It holds the reason taxonomy, the informed-decline surface, the pocket-level flags, and the verified signal — and publishes them. Every <em>action</em> belongs to the service that owns it.</p>
-    </div>
-    <div class="twrap">
-      <table>
-        <thead><tr><th>Concern</th><th>This feature</th><th>Who acts on it</th></tr></thead>
-        <tbody>
-          <tr><td>Reason taxonomy + capture (incl. context, randomisation)</td><td class="yes">Owns</td><td class="no">—</td></tr>
-          <tr><td>Informed-decline surface (nearby connections)</td><td class="yes">Owns the surface</td><td>reads active-connection data</td></tr>
-          <tr><td>Pocket-level flags + verification + verified signal</td><td class="yes">Owns</td><td class="no">—</td></tr>
-          <tr><td>De-listing a pocket / changing the splitter list</td><td class="no">Emits signal only</td><td><b>Genie</b> decides &amp; acts</td></tr>
-          <tr><td>Routing / re-offer / who gets the next booking</td><td class="no">Emits signal only</td><td><b>DAS</b> decides</td></tr>
-          <tr><td>Evaluating repeated declines / CSP patterns</td><td class="no">Records raw declines</td><td><b>Quality</b> evaluates</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="callout"><p>Net: this feature <strong>does not influence DAS directly, does not de-list CSPs itself, and asks no one to act</strong>. It makes the right action <em>possible</em> by being the one clean, trusted source of decline truth. Consumers pull.</p></div>
   </div>
 </section>
 
@@ -451,31 +451,22 @@
   </div>
 </section>
 
-<!-- BUILD -->
-<section id="build">
+<!-- OPEN QUESTIONS -->
+<section id="open">
   <div class="wrap">
     <div class="sec-head">
-      <span class="eyebrow">Scope 1 · sequencing</span>
-      <h2>Build order for the one full loop</h2>
-      <p>The rule: ship at least one reason end-to-end — input <em>and</em> feedback — not an input layer with no consequence.</p>
+      <span class="eyebrow">For review</span>
+      <h2>Open questions</h2>
     </div>
-    <ol class="phases">
-      <li><b>Capture in context + randomisation</b> <span class="pill">Step 1</span> — the neutral, unbiased "service not available" tap.</li>
-      <li><b>Informed-decline surface + pocket capture</b> <span class="pill">Step 2</span> — nearby-connections popup, reading active-connection geodata; record the decision and the pocket.</li>
-      <li><b>Verification layer</b> <span class="pill">Step 3</span> — accumulate pocket-level confidence from cross-CSP installs and own-data; wire Dominance calling as ground truth.</li>
-      <li><b>Verified signal to Genie</b> <span class="pill">Step 4</span> — the published, pocket-level record Genie consumes.</li>
-      <li><b>Genie consequence live</b> <span class="pill">Step 5</span> — threshold de-listing that changes who future bookings route to. <b>This is what makes it a loop, not a UX change.</b></li>
-    </ol>
-    <div class="callout warn" style="margin-top:20px">
-      <h4>Open questions for review</h4>
-      <p>① Exact radius &amp; count for the Step 2 popup (150&nbsp;m / 3 is illustrative). ② How a "pocket" is defined — active-point cluster, splitter, or geo-cell — since it's the unit Genie de-lists. ③ Dominance-calling data access (a queryable source, not the login-gated app) to calibrate Step 3. ④ Genie's threshold and whether it differs by confidence source. ⑤ Reversal — how a de-listed pocket can be re-opened for a CSP if conditions change.</p>
+    <div class="callout warn">
+      <p>① Exact radius &amp; count for the Step 2 popup (150&nbsp;m / 3 is illustrative). ② How a "pocket" is defined — active-point cluster, splitter, or geo-cell — since it's the unit Genie de-lists. ③ Dominance-calling data access (a queryable source, not the login-gated app) to drive Step 3. ④ The verification mechanism for coverage — weight of calling vs data, and how confidence accumulates per pocket. ⑤ Genie's threshold, and how a de-listed pocket can be re-opened for a CSP if conditions change.</p>
     </div>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
-    <p><strong>Decline Intelligence — "Service not available" loop.</strong> Scope 1 concept built on the CSP decline analysis (Jun–Aug 2026). This reason is ~65% of all declines. This feature is a capture + system-of-record layer; Genie, DAS, Quality and the customer-side systems act on the signals it publishes. A decline is treated as neutral, valuable signal — never a strike against the CSP. Illustrative UI, thresholds and the "pocket" unit are for discussion, not final spec. Ashish Raj.</p>
+    <p><strong>Decline Intelligence — "Service not available" loop.</strong> Scope 1 concept built on the CSP decline analysis (Jun–Aug 2026). This reason is ~65% of all declines. This feature is a capture + system-of-record layer; Genie, DAS, Quality and the customer-side systems act on the signals it publishes. Illustrative UI, thresholds and the "pocket" unit are for discussion, not final spec. Ashish Raj.</p>
   </div>
 </footer>
 
