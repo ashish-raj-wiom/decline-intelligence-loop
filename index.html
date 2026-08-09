@@ -127,6 +127,22 @@
   td.num,th.num{text-align:right; font-variant-numeric:tabular-nums}
   .bar{height:8px; border-radius:0 4px 4px 0; background:var(--csp); display:inline-block; vertical-align:middle}
   tr.hi td{background:var(--csp-wash)} tr.hi td b{color:var(--csp)}
+  /* funnel */
+  .funnel{display:flex; flex-direction:column; gap:2px; margin:4px 0 4px}
+  .fstage{display:grid; grid-template-columns:120px 1fr 120px; gap:14px; align-items:center}
+  .fstage .fl{font-weight:700; color:var(--ink); font-size:14.5px}
+  .fstage .ft{background:var(--tile); border-radius:8px; height:34px}
+  .fstage .fb{height:34px; border-radius:8px; min-width:6px}
+  .fstage .fb.a{background:var(--sys)} .fstage .fb.b{background:var(--sys)} .fstage .fb.c{background:var(--learn)}
+  .fstage .fr{text-align:right}
+  .fstage .fr .fn{font-weight:750; font-variant-numeric:tabular-nums; color:var(--ink); font-size:16px}
+  .fstage .fr .fp{font-size:11.5px; color:var(--muted)}
+  .fdrop{display:flex; align-items:center; gap:9px; padding:5px 0 5px 134px; font-size:13px; color:var(--ink2)}
+  .fdrop .dn{font-variant-numeric:tabular-nums; font-weight:660; color:var(--ink)}
+  .fdrop.focus{color:var(--csp)} .fdrop.focus .dn{color:var(--csp)}
+  .fdrop .dt{font-size:10px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; padding:1px 8px; border-radius:20px; background:var(--csp-wash); color:var(--csp)}
+  .fdrop.other{color:var(--muted)} .fdrop.other .dn{color:var(--ink2)}
+  @media(max-width:680px){.fstage{grid-template-columns:88px 1fr 78px; gap:9px} .fstage .fl{font-size:12.5px} .fdrop{padding-left:96px}}
 
   /* step rail */
   .steprail{margin-top:12px}
@@ -249,12 +265,21 @@
       <h2>When a CSP won't install, he tells us why</h2>
       <p>A booking sent to a CSP can be turned down at two moments — a <strong>decline</strong> before he accepts, or an <strong>install-failure report</strong> after — and at both he picks a reason from the same fixed list. That reason is the signal this whole exercise is built on. First, the lay of the land.</p>
     </div>
-    <div class="numrow">
-      <div class="numcard"><div class="v">3,151</div><div class="k">declines · last 30 days</div></div>
-      <div class="numcard"><div class="v">15.9%</div><div class="k">of all install candidates are declined</div></div>
-      <div class="numcard"><div class="v">1,188</div><div class="k">install-failures · last 30 days · same reason set</div></div>
+    <h3 style="margin-bottom:5px">The install funnel — where bookings drop</h3>
+    <p style="margin-bottom:15px">Of every task created, the CSP either declines it, accepts and installs, or accepts and reports a failure. The two drops where he gives us a <strong>reason</strong> are our subject — but they aren't the only leaks in the funnel.</p>
+    <div class="funnel">
+      <div class="fstage"><div class="fl">Task created</div><div class="ft"><div class="fb a" style="width:100%"></div></div><div class="fr"><div class="fn">19,418</div><div class="fp">last 30 days</div></div></div>
+      <div class="fdrop focus"><span>↳ Drop-off 1 · <b>Decline</b> (before acceptance)</span><span class="dn">3,191</span><span>· 16.4%</span><span class="dt">our focus</span></div>
+      <div class="fdrop other"><span>↳ other drops before acceptance — mostly tasks that <b>time out</b> (~10,969), plus some cancellations</span></div>
+      <div class="fstage"><div class="fl">Acceptance</div><div class="ft"><div class="fb b" style="width:36.8%"></div></div><div class="fr"><div class="fn">7,140</div><div class="fp">37% of created</div></div></div>
+      <div class="fdrop focus"><span>↳ Drop-off 2 · <b>Install reported failure</b> (after acceptance)</span><span class="dn">1,188</span><span>· 6.1%</span><span class="dt">our focus</span></div>
+      <div class="fdrop other"><span>↳ other drops after acceptance — customer cancellations (~805) and ~713 still in progress</span></div>
+      <div class="fstage"><div class="fl">Install</div><div class="ft"><div class="fb c" style="width:13.1%"></div></div><div class="fr"><div class="fn">2,552</div><div class="fp">13% of created</div></div></div>
     </div>
-    <h3 style="margin-bottom:9px">The reasons a CSP picks, and how often</h3>
+    <p style="font-size:12.6px; color:var(--muted); margin-top:10px"><strong>There are other drop-offs too</strong> — and the largest leak isn't a decline at all: more than half of tasks time out before the CSP even accepts. This project targets the two <em>reasoned</em> drops (Decline and Install-failure), which sit inside this leakier funnel.</p>
+
+    <h3 style="margin:26px 0 9px">The reasons a CSP picks, and how often</h3>
+    <p style="font-size:13.5px; margin-bottom:11px">Both reasoned drops draw from the same list. Here's how the ~3.2k declines split by reason:</p>
     <div class="twrap">
       <table>
         <thead><tr><th>Decline reason</th><th class="num">Share of declines</th><th style="width:42%">Distribution</th></tr></thead>
@@ -282,16 +307,16 @@
     <div class="sec-head">
       <span class="eyebrow">The loop in one picture · service not available</span>
       <h2>Five steps, one reason, all the way around</h2>
-      <p>Here's the loop for that one reason. It only counts as built if it runs end-to-end: from the CSP's tap to Genie actually changing who gets routed there.</p>
+      <p>Here's the loop for that one reason. It only counts as built if it runs end-to-end: from the CSP's tap to Genie actually dropping him from the candidate list for that pocket.</p>
     </div>
     <div class="loop">
       <div class="node s1"><div class="n">Step 1 · Show</div><h4>Reason in context</h4><p>Surface the reason at the right moment, framed as neutral signal.</p></div>
       <div class="node s2"><div class="n">Step 2 · Assist &amp; capture</div><h4>Informed decline</h4><p>Show what we know, let him decide, and capture the area he's rejecting.</p></div>
       <div class="node s3"><div class="n">Step 3 · Verify</div><h4>Is it a false decline?</h4><p>Test the claim against our own data and aligned-incentive ground truth.</p></div>
       <div class="node s4"><div class="n">Step 4 · Signal</div><h4>Emit to Genie</h4><p>Hand the verified signal to serviceability. We don't act — we inform.</p></div>
-      <div class="node s5"><div class="n">Step 5 · Consequence</div><h4>Genie stops routing</h4><p>Past a threshold, Genie de-lists that pocket for that CSP.</p></div>
+      <div class="node s5"><div class="n">Step 5 · Consequence</div><h4>Genie drops him from candidates</h4><p>Past a threshold, Genie stops surfacing him for bookings in that pocket, so DAS never routes them to him.</p></div>
     </div>
-    <div class="loopback"><span class="ico">↻</span><span><b>The self-learning loop:</b> once Genie de-lists a pocket for a CSP, no new booking from there reaches him — so <b>the clutter he used to decline never arrives again</b>. Fewer bad offers → fewer coverage declines → a cleaner supply map every month.</span></div>
+    <div class="loopback"><span class="ico">↻</span><span><b>The self-learning loop:</b> once Genie drops that active point, the CSP stops appearing as a candidate for bookings there — so DAS never sends him those, and <b>the clutter he used to decline never arrives again</b>. Fewer bad offers → fewer coverage declines → a cleaner supply map every month.</span></div>
   </div>
 </section>
 
@@ -310,7 +335,7 @@
     </div>
     <div class="callout good">
       <h4>How this helps the customer — the answer to "what happens after Step 5"</h4>
-      <p>A customer in a genuinely-serviced pocket stops being routed to a CSP who'll refuse them. Their booking lands on a CSP who <em>will</em> install — first time — instead of bouncing through re-offers until it times out. The loop's payoff is not a cleaner dashboard; it's a customer who waits days less to get online.</p>
+      <p>A customer in a genuinely-serviced pocket stops being sent to a CSP who'll refuse them. Their booking lands on a CSP who <em>will</em> install — first time — instead of bouncing through re-offers until it times out. The loop's payoff is not a cleaner dashboard; it's a customer who waits days less to get online.</p>
     </div>
   </div>
 </section>
@@ -420,7 +445,8 @@
         <div class="body">
           <div class="lbl">Signal</div>
           <h3>Emit the verified signal to Genie <span class="owner genie">Genie acts</span></h3>
-          <p>This is the scope boundary. We <strong>do not change routing, de-list anyone, or touch the splitter map ourselves</strong>. We publish a clean, verified, pocket-level signal — <em>"CSP X, ≥N deliberate not-serviceable flags for pocket P"</em> — and Genie reads it. We are the trusted system-of-record; Genie owns the decision.</p>
+          <p>This is the scope boundary. We <strong>build no candidate list, route nothing, and de-list no one ourselves</strong>. We publish a clean, verified, pocket-level signal — <em>"CSP X, ≥N deliberate not-serviceable flags for pocket P"</em> — and Genie reads it. We are the trusted system-of-record; Genie owns the decision.</p>
+          <div class="callout" style="margin-top:12px"><p style="font-size:12.8px"><strong>How the CSP system works:</strong> <b>Genie</b> builds each booking's candidate-CSP list by distance from every CSP's active connection points; <b>DAS</b> then routes among those candidates. Neither is us — we only feed Genie the signal that changes which active points count.</p></div>
         </div>
       </div>
 
@@ -429,12 +455,12 @@
         <div class="mk">5</div>
         <div class="body">
           <div class="lbl">Consequence</div>
-          <h3>Genie de-lists the pocket for that CSP <span class="owner genie">Genie acts</span></h3>
-          <p>Using the signal, Genie applies a threshold: once a CSP's active point / pocket crosses the flag bar, Genie <strong>removes it from that CSP's active-connection / splitter list</strong>. From then on, <strong>new bookings from that pocket never route to him</strong> — because we've learned he won't install there. The clutter is gone from his feed, and the booking goes to a CSP who will.</p>
+          <h3>Genie drops the pocket from his candidate footprint <span class="owner genie">Genie acts</span></h3>
+          <p>Using the signal, Genie applies a threshold: once a CSP's active point / pocket crosses the flag bar, Genie <strong>stops counting that active point in the distance calc for this CSP</strong>. From then on he <strong>isn't surfaced as a candidate for new bookings near that pocket</strong> — so DAS never routes them to him, because we've learned he won't install there. The clutter is gone from his feed, and the booking goes to a CSP who will.</p>
           <div class="thresh">
             <div class="pt"><div class="cnt">&gt;2</div><div class="lab">verified flags on a pocket</div></div>
             <div class="arrow">→</div>
-            <div class="res"><b>Genie removes that point</b> from the CSP's active-connection / splitter list → future bookings there route elsewhere.</div>
+            <div class="res"><b>Genie stops counting that active point</b> for this CSP → he's not a candidate for nearby bookings → DAS routes them elsewhere.</div>
           </div>
           <p style="font-size:12.6px; color:var(--muted); margin-top:10px">Threshold (&gt;2) is illustrative — Genie owns the exact bar and can tune it per confidence source.</p>
         </div>
@@ -503,7 +529,7 @@
       <h2>Open questions</h2>
     </div>
     <div class="callout warn">
-      <p>① Exact radius &amp; count for the Step 2 popup (150&nbsp;m / 3 is illustrative). ② How a "pocket" is defined — active-point cluster, splitter, or geo-cell — since it's the unit Genie de-lists. ③ Dominance-calling data access (a queryable source, not the login-gated app) to drive Step 3. ④ The verification mechanism for coverage — weight of calling vs data, and how confidence accumulates per pocket. ⑤ Genie's threshold, and how a de-listed pocket can be re-opened for a CSP if conditions change.</p>
+      <p>① Exact radius &amp; count for the Step 2 popup (150&nbsp;m / 3 is illustrative). ② How a "pocket" is defined — active-point cluster, splitter, or geo-cell — since it's the unit Genie drops from the distance calc. ③ Dominance-calling data access (a queryable source, not the login-gated app) to drive Step 3. ④ The verification mechanism for coverage — weight of calling vs data, and how confidence accumulates per pocket. ⑤ Genie's threshold, and how a dropped pocket can be re-opened for a CSP if conditions change.</p>
     </div>
   </div>
 </section>
