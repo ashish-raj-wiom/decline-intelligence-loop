@@ -203,6 +203,11 @@
   .rrow.sel .rd{border-color:var(--csp); box-shadow:inset 0 0 0 3px var(--csp)}
   .rrow .sh{margin-left:auto; font-size:10px; color:var(--muted)}
   .owner.tbd{background:var(--tile); color:var(--muted)}
+  .vtag{font-size:10px; font-weight:700; letter-spacing:.02em; padding:1px 8px; border-radius:20px; white-space:nowrap}
+  .vtag.keep{background:var(--learn-wash); color:var(--learn)}
+  .vtag.drop{background:rgba(208,67,63,.13); color:var(--stop)}
+  .vtag.club{background:var(--csp-wash); color:var(--csp)}
+  .vtag.new{background:var(--sys-wash); color:var(--sys-ink)}
 
   /* verification signals */
   .vsig{display:flex; gap:12px; align-items:flex-start; padding:13px 0; border-bottom:1px solid var(--line)}
@@ -386,28 +391,8 @@
         <div class="body">
           <div class="lbl">Show</div>
           <h3>Show the reason list <span class="owner here">this layer</span></h3>
-          <p>Step 1 does one thing: show the CSP the list of decline reasons and let him pick the one that fits. What matters here is <strong>which reasons are visible</strong>, that they read as neutral options, and that their <strong>order is randomised</strong> on every render so a reason isn't chosen just because it sits on top. The CSP taps the option matching his situation — for this exercise, that's <strong>"service not available at this location"</strong>.</p>
-          <div class="grid2" style="margin-top:15px; align-items:start">
-            <div>
-              <div class="rlist">
-                <div class="rt">Why can't you install this?</div>
-                <div class="rrow sel"><span class="rd"></span>Service not available at this location <span class="sh">in scope</span></div>
-                <div class="rrow"><span class="rd"></span>Required device is currently unavailable</div>
-                <div class="rrow"><span class="rd"></span>Customer refused</div>
-                <div class="rrow"><span class="rd"></span>Installation could not be scheduled</div>
-                <div class="rrow"><span class="rd"></span>Could not understand the address</div>
-                <div class="rrow"><span class="rd"></span>Other — tell us more <span class="sh">pinned last</span></div>
-              </div>
-              <p style="font-size:12.3px; color:var(--muted); margin-top:8px">Order shuffles each time; "Other" stays pinned last.</p>
-            </div>
-            <div>
-              <h4 style="color:var(--ink); margin-bottom:7px">What Step 1 owns</h4>
-              <div class="card" style="padding:14px 16px">
-                <p style="font-size:13.3px">Which reasons are visible, neutral framing, randomised order, and recording one honest tap. Nothing is interpreted or acted on yet — that starts at Step 2.</p>
-              </div>
-              <div class="callout" style="margin-top:12px"><h4>More about it →</h4><p style="font-size:12.8px">The full reason-set design — which reasons to keep, remove, club or add, and why — sits in the <a href="#archive" style="color:var(--sys-ink)">archive</a>. Scope 1 only needs the list shown correctly.</p></div>
-            </div>
-          </div>
+          <p>Step 1 does one thing: show the CSP the list of decline reasons and let him pick the one that fits. What matters here is <strong>which reasons are visible</strong>, that they read as neutral options, and that their <strong>order is randomised</strong> on every render so a reason isn't chosen just because it sits on top. The CSP taps the option matching his situation — for this exercise, that's <strong>"service not available at this location"</strong>. Nothing is interpreted or acted on yet; that starts at Step 2.</p>
+          <div class="callout" style="margin-top:14px"><h4>More about it →</h4><p style="font-size:13px">The full reason-set design — the complete list, and which reasons to keep, remove, club or add — sits in the <a href="#archive" style="color:var(--sys-ink)">archive</a>. Scope 1 only needs the list shown correctly.</p></div>
         </div>
       </div>
 
@@ -539,7 +524,36 @@
     <details class="archive" style="margin-top:12px">
       <summary><span class="tag">Reason-set</span> Redefining the full reason list (remove / club / add / randomise) <span class="chev">›</span></summary>
       <div class="archbody">
-        <p style="font-size:13.8px; margin-top:12px">A broader clean-up of the shared decline / install-failure reason set: fold the redundant "network setup not possible" into coverage, club "not interested" + "price" into one "customer refused", add "could not understand address", add a free-text "Other", and randomise order everywhere. Deferred so Scope 1 stays focused on one full loop rather than a wide input-only change.</p>
+        <p style="font-size:13.8px; margin-top:12px">The shared decline / install-failure list needs a clean-up before it can be fully trusted. Deferred so Scope&nbsp;1 stays a single full loop rather than a wide input-only change — but here is the intended redesign.</p>
+
+        <h4 style="margin:18px 0 8px; color:var(--ink)">Today's list, and the verdict on each</h4>
+        <div class="twrap">
+          <table>
+            <thead><tr><th>Reason (today)</th><th class="num">Share</th><th>Verdict</th></tr></thead>
+            <tbody>
+              <tr><td>Service not available at this location</td><td class="num">64.7%</td><td><span class="vtag keep">keep · Scope-1 focus</span></td></tr>
+              <tr><td>Network setup is currently not possible</td><td class="num">13.6%</td><td><span class="vtag drop">remove · redundant, fold into coverage</span></td></tr>
+              <tr><td>Customer is not interested anymore</td><td class="num">7.4%</td><td><span class="vtag club">club → Customer refused</span></td></tr>
+              <tr><td>Required device is currently unavailable</td><td class="num">7.1%</td><td><span class="vtag keep">keep</span></td></tr>
+              <tr><td>Installation could not be scheduled</td><td class="num">3.7%</td><td><span class="vtag keep">keep</span></td></tr>
+              <tr><td>Customer did not agree with the plan price</td><td class="num">3.4%</td><td><span class="vtag club">club → Customer refused</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size:13px; margin-top:12px"><strong>The changes:</strong> remove the redundant coverage duplicate ("network setup not possible"); club the two customer-intent reasons into one ("Customer refused"); add the new reasons below; and randomise order on every render so no reason gets a free ride to the top.</p>
+
+        <h4 style="margin:18px 0 8px; color:var(--ink)">Proposed final list</h4>
+        <div class="rlist" style="max-width:540px">
+          <div class="rt">Why can't you install this?</div>
+          <div class="rrow"><span class="rd"></span>Service not available at this location</div>
+          <div class="rrow"><span class="rd"></span>Required device is currently unavailable</div>
+          <div class="rrow"><span class="rd"></span>Customer refused <span class="sh">clubbed</span></div>
+          <div class="rrow"><span class="rd"></span>Installation could not be scheduled</div>
+          <div class="rrow"><span class="rd"></span>Could not understand the address <span class="sh">new</span></div>
+          <div class="rrow"><span class="rd"></span>Technician not available &nbsp;·&nbsp; ladka nahi hai <span class="sh">new</span></div>
+          <div class="rrow"><span class="rd"></span>Other — tell us more <span class="sh">new · pinned last</span></div>
+        </div>
+        <p style="font-size:12.5px; color:var(--muted); margin-top:9px">Order randomised each render; "Other" pinned last. <strong>"Technician not available"</strong> can hand off to the Availability service — prompting the CSP to pause installs for the day.</p>
       </div>
     </details>
 
