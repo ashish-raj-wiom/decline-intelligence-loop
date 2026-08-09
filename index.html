@@ -392,7 +392,7 @@
           <div class="lbl">Show</div>
           <h3>Show the reason list <span class="owner here">this layer</span></h3>
           <p>Step 1 does one thing: show the CSP the list of decline reasons and let him pick the one that fits. What matters here is <strong>which reasons are visible</strong>, that they read as neutral options, and that their <strong>order is randomised</strong> on every render so a reason isn't chosen just because it sits on top. The CSP taps the option matching his situation — for this exercise, that's <strong>"service not available at this location"</strong>. Nothing is interpreted or acted on yet; that starts at Step 2.</p>
-          <div class="callout" style="margin-top:14px"><h4>More about it →</h4><p style="font-size:13px">The full reason-set design — the complete list, and which reasons to keep, remove, club or add — sits in the <a href="#archive" style="color:var(--sys-ink)">archive</a>. Scope 1 only needs the list shown correctly.</p></div>
+          <div class="callout" style="margin-top:14px"><h4>More about it →</h4><p style="font-size:13px">The full reason-set design — the complete list, and which reasons to keep, remove, club or add — sits in the <a href="#reason-set" style="color:var(--sys-ink)">archive</a>. Scope 1 only needs the list shown correctly.</p></div>
         </div>
       </div>
 
@@ -502,26 +502,7 @@
       <p>Scope 1 is one reason, built fully. The material below is kept for reference — it applies the same five-step spine to other reasons and capture ideas, to be picked up once the coverage loop is live.</p>
     </div>
 
-    <details class="archive">
-      <summary><span class="tag">Reason</span> "Customer refused" — customer-side verification loop <span class="chev">›</span></summary>
-      <div class="archbody">
-        <p style="font-size:13.8px; margin-top:12px">When a CSP says the customer refused, today we don't validate it — we just re-offer to the next CSP, breaking their experience if the first CSP was right. The same spine applies, but the verification and the action live on the <strong>customer side</strong>, not here: this layer would only emit a <em>"customer-refused, needs verification"</em> signal, and the customer-side system owns the contact and the outcome.</p>
-        <div class="brow">
-          <div class="bq">Customer: "Yes, I don't want it"</div>
-          <div class="bans stop"><div class="act">▣ Cancel &amp; stop routing</div><p>CSP was right. Customer-side cancels + fast-refunds; no other CSP wastes a visit.</p></div>
-        </div>
-        <div class="brow">
-          <div class="bq">Customer: "No, I do want it"</div>
-          <div class="bans go"><div class="act">▶ Keep routing + record</div><p>Booking stays alive. The disproven claim is recorded for Quality to evaluate — never surfaced to the CSP as a strike.</p></div>
-        </div>
-        <div class="brow">
-          <div class="bq">Customer: no response</div>
-          <div class="bans hold"><div class="act">◷ As usual</div><p>No new information — fall back to today's behaviour. We lose nothing.</p></div>
-        </div>
-      </div>
-    </details>
-
-    <details class="archive" style="margin-top:12px">
+    <details class="archive" id="reason-set">
       <summary><span class="tag">Reason-set</span> Redefining the full reason list (remove / club / add / randomise) <span class="chev">›</span></summary>
       <div class="archbody">
         <p style="font-size:13.8px; margin-top:12px">The shared decline / install-failure list needs a clean-up before it can be fully trusted. Deferred so Scope&nbsp;1 stays a single full loop rather than a wide input-only change — but here is the intended redesign.</p>
@@ -558,6 +539,25 @@
     </details>
 
     <details class="archive" style="margin-top:12px">
+      <summary><span class="tag">Reason</span> "Customer refused" — customer-side verification loop <span class="chev">›</span></summary>
+      <div class="archbody">
+        <p style="font-size:13.8px; margin-top:12px">When a CSP says the customer refused, today we don't validate it — we just re-offer to the next CSP, breaking their experience if the first CSP was right. The same spine applies, but the verification and the action live on the <strong>customer side</strong>, not here: this layer would only emit a <em>"customer-refused, needs verification"</em> signal, and the customer-side system owns the contact and the outcome.</p>
+        <div class="brow">
+          <div class="bq">Customer: "Yes, I don't want it"</div>
+          <div class="bans stop"><div class="act">▣ Cancel &amp; stop routing</div><p>CSP was right. Customer-side cancels + fast-refunds; no other CSP wastes a visit.</p></div>
+        </div>
+        <div class="brow">
+          <div class="bq">Customer: "No, I do want it"</div>
+          <div class="bans go"><div class="act">▶ Keep routing + record</div><p>Booking stays alive. The disproven claim is recorded for Quality to evaluate — never surfaced to the CSP as a strike.</p></div>
+        </div>
+        <div class="brow">
+          <div class="bq">Customer: no response</div>
+          <div class="bans hold"><div class="act">◷ As usual</div><p>No new information — fall back to today's behaviour. We lose nothing.</p></div>
+        </div>
+      </div>
+    </details>
+
+    <details class="archive" style="margin-top:12px">
       <summary><span class="tag">Capture · TBD</span> Voice recording on decline <span class="chev">›</span></summary>
       <div class="archbody">
         <p style="font-size:13.8px; margin-top:12px">Optional short voice note at decline — the rawest signal, a fallback for when the fixed list still misses the nuance. Mined for themes that graduate into the taxonomy. Rollout timing TBD.</p>
@@ -590,6 +590,20 @@
       if(!cur){cur=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';}
       r.setAttribute('data-theme', cur==='dark'?'light':'dark');
     });
+
+    // Links pointing to a <details> (e.g. the archive) open and scroll to it
+    function openTarget(id){
+      var el=document.querySelector(id);
+      if(el && el.tagName==='DETAILS'){ el.open=true; el.scrollIntoView({behavior:'smooth',block:'start'}); }
+    }
+    document.querySelectorAll('a[href^="#"]').forEach(function(a){
+      a.addEventListener('click',function(){
+        var id=a.getAttribute('href');
+        if(id.length>1){ var el=document.querySelector(id); if(el && el.tagName==='DETAILS'){ el.open=true; setTimeout(function(){ el.scrollIntoView({behavior:'smooth',block:'start'}); },0); } }
+      });
+    });
+    if(location.hash) openTarget(location.hash);
+    window.addEventListener('hashchange',function(){ if(location.hash) openTarget(location.hash); });
   })();
 </script>
 </body>
