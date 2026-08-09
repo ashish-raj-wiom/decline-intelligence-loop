@@ -143,6 +143,28 @@
   .fdrop .dt{font-size:10px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; padding:1px 8px; border-radius:20px; background:var(--csp-wash); color:var(--csp)}
   .fdrop.other{color:var(--muted)} .fdrop.other .dn{color:var(--ink2)}
   @media(max-width:680px){.fstage{grid-template-columns:88px 1fr 78px; gap:9px} .fstage .fl{font-size:12.5px} .fdrop{padding-left:96px}}
+  /* drop-off hero cards + compact context funnel */
+  .drops{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:8px 0 18px}
+  @media(max-width:680px){.drops{grid-template-columns:1fr}}
+  .drop{background:var(--surface); border:1px solid var(--tile); border-left:3px solid var(--csp); border-radius:13px; padding:17px 19px}
+  .drop .dl{font-size:11px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); display:flex; align-items:center; gap:9px; flex-wrap:wrap}
+  .drop .dl .tag{font-size:10px; font-weight:700; letter-spacing:.03em; padding:1px 8px; border-radius:20px; background:var(--csp-wash); color:var(--csp)}
+  .drop .dh{font-size:16px; font-weight:700; color:var(--ink); margin:9px 0 2px}
+  .drop .dv{display:flex; align-items:baseline; gap:9px; margin:2px 0 6px}
+  .drop .dv .n{font-size:37px; font-weight:780; letter-spacing:-.025em; color:var(--csp); font-variant-numeric:tabular-nums; line-height:1}
+  .drop .dv .p{font-size:14.5px; font-weight:640; color:var(--ink2)}
+  .drop .dd{font-size:13px; color:var(--ink2); max-width:none}
+  .ctx{background:var(--raise); border:1px solid var(--tile); border-radius:12px; padding:15px 18px 16px}
+  .ctx .ct{font-size:11px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); margin-bottom:13px}
+  .cf{display:flex; flex-direction:column; gap:9px}
+  .cfrow{display:grid; grid-template-columns:104px 1fr 92px; gap:12px; align-items:center}
+  .cfrow .cl{color:var(--ink2); font-weight:640; font-size:13px}
+  .cfrow .ctk{height:16px; background:var(--tile); border-radius:5px; overflow:hidden}
+  .cfrow .cb{height:16px; border-radius:5px}
+  .cfrow .cb.a{background:var(--sys); opacity:.5} .cfrow .cb.b{background:var(--sys); opacity:.5} .cfrow .cb.c{background:var(--learn); opacity:.85}
+  .cfrow .cn{text-align:right; font-variant-numeric:tabular-nums; color:var(--ink); font-weight:680; font-size:14px}
+  .cfrow .cn small{color:var(--muted); font-weight:500; font-size:10.5px; margin-left:5px}
+  .ctx .cnote{font-size:12.3px; color:var(--muted); margin-top:12px; max-width:none}
 
   /* step rail */
   .steprail{margin-top:12px}
@@ -265,18 +287,31 @@
       <h2>When a CSP won't install, he tells us why</h2>
       <p>A booking sent to a CSP can be turned down at two moments — a <strong>decline</strong> before he accepts, or an <strong>install-failure report</strong> after — and at both he picks a reason from the same fixed list. That reason is the signal this whole exercise is built on. First, the lay of the land.</p>
     </div>
-    <h3 style="margin-bottom:5px">The install funnel — where bookings drop</h3>
-    <p style="margin-bottom:15px">Of every task created, the CSP either declines it, accepts and installs, or accepts and reports a failure. The two drops where he gives us a <strong>reason</strong> are our subject — but they aren't the only leaks in the funnel.</p>
-    <div class="funnel">
-      <div class="fstage"><div class="fl">Task created</div><div class="ft"><div class="fb a" style="width:100%"></div></div><div class="fr"><div class="fn">19,418</div><div class="fp">last 30 days</div></div></div>
-      <div class="fdrop focus"><span>↳ Drop-off 1 · <b>Decline</b> (before acceptance)</span><span class="dn">3,191</span><span>· 16.4%</span><span class="dt">our focus</span></div>
-      <div class="fdrop other"><span>↳ other drops before acceptance — mostly tasks that <b>time out</b> (~10,969), plus some cancellations</span></div>
-      <div class="fstage"><div class="fl">Acceptance</div><div class="ft"><div class="fb b" style="width:36.8%"></div></div><div class="fr"><div class="fn">7,140</div><div class="fp">37% of created</div></div></div>
-      <div class="fdrop focus"><span>↳ Drop-off 2 · <b>Install reported failure</b> (after acceptance)</span><span class="dn">1,188</span><span>· 6.1%</span><span class="dt">our focus</span></div>
-      <div class="fdrop other"><span>↳ other drops after acceptance — customer cancellations (~805) and ~713 still in progress</span></div>
-      <div class="fstage"><div class="fl">Install</div><div class="ft"><div class="fb c" style="width:13.1%"></div></div><div class="fr"><div class="fn">2,552</div><div class="fp">13% of created</div></div></div>
+    <h3 style="margin-bottom:5px">The two drop-offs we act on</h3>
+    <p style="margin-bottom:16px">Of every task created, the CSP declines it, accepts and installs, or accepts and reports a failure. The two drops where he gives us a <strong>reason</strong> — and which this project acts on — are these:</p>
+    <div class="drops">
+      <div class="drop">
+        <div class="dl">Drop-off 1 · before acceptance <span class="tag">our focus</span></div>
+        <div class="dh">Decline</div>
+        <div class="dv"><span class="n">3,191</span><span class="p">16.4% of tasks</span></div>
+        <div class="dd">The CSP turns the booking down before accepting it — and picks a reason.</div>
+      </div>
+      <div class="drop">
+        <div class="dl">Drop-off 2 · after acceptance <span class="tag">our focus</span></div>
+        <div class="dh">Install reported failure</div>
+        <div class="dv"><span class="n">1,188</span><span class="p">6.1% of tasks</span></div>
+        <div class="dd">He accepts, then can't complete the install — and reports a reason.</div>
+      </div>
     </div>
-    <p style="font-size:12.6px; color:var(--muted); margin-top:10px"><strong>There are other drop-offs too</strong> — and the largest leak isn't a decline at all: more than half of tasks time out before the CSP even accepts. This project targets the two <em>reasoned</em> drops (Decline and Install-failure), which sit inside this leakier funnel.</p>
+    <div class="ctx">
+      <div class="ct">In context — the full funnel · last 30 days</div>
+      <div class="cf">
+        <div class="cfrow"><span class="cl">Task created</span><span class="ctk"><span class="cb a" style="width:100%"></span></span><span class="cn">19,418<small>100%</small></span></div>
+        <div class="cfrow"><span class="cl">Acceptance</span><span class="ctk"><span class="cb b" style="width:36.8%"></span></span><span class="cn">7,140<small>37%</small></span></div>
+        <div class="cfrow"><span class="cl">Install</span><span class="ctk"><span class="cb c" style="width:13.1%"></span></span><span class="cn">2,552<small>13%</small></span></div>
+      </div>
+      <p class="cnote">The two reasoned drops sit inside a leakier funnel — the biggest leak isn't a decline at all: <strong>~10,969 tasks (56%) time out before acceptance</strong>, plus customer cancellations (~805) and ~713 still in progress.</p>
+    </div>
 
     <h3 style="margin:26px 0 9px">The reasons a CSP picks, and how often</h3>
     <p style="font-size:13.5px; margin-bottom:11px">Both reasoned drops draw from the same list. Here's how the ~3.2k declines split by reason:</p>
@@ -381,9 +416,10 @@
         <div class="mk">2</div>
         <div class="body">
           <div class="lbl">Assist &amp; capture</div>
-          <h3>Help him avoid a false decline — and capture the area he's rejecting <span class="owner here">this layer</span></h3>
+          <h3>Help him avoid a false decline — and capture the points he's rejecting <span class="owner here">this layer</span></h3>
           <p>Before we accept the decline, we show the CSP what we already know: he has <strong>active connections a few doors away</strong>. If he backs off, a false decline never happens. If he still declines, we capture two things — the <strong>decision</strong> (a deliberate "I won't serve here"), and <strong>the specific active or splitter points we just showed him</strong> that he's declaring un-serviceable. Those points, not just the booking, are the unit we learn on — and <strong>only a point we actually showed him can ever be flagged</strong>, never one he never saw.</p>
           <div class="grid2" style="margin-top:15px; align-items:start">
+            <div>
             <div class="interrupt">
               <div class="ttl">⚠︎ Are you sure service isn't available here?</div>
               <p>You have <strong>3 active connections</strong> within 150&nbsp;m of this address:</p>
@@ -396,6 +432,8 @@
                 <div class="btn ghost">Let me re-check</div>
                 <div class="btn primary">Still not serviceable</div>
               </div>
+            </div>
+            <p style="font-size:11.5px; color:var(--muted); margin-top:9px">Illustration only — the exact Step 2 UX flow will be finalised by the solutions team.</p>
             </div>
             <div>
               <h4 style="color:var(--ink); margin-bottom:7px">What we record</h4>
