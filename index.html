@@ -307,14 +307,14 @@
     <div class="sec-head">
       <span class="eyebrow">The loop in one picture · service not available</span>
       <h2>Five steps, one reason, all the way around</h2>
-      <p>Here's the loop for that one reason. It only counts as built if it runs end-to-end: from the CSP's tap to Genie actually dropping him from the candidate list for that pocket.</p>
+      <p>Here's the loop for that one reason. It only counts as built if it runs end-to-end: from the CSP's tap to Genie actually dropping him from the candidate list for that point.</p>
     </div>
     <div class="loop">
       <div class="node s1"><div class="n">Step 1 · Show</div><h4>Reason in context</h4><p>Surface the reason at the right moment, framed as neutral signal.</p></div>
-      <div class="node s2"><div class="n">Step 2 · Assist &amp; capture</div><h4>Informed decline</h4><p>Show what we know, let him decide, and capture the area he's rejecting.</p></div>
+      <div class="node s2"><div class="n">Step 2 · Assist &amp; capture</div><h4>Informed decline</h4><p>Show him the nearby points, let him decide, and capture the ones he still rejects.</p></div>
       <div class="node s3"><div class="n">Step 3 · Verify</div><h4>Is it a false decline?</h4><p>Test the claim against our own data and aligned-incentive ground truth.</p></div>
       <div class="node s4"><div class="n">Step 4 · Signal</div><h4>Emit to Genie</h4><p>Hand the verified signal to serviceability. We don't act — we inform.</p></div>
-      <div class="node s5"><div class="n">Step 5 · Consequence</div><h4>Genie drops him from candidates</h4><p>Past a threshold, Genie stops surfacing him for bookings in that pocket, so DAS never routes them to him.</p></div>
+      <div class="node s5"><div class="n">Step 5 · Consequence</div><h4>Genie drops him from candidates</h4><p>Past a threshold, Genie stops surfacing him for bookings near that point, so DAS never routes them to him.</p></div>
     </div>
     <div class="loopback"><span class="ico">↻</span><span><b>The self-learning loop:</b> once Genie drops that active point, the CSP stops appearing as a candidate for bookings there — so DAS never sends him those, and <b>the clutter he used to decline never arrives again</b>. Fewer bad offers → fewer coverage declines → a cleaner supply map every month.</span></div>
   </div>
@@ -325,17 +325,12 @@
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">Why we're doing this</span>
-      <h2>The objective, and how we'll know it worked</h2>
-      <p>For this reason, the goal is to <strong>send only quality serviceable bookings to the CSP and filter out the clutter</strong> — automatically, by learning from every decline. Success is measured where it matters: the CSP's feed gets cleaner, and the customer gets installed faster.</p>
-    </div>
-    <div class="stats">
-      <div class="stat down"><div class="dir">▼ should fall</div><div class="m">% declines for "location too far / not serviceable"</div><div class="k">the clutter is leaving the system</div></div>
-      <div class="stat down"><div class="dir">▼ should fall</div><div class="m">Median distance of a booking from the CSP</div><div class="k">CSPs get bookings genuinely near them</div></div>
-      <div class="stat down"><div class="dir">▼ should fall</div><div class="m">Customer wait-time to install</div><div class="k">next booking lands on the right CSP first time</div></div>
+      <h2>The objective</h2>
+      <p>For this reason, the goal is to <strong>send only quality serviceable bookings to the CSP and filter out the clutter</strong> — automatically, by learning from every decline. (Success metrics are at the end of the walkthrough below.)</p>
     </div>
     <div class="callout good">
       <h4>How this helps the customer — the answer to "what happens after Step 5"</h4>
-      <p>A customer in a genuinely-serviced pocket stops being sent to a CSP who'll refuse them. Their booking lands on a CSP who <em>will</em> install — first time — instead of bouncing through re-offers until it times out. The loop's payoff is not a cleaner dashboard; it's a customer who waits days less to get online.</p>
+      <p>A customer in a genuinely-serviced area stops being sent to a CSP who'll refuse them. Their booking lands on a CSP who <em>will</em> install — first time — instead of bouncing through re-offers until it times out. The loop's payoff is not a cleaner dashboard; it's a customer who waits days less to get online.</p>
     </div>
   </div>
 </section>
@@ -387,7 +382,7 @@
         <div class="body">
           <div class="lbl">Assist &amp; capture</div>
           <h3>Help him avoid a false decline — and capture the area he's rejecting <span class="owner here">this layer</span></h3>
-          <p>Before we accept the decline, we show the CSP what we already know: he has <strong>active connections a few doors away</strong>. If he backs off, a false decline never happens. If he still declines, we capture two things — the <strong>decision</strong> (a deliberate "I won't serve here"), and <strong>the specific active points / pocket he is declaring un-serviceable</strong>. That pocket, not just the booking, is the unit we learn on.</p>
+          <p>Before we accept the decline, we show the CSP what we already know: he has <strong>active connections a few doors away</strong>. If he backs off, a false decline never happens. If he still declines, we capture two things — the <strong>decision</strong> (a deliberate "I won't serve here"), and <strong>the specific active or splitter points we just showed him</strong> that he's declaring un-serviceable. Those points, not just the booking, are the unit we learn on — and <strong>only a point we actually showed him can ever be flagged</strong>, never one he never saw.</p>
           <div class="grid2" style="margin-top:15px; align-items:start">
             <div class="interrupt">
               <div class="ttl">⚠︎ Are you sure service isn't available here?</div>
@@ -406,7 +401,7 @@
               <h4 style="color:var(--ink); margin-bottom:7px">What we record</h4>
               <div class="card" style="padding:14px 16px">
                 <p style="font-size:13.3px; margin-bottom:8px"><strong>"Let me re-check"</strong> → decline avoided. The booking keeps its best CSP. Nothing else happens.</p>
-                <p style="font-size:13.3px"><strong>"Still not serviceable"</strong> → a <em>deliberate</em> decline, made despite seeing live neighbours. We log it against the <strong>nearby active points</strong> as one flag: <em>"this CSP won't serve this pocket."</em></p>
+                <p style="font-size:13.3px"><strong>"Still not serviceable"</strong> → a <em>deliberate</em> decline, made despite seeing live neighbours. We log it against the <strong>points we showed him</strong> as one flag: <em>"this CSP won't serve this point."</em></p>
               </div>
               <div class="callout" style="margin-top:12px"><p style="font-size:12.8px">Showing the neighbours is what converts a careless tap into a high-confidence claim. It's the cheapest false-decline filter we have — and it happens before Step 3 ever runs.</p></div>
             </div>
@@ -419,23 +414,17 @@
         <div class="mk">3</div>
         <div class="body">
           <div class="lbl">Verify</div>
-          <h3>Verify the claim — data &amp; ops-calling driven <span class="owner tbd">TBD</span></h3>
-          <p>We never act on a single tap. For <em>this</em> reason the verification is <strong>data-driven and ops-calling driven</strong>, and the exact mechanism is still to be worked out. Coverage is largely self-verifying by accumulation — the same pocket flagged repeatedly, cross-checked against data and calling — so a heavy verification layer matters far more for intent reasons like <strong>"customer said no"</strong> (where you actually have to ask the customer) than it does here.</p>
+          <h3>Verify the claim — Ops calling <span class="owner tbd">TBD</span></h3>
+          <p>We never act on a single tap. But note: <strong>whatever data we hold about this location has already been shown to the CSP</strong> in the Step 2 popup — so re-checking our own data here adds nothing. The one thing data can't settle is his actual claim: that the connection is <strong>genuinely too far for him to serve</strong>. That needs a human check.</p>
           <div class="card" style="margin-top:14px; padding:6px 18px">
             <div class="vsig hi">
               <div class="conf">Ops calling</div>
-              <div class="vb"><h4>Dominance calling as the data check</h4>
-                <p>Ops already calls every <strong>Dominance CSP</strong> (high install incentive, ~75%+ SE), so their declines are near-ground-truth and the calling flow can confirm whether a pocket was really un-serviceable. The natural calibration set — <span style="color:var(--muted)">queryable data source still to be wired.</span></p>
-              </div>
-            </div>
-            <div class="vsig md">
-              <div class="conf">Data</div>
-              <div class="vb"><h4>Cross-CSP installs + our own connection map</h4>
-                <p>A pocket where another CSP later installs, or where this CSP already runs live connections, contradicts "not serviceable". Repeated deliberate declines against such a pocket are the accumulation signal.</p>
+              <div class="vb"><h4>Ops calls to validate "it's too far"</h4>
+                <p>Ops follows up with the CSP to confirm the connection is really beyond his reach, as he claims — not that he simply didn't want it. Only a validated "genuinely far" decline accumulates toward the consequence in Step 5.</p>
               </div>
             </div>
           </div>
-          <div class="callout warn" style="margin-top:14px"><h4>TBD</h4><p>The precise verification mechanism for coverage — how much weight to give calling vs data, and how confidence accumulates per pocket — needs to be figured out. It's lighter here than for customer-intent reasons.</p></div>
+          <div class="callout warn" style="margin-top:14px"><h4>TBD</h4><p>The ops-calling flow — who calls, when, and how a validated "too far" decline is recorded — still needs to be worked out. A verification layer matters more for intent reasons like "customer said no"; for coverage, ops calling is the one check our own data can't make.</p></div>
         </div>
       </div>
 
@@ -445,7 +434,7 @@
         <div class="body">
           <div class="lbl">Signal</div>
           <h3>Emit the verified signal to Genie <span class="owner genie">Genie acts</span></h3>
-          <p>This is the scope boundary. We <strong>build no candidate list, route nothing, and de-list no one ourselves</strong>. We publish a clean, verified, pocket-level signal — <em>"CSP X, ≥N deliberate not-serviceable flags for pocket P"</em> — and Genie reads it. We are the trusted system-of-record; Genie owns the decision.</p>
+          <p>This is the scope boundary. We <strong>build no candidate list, route nothing, and de-list no one ourselves</strong>. We publish a clean, verified, point-level signal — <em>"CSP X, ≥N validated not-serviceable flags for point P"</em> — and Genie reads it. We are the trusted system-of-record; Genie owns the decision.</p>
           <div class="callout" style="margin-top:12px"><p style="font-size:12.8px"><strong>How the CSP system works:</strong> <b>Genie</b> builds each booking's candidate-CSP list by distance from every CSP's active connection points; <b>DAS</b> then routes among those candidates. Neither is us — we only feed Genie the signal that changes which active points count.</p></div>
         </div>
       </div>
@@ -455,17 +444,28 @@
         <div class="mk">5</div>
         <div class="body">
           <div class="lbl">Consequence</div>
-          <h3>Genie drops the pocket from his candidate footprint <span class="owner genie">Genie acts</span></h3>
-          <p>Using the signal, Genie applies a threshold: once a CSP's active point / pocket crosses the flag bar, Genie <strong>stops counting that active point in the distance calc for this CSP</strong>. From then on he <strong>isn't surfaced as a candidate for new bookings near that pocket</strong> — so DAS never routes them to him, because we've learned he won't install there. The clutter is gone from his feed, and the booking goes to a CSP who will.</p>
+          <h3>Genie drops the point for that CSP <span class="owner genie">Genie acts</span></h3>
+          <p>Using the signal, Genie applies a threshold: once a CSP's <strong>point (active or splitter point)</strong> crosses the flag bar, Genie <strong>stops counting that point in the distance calc for this CSP</strong>. From then on he <strong>isn't surfaced as a candidate for new bookings near that point</strong> — so DAS never routes them to him, because we've learned he won't install there. The clutter is gone from his feed, and the booking goes to a CSP who will.</p>
           <div class="thresh">
-            <div class="pt"><div class="cnt">&gt;2</div><div class="lab">verified flags on a pocket</div></div>
+            <div class="pt"><div class="cnt">&gt;2</div><div class="lab">validated flags on a point</div></div>
             <div class="arrow">→</div>
             <div class="res"><b>Genie stops counting that active point</b> for this CSP → he's not a candidate for nearby bookings → DAS routes them elsewhere.</div>
           </div>
-          <p style="font-size:12.6px; color:var(--muted); margin-top:10px">Threshold (&gt;2) is illustrative — Genie owns the exact bar and can tune it per confidence source.</p>
+          <p style="font-size:12.6px; color:var(--muted); margin-top:10px">Threshold (&gt;2) is illustrative — Genie owns the exact bar. Every flagged point is one the CSP was shown in Step 2 and still rejected.</p>
         </div>
       </div>
 
+    </div>
+
+    <div class="sec-head" style="margin-top:36px; margin-bottom:16px">
+      <span class="eyebrow">Success metrics</span>
+      <h3 style="font-size:20px; margin-top:6px">How we'll know it worked</h3>
+    </div>
+    <div class="stats" style="grid-template-columns:repeat(2,1fr)">
+      <div class="stat down"><div class="dir">▼ should fall</div><div class="m">% declines for "location too far / not serviceable"</div><div class="k">the clutter is leaving the system</div></div>
+      <div class="stat down"><div class="dir">▼ should fall</div><div class="m">Median distance of a booking from the CSP</div><div class="k">CSPs get bookings genuinely near them</div></div>
+      <div class="stat down"><div class="dir">▼ should fall</div><div class="m">Customer wait-time to install</div><div class="k">next booking lands on the right CSP first time</div></div>
+      <div class="stat up"><div class="dir">▲ Step 2 is working</div><div class="m">% of tasks the CSP reconsidered when shown nearby active connections</div><div class="k">false declines caught before they happen</div></div>
     </div>
   </div>
 </section>
@@ -529,14 +529,14 @@
       <h2>Open questions</h2>
     </div>
     <div class="callout warn">
-      <p>① Exact radius &amp; count for the Step 2 popup (150&nbsp;m / 3 is illustrative). ② How a "pocket" is defined — active-point cluster, splitter, or geo-cell — since it's the unit Genie drops from the distance calc. ③ Dominance-calling data access (a queryable source, not the login-gated app) to drive Step 3. ④ The verification mechanism for coverage — weight of calling vs data, and how confidence accumulates per pocket. ⑤ Genie's threshold, and how a dropped pocket can be re-opened for a CSP if conditions change.</p>
+      <p>① Exact radius &amp; count for the Step 2 popup (150&nbsp;m / 3 is illustrative). ② Whether the flagged unit is the active connection point or the splitter point — that's what Genie drops from the distance calc. ③ The ops-calling flow — who calls, when, and how a validated "genuinely too far" decline is recorded. ④ Genie's threshold, and how a dropped point can be re-opened for a CSP if conditions change.</p>
     </div>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
-    <p><strong>Decline Intelligence — "Service not available" loop.</strong> Scope 1 concept built on the CSP decline analysis (Jun–Aug 2026). This reason is ~65% of all declines. This feature is a capture + system-of-record layer; Genie, DAS, Quality and the customer-side systems act on the signals it publishes. Illustrative UI, thresholds and the "pocket" unit are for discussion, not final spec. Ashish Raj.</p>
+    <p><strong>Decline Intelligence — "Service not available" loop.</strong> Scope 1 concept built on the CSP decline analysis (Jun–Aug 2026). This reason is ~65% of all declines. This feature is a capture + system-of-record layer; Genie, DAS, Quality and the customer-side systems act on the signals it publishes. Illustrative UI, thresholds and the "point" unit are for discussion, not final spec. Ashish Raj.</p>
   </div>
 </footer>
 
