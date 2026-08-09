@@ -118,6 +118,15 @@
   .stat.down .dir{color:var(--learn)} .stat.up .dir{color:var(--learn)}
   .stat .m{font-size:15.5px; font-weight:680; color:var(--ink); margin:6px 0 3px; letter-spacing:-.01em}
   .stat .k{font-size:12.5px; color:var(--muted)}
+  /* context number cards + popularity bars */
+  .numrow{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:2px 0 22px}
+  @media(max-width:680px){.numrow{grid-template-columns:1fr}}
+  .numcard{background:var(--raise); border:1px solid var(--tile); border-radius:12px; padding:16px 17px}
+  .numcard .v{font-size:28px; font-weight:760; letter-spacing:-.02em; font-variant-numeric:tabular-nums; color:var(--ink)}
+  .numcard .k{font-size:12.5px; color:var(--muted); margin-top:3px}
+  td.num,th.num{text-align:right; font-variant-numeric:tabular-nums}
+  .bar{height:8px; border-radius:0 4px 4px 0; background:var(--csp); display:inline-block; vertical-align:middle}
+  tr.hi td{background:var(--csp-wash)} tr.hi td b{color:var(--csp)}
 
   /* step rail */
   .steprail{margin-top:12px}
@@ -221,7 +230,7 @@
   <div class="wrap">
     <div class="kick"><span class="dot"></span><span class="eyebrow">CSP Decline Intelligence · Scope 1 · one reason, end-to-end</span></div>
     <h1>Send each CSP only the bookings<br>he'll actually install</h1>
-    <p class="lede">When a CSP says <b>"service not available at this location"</b> and declines, today we throw the signal away and re-offer the booking blindly — often to the wrong CSP, again. This turns that one reason into a <b>self-learning loop</b>: capture it in context, help the CSP avoid a careless decline, verify it's real, and let <b>Genie</b> stop routing that pocket to a CSP who won't serve it. The objective is simple — <b>filter the clutter, so every CSP gets only quality, serviceable bookings.</b></p>
+    <p class="lede">When a CSP won't install a booking, he tells us <b>why he's declining</b> — and today we throw that signal away and re-offer blindly, often to the wrong CSP again. This turns declines into a <b>self-learning loop</b>: capture the reason in context, help the CSP avoid a careless decline, verify it's real, and let the right service act on it. We start with the <b>single biggest reason of all</b>. The objective — <b>filter the clutter, so every CSP gets only quality, serviceable bookings.</b></p>
     <div class="metastrip">
       <span><b>Reason in scope:</b> "Service not available at this location" (~65% of all declines)</span>
       <span><b>Builds on:</b> the CSP decline analysis (Jun–Aug 2026)</span>
@@ -232,13 +241,48 @@
 
 <main>
 
+<!-- CONTEXT -->
+<section id="context">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Context · what a decline is</span>
+      <h2>When a CSP won't install, he tells us why</h2>
+      <p>A booking sent to a CSP can be turned down at two moments — a <strong>decline</strong> before he accepts, or an <strong>install-failure report</strong> after — and at both he picks a reason from the same fixed list. That reason is the signal this whole exercise is built on. First, the lay of the land.</p>
+    </div>
+    <div class="numrow">
+      <div class="numcard"><div class="v">3,151</div><div class="k">declines · last 30 days</div></div>
+      <div class="numcard"><div class="v">15.9%</div><div class="k">of all install candidates are declined</div></div>
+      <div class="numcard"><div class="v">1,653</div><div class="k">install-failures · last 45 days · same reason set</div></div>
+    </div>
+    <h3 style="margin-bottom:9px">The reasons a CSP picks, and how often</h3>
+    <div class="twrap">
+      <table>
+        <thead><tr><th>Decline reason</th><th class="num">Share of declines</th><th style="width:42%">Distribution</th></tr></thead>
+        <tbody>
+          <tr class="hi"><td><b>Service not available at this location</b></td><td class="num"><b>64.7%</b></td><td><span class="bar" style="width:97%"></span></td></tr>
+          <tr><td>Network setup is currently not possible</td><td class="num">13.6%</td><td><span class="bar" style="width:20%"></span></td></tr>
+          <tr><td>Customer is not interested anymore</td><td class="num">7.4%</td><td><span class="bar" style="width:11%"></span></td></tr>
+          <tr><td>Required device is currently unavailable</td><td class="num">7.1%</td><td><span class="bar" style="width:11%"></span></td></tr>
+          <tr><td>Installation could not be scheduled</td><td class="num">3.7%</td><td><span class="bar" style="width:6%"></span></td></tr>
+          <tr><td>Customer did not agree with the plan price</td><td class="num">3.4%</td><td><span class="bar" style="width:5%"></span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:12.8px; color:var(--muted); margin-top:10px">The install-failure list uses the same set — coverage, customer-refused, price, backhaul, schedule, device — so this picture covers both capture points.</p>
+    <div class="callout" style="margin-top:20px">
+      <h4>Where we start</h4>
+      <p>One reason dwarfs the rest — <strong>"Service not available at this location", at ~65% of all declines</strong>. So we build the full self-learning loop for that one reason first, end-to-end. The others follow the same five-step spine later (kept in the archive). The rest of this document is that one reason.</p>
+    </div>
+  </div>
+</section>
+
 <!-- LOOP -->
 <section id="loop">
   <div class="wrap">
     <div class="sec-head">
-      <span class="eyebrow">The loop in one picture</span>
+      <span class="eyebrow">The loop in one picture · service not available</span>
       <h2>Five steps, one reason, all the way around</h2>
-      <p>Every step is scoped to a single reason — "service not available". The loop only counts as built if it runs end-to-end: from the CSP's tap to Genie actually changing who gets routed there.</p>
+      <p>Here's the loop for that one reason. It only counts as built if it runs end-to-end: from the CSP's tap to Genie actually changing who gets routed there.</p>
     </div>
     <div class="loop">
       <div class="node s1"><div class="n">Step 1 · Show</div><h4>Reason in context</h4><p>Surface the reason at the right moment, framed as neutral signal.</p></div>
