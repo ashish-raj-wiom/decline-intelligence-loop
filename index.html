@@ -207,6 +207,7 @@
   .vtag.drop{background:rgba(208,67,63,.13); color:var(--stop)}
   .vtag.club{background:var(--csp-wash); color:var(--csp)}
   .vtag.new{background:var(--sys-wash); color:var(--sys-ink)}
+  .vtag.tbd{background:var(--tile); color:var(--muted)}
 
   /* verification signals */
   .vsig{display:flex; gap:12px; align-items:flex-start; padding:13px 0; border-bottom:1px solid var(--line)}
@@ -245,6 +246,8 @@
   .own{display:inline-block; font-size:11px; font-weight:700; padding:1px 8px; border-radius:20px; background:var(--sys-wash); color:var(--sys-ink); white-space:nowrap; margin-top:6px}
   .own.g{background:var(--learn-wash); color:var(--learn)}
   td.emit{border-left:1px solid var(--hair)} td.cons{border-left:1px solid var(--hair)}
+  table.rxtab .mermaid{margin:4px 0 6px; text-align:left; min-width:190px}
+  table.rxtab .mermaid svg{max-width:none; height:auto}
 
   /* interactive reason explorer */
   .rx{margin-top:6px}
@@ -418,7 +421,12 @@
           <tr class="hi">
             <td class="reason"><b>Location is Far</b></td>
             <td>Reason list → run the intercept.</td>
-            <td>Blocking modal of his nearby active / splitter points. Still declines → capture the deliberate "won't serve" + the exact points shown, in order.</td>
+            <td>Show his nearby active / splitter points; on his choice, capture the outcome:
+              <pre class="mermaid">flowchart TD
+  S["Show nearby points"] -->|"OK, I'll connect"| N["No decline · no signal"]
+  S -->|"I won't connect"| Y["Capture + push to Genie"]
+  S -->|"No points in time"| Z["Decline · no signal"]</pre>
+            </td>
             <td class="emit">Point-level signal — connection + customer, CSP, rejected points.<br><span class="own g">→ Genie</span></td>
             <td class="cons">De-lists the point → not a candidate for nearby bookings → DAS stops routing them to him.<br><span class="own g">Genie</span></td>
             <td><span class="vtag keep">go-live 14&nbsp;Aug</span></td>
@@ -428,45 +436,35 @@
             <td>Reason list.</td>
             <td>Show a confirm — "we'll check this with the customer". On his confirm, mark the deliberate decline.</td>
             <td class="emit">"Customer refused, verify".<br><span class="own">→ Customer backend</span></td>
-            <td class="cons">Backend verifies. <b>True</b> → cancel + refund (owns the workflow). <b>False</b> → signal back that the CSP was wrong.<br><span class="own">Customer backend</span></td>
+            <td class="cons"><pre class="mermaid">flowchart TD
+  V["Backend verifies"] -->|"True"| C["Cancel booking + refund"]
+  V -->|"False"| W["Signal back: CSP was wrong"]</pre><span class="own">Customer backend</span></td>
             <td><span class="vtag new">proposed</span></td>
           </tr>
           <tr>
             <td class="reason"><b>I don't have a device</b></td>
-            <td>Reason list.</td>
-            <td>Capture the device shortage for this CSP. <em>Detail pending.</em></td>
-            <td class="emit">"Out of device stock".<br><span class="own">→ Supply / Inventory</span></td>
-            <td class="cons">Hold device-needing installs to him until restocked; trigger replenishment.<br><span class="own">Supply / Inventory</span></td>
-            <td><span class="vtag new">proposed</span></td>
+            <td></td><td></td><td class="emit"></td><td class="cons"></td>
+            <td><span class="vtag tbd">not proposed yet</span></td>
           </tr>
           <tr>
             <td class="reason"><b>Couldn't understand address</b></td>
-            <td>Reason list.</td>
-            <td>Show the address + map pin; let him flag what's wrong / add a landmark. Capture the gap.</td>
-            <td class="emit">"Address unclear".<br><span class="own">→ Customer / Address</span></td>
-            <td class="cons">Re-confirm or enrich the address before re-routing; better capture upstream.<br><span class="own">Customer / Address</span></td>
-            <td><span class="vtag new">proposed</span></td>
+            <td></td><td></td><td class="emit"></td><td class="cons"></td>
+            <td><span class="vtag tbd">not proposed yet</span></td>
           </tr>
           <tr>
             <td class="reason"><b>No one free to install</b></td>
-            <td>Reason list.</td>
-            <td>Capture "no technician free"; prompt him to pause installs / set his availability.</td>
-            <td class="emit">"No capacity now".<br><span class="own">→ Availability</span></td>
-            <td class="cons">Pause new install routing to him for the window; capacity adjusts.<br><span class="own">Availability</span></td>
-            <td><span class="vtag new">proposed</span></td>
+            <td></td><td></td><td class="emit"></td><td class="cons"></td>
+            <td><span class="vtag tbd">not proposed yet</span></td>
           </tr>
           <tr>
             <td class="reason"><b>Another reason</b></td>
-            <td>Pinned last; free-text box.</td>
-            <td>Capture the free text (minimum length enforced).</td>
-            <td class="emit">Free text.<br><span class="own">→ Analytics</span></td>
-            <td class="cons">Recurring themes graduate into new named reasons — the taxonomy grows.<br><span class="own">Analytics</span></td>
-            <td><span class="vtag club">learn</span></td>
+            <td></td><td></td><td class="emit"></td><td class="cons"></td>
+            <td><span class="vtag tbd">not proposed yet</span></td>
           </tr>
         </tbody>
       </table>
     </div>
-    <p style="font-size:12.8px; color:var(--muted); margin-top:12px"><strong>Location is Far</strong> is signed off; the owning services and consequences for the other five are <strong>proposed, for discussion</strong> — the spine is fixed, the owner per reason is the open question.</p>
+    <p style="font-size:12.8px; color:var(--muted); margin-top:12px"><strong>Location is Far</strong> is signed off (go-live 14 Aug) and <strong>"the customer said no"</strong> is proposed — only these two loops are decided. The other four are <strong>not proposed yet</strong>; blank cells mean the loop hasn't been designed. Flowcharts show the if / else branches.</p>
   </div>
 </section>
 
@@ -679,6 +677,14 @@
     });
     if(location.hash) openTarget(location.hash);
     window.addEventListener('hashchange',function(){ if(location.hash) openTarget(location.hash); });
+  })();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+  (function(){
+    if(!window.mermaid) return;
+    var dark=(document.documentElement.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'))==='dark';
+    try{ mermaid.initialize({startOnLoad:false, securityLevel:'strict', theme:dark?'dark':'neutral', flowchart:{htmlLabels:true}}); mermaid.run({querySelector:'.mermaid'}); }catch(e){}
   })();
 </script>
 </body>
