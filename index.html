@@ -246,8 +246,13 @@
   .own{display:inline-block; font-size:11px; font-weight:700; padding:1px 8px; border-radius:20px; background:var(--sys-wash); color:var(--sys-ink); white-space:nowrap; margin-top:6px}
   .own.g{background:var(--learn-wash); color:var(--learn)}
   td.emit{border-left:1px solid var(--hair)} td.cons{border-left:1px solid var(--hair)}
-  table.rxtab .mermaid{margin:4px 0 6px; text-align:left; min-width:190px}
-  table.rxtab .mermaid svg{max-width:none; height:auto}
+  table.rxtab .mermaid{margin:4px 0 6px; text-align:left}
+  table.rxtab .mermaid svg{max-width:100% !important; height:auto}
+  /* let the reason table use the full real-estate, not the 1000px column */
+  #reasons-table > .wrap{max-width:1500px}
+  table.rxtab th.reason{width:10%} table.rxtab th.kshow{width:10%}
+  table.rxtab th.kcap{width:30%} table.rxtab th.kemit{width:14%} table.rxtab th.kcons{width:24%}
+  table.rxtab td{font-size:13.3px}
 
   /* interactive reason explorer */
   .rx{margin-top:6px}
