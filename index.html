@@ -272,11 +272,11 @@
   <div class="wrap">
     <div class="kick"><span class="dot"></span><span class="eyebrow">CSP Decline Intelligence · the self-learning loop · every reason</span></div>
     <h1>Send each CSP only the bookings<br>he'll actually install</h1>
-    <p class="lede">When a CSP won't install a booking, he tells us <b>why</b> — and today we throw that reason away and re-offer blindly, often to the wrong CSP again. This turns <b>every decline reason</b> into a <b>self-learning loop</b>: show the reason in context, assist the CSP so his answer is deliberate, capture it, <b>send a clean signal to the service that owns that problem</b>, and let that service build the consequence. One spine, <b>four steps</b>, applied to every reason — and we built the biggest reason, <b>"Location is Far"</b>, first, end-to-end.</p>
+    <p class="lede">When a CSP won't install a booking, he tells us <b>why</b> — and today we throw that reason away and re-offer blindly, often to the wrong CSP again. This turns <b>every decline reason</b> into a <b>self-learning loop</b>: show the reason in context, assist the CSP so his answer is deliberate, capture it, <b>send a clean signal to the service that owns that problem</b>, and let that service build the consequence. One spine, <b>four steps</b>, applied to every reason — and we've specced the biggest reason, <b>"Location is Far"</b>, first, end-to-end (go-live expected 14 Aug).</p>
     <div class="metastrip">
       <span><b>Spine:</b> Show → Assist/Verify &amp; Capture → Emit Signal → Build Consequence</span>
       <span><b>Reasons:</b> 6 finalised · Location is Far ≈ 65% of declines</span>
-      <span><b>Built first:</b> <a href="https://ashish-raj-wiom.github.io/coverage-decline-assist-prd/" style="color:var(--sys-ink)">CSP PRD</a> · <a href="https://ashish-raj-wiom.github.io/genie-coverage-integration-prd/" style="color:var(--sys-ink)">Genie PRD</a> (signed off)</span>
+      <span><b>First in line:</b> <a href="https://ashish-raj-wiom.github.io/coverage-decline-assist-prd/" style="color:var(--sys-ink)">CSP PRD</a> · <a href="https://ashish-raj-wiom.github.io/genie-coverage-integration-prd/" style="color:var(--sys-ink)">Genie PRD</a> (signed off · go-live 14 Aug)</span>
       <span><b>Status:</b> concept for review</span>
     </div>
   </div>
@@ -336,7 +336,7 @@
     <p style="font-size:12.8px; color:var(--muted); margin-top:10px">Shares are approximate, from the Jun–Aug 2026 analysis: "Location is Far" absorbs the old redundant "network setup" reason; "the customer said no" folds in the old price reason; "could not be scheduled" was dropped. "Address" and "no technician" are new reasons, not separately measured before. The same six apply at both capture points.</p>
     <div class="callout" style="margin-top:20px">
       <h4>What this document shows</h4>
-      <p>Every reason runs the <strong>same four-step loop</strong>. Rather than go deep on one, the table below shows <strong>what we'll do for each reason across the four steps</strong> — then we walk the one we've already built, <strong>Location is Far</strong>, end-to-end as the worked example.</p>
+      <p>Every reason runs the <strong>same four-step loop</strong>. Rather than go deep on one, the table below shows <strong>what we'll do for each reason across the four steps</strong> — then we walk the one we've already specced, <strong>Location is Far</strong>, end-to-end as the worked example.</p>
     </div>
   </div>
 </section>
@@ -365,7 +365,7 @@
     <div class="sec-head">
       <span class="eyebrow">Breadth first · every reason × the four steps</span>
       <h2>What we do for each reason</h2>
-      <p>The plan for all six reasons on one page. <strong>Location is Far</strong> is built and signed off; the rest are the roadmap — same spine, different owning service. <strong>Who owns the consequence</strong> is the real difference between reasons.</p>
+      <p>The plan for all six reasons on one page. <strong>Location is Far</strong> is signed off, with go-live expected <strong>14 Aug</strong>; the rest are the roadmap — same spine, different owning service. <strong>Who owns the consequence</strong> is the real difference between reasons.</p>
     </div>
     <div class="twrap">
       <table>
@@ -384,7 +384,7 @@
             <td>Show his own nearby active / splitter points (blocking modal). If he still declines, capture the deliberate "won't serve" + the exact points shown, in order. Seeing the neighbours <em>is</em> the check.</td>
             <td>Point-level signal → <b>Genie</b> (connection + customer, CSP, rejected points).</td>
             <td>Genie de-lists the point for this CSP → he's no longer a candidate for nearby bookings → DAS stops routing them to him.</td>
-            <td><span class="vtag keep">built</span></td>
+            <td><span class="vtag keep">go-live 14&nbsp;Aug</span></td>
           </tr>
           <tr>
             <td><b>The customer said no</b></td>
@@ -429,7 +429,7 @@
         </tbody>
       </table>
     </div>
-    <p style="font-size:12.8px; color:var(--muted); margin-top:10px">Owning services and consequences for the five non-built reasons are <strong>proposed, for discussion</strong> — the spine is fixed; the owner per reason is the open question.</p>
+    <p style="font-size:12.8px; color:var(--muted); margin-top:10px">Owning services and consequences for the other five reasons are <strong>proposed, for discussion</strong> — the spine is fixed; the owner per reason is the open question.</p>
   </div>
 </section>
 
@@ -453,7 +453,7 @@
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">Location is Far · the worked example</span>
-      <h2>The one we built, through all four steps</h2>
+      <h2>The one we've specced, through all four steps</h2>
       <p>Location is Far is signed off on both sides — the <a href="https://ashish-raj-wiom.github.io/coverage-decline-assist-prd/" style="color:var(--sys-ink)">CSP-side PRD</a> and the <a href="https://ashish-raj-wiom.github.io/genie-coverage-integration-prd/" style="color:var(--sys-ink)">Genie PRD</a>. Here it is end to end.</p>
     </div>
 
@@ -554,7 +554,7 @@
     <div class="sec-head">
       <span class="eyebrow">Archive · out of current scope</span>
       <h2>Parked for later</h2>
-      <p>Location is Far is built fully. The material below is extra depth kept for reference — the finalised reason list, capture ideas, and the per-reason detail behind the table above. The same four-step spine applies to every reason.</p>
+      <p>Location is Far is specced fully (go-live expected 14 Aug). The material below is extra depth kept for reference — the finalised reason list, capture ideas, and the per-reason detail behind the table above. The same four-step spine applies to every reason.</p>
     </div>
 
     <details class="archive" id="reason-set" open>
@@ -613,7 +613,7 @@
 
 <footer>
   <div class="wrap">
-    <p><strong>Decline Intelligence — every reason, one 4-step loop.</strong> Concept built on the CSP decline analysis (Jun–Aug 2026). The spine — Show → Assist/Verify &amp; Capture → Emit Signal → Build Consequence — applies to all six reasons; <strong>Location is Far</strong> (~65% of declines) is built and signed off (CSP + Genie PRDs). This is a capture + system-of-record layer; Genie, the customer-side, Supply, Availability and Analytics act on the signals it publishes. Owning services for the five non-built reasons are proposed, for discussion. Ashish Raj.</p>
+    <p><strong>Decline Intelligence — every reason, one 4-step loop.</strong> Concept built on the CSP decline analysis (Jun–Aug 2026). The spine — Show → Assist/Verify &amp; Capture → Emit Signal → Build Consequence — applies to all six reasons; <strong>Location is Far</strong> (~65% of declines) is signed off (CSP + Genie PRDs), go-live expected 14 Aug. This is a capture + system-of-record layer; Genie, the customer-side, Supply, Availability and Analytics act on the signals it publishes. Owning services for the five non-built reasons are proposed, for discussion. Ashish Raj.</p>
   </div>
 </footer>
 
