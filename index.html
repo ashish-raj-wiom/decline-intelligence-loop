@@ -319,7 +319,7 @@
     <h1>Send each CSP only the bookings<br>he'll actually install</h1>
     <p class="lede">When a CSP won't install a booking, he tells us <b>why</b> — and today we throw that reason away and re-offer blindly, often to the wrong CSP again. This turns <b>every decline reason</b> into a <b>self-learning loop</b>: show the reason in context, assist the CSP so his answer is deliberate, capture it, <b>send a clean signal to the service that owns that problem</b>, and let that service build the consequence. One spine, <b>four steps</b>, applied to every reason — and we've specced the biggest reason, <b>"Location is Far"</b>, first, end-to-end (go-live expected 19 Aug).</p>
     <div class="metastrip">
-      <span><b>Spine:</b> Show → Assist/Verify &amp; Capture → Emit Signal → Build Consequence</span>
+      <span><b>Spine:</b> Show → Assist/Verify &amp; Capture → Emit Signal → Analyse &amp; Build Consequence</span>
       <span><b>Reasons:</b> 6 finalised · Location is Far ≈ 65% of declines</span>
       <span><b>First in line:</b> <a href="https://ashish-raj-wiom.github.io/coverage-decline-assist-prd/" style="color:var(--sys-ink)">CSP PRD</a> · <a href="https://ashish-raj-wiom.github.io/genie-coverage-integration-prd/" style="color:var(--sys-ink)">Genie PRD</a> (signed off · go-live 19 Aug)</span>
       <span><b>Status:</b> concept for review</span>
@@ -368,16 +368,6 @@
         <div class="dd">He accepts, then can't complete the install — and reports a reason.</div>
       </div>
     </div>
-    <div class="ctx">
-      <div class="ct">In context — the full funnel · last 30 days</div>
-      <div class="cf">
-        <div class="cfrow"><span class="cl">Task created</span><span class="ctk"><span class="cb a" style="width:100%"></span></span><span class="cn">19,418<small>100%</small></span></div>
-        <div class="cfrow"><span class="cl">Acceptance</span><span class="ctk"><span class="cb b" style="width:36.8%"></span></span><span class="cn">7,140<small>37%</small></span></div>
-        <div class="cfrow"><span class="cl">Install</span><span class="ctk"><span class="cb c" style="width:13.1%"></span></span><span class="cn">2,552<small>13%</small></span></div>
-      </div>
-      <p class="cnote">The two reasoned drops sit inside a leakier funnel — the biggest leak isn't a decline at all: <strong>~10,969 tasks (56%) time out before acceptance</strong>, plus customer cancellations (~805) and ~713 still in progress.</p>
-    </div>
-
     <h3 style="margin:26px 0 9px">The reasons — the finalised set</h3>
     <p style="font-size:13.5px; margin-bottom:11px">Both reasoned drops draw from the same fixed list. After the analysis, the list was cleaned up and signed off as these <strong>six</strong> (exact copy in Figma / the <a href="https://ashish-raj-wiom.github.io/decline-reason-set-prd/" style="color:var(--sys-ink)">Reason Set PRD</a>). One reason dwarfs the rest:</p>
     <div class="twrap">
@@ -396,7 +386,7 @@
     <p style="font-size:12.8px; color:var(--muted); margin-top:10px">Shares are approximate, from the Jun–Aug 2026 analysis: "Location is Far" absorbs the old redundant "network setup" reason; "the customer said no" folds in the old price reason; "could not be scheduled" was dropped. "Address" and "no technician" are new reasons, not separately measured before. The same six apply at both capture points.</p>
     <div class="callout" style="margin-top:20px">
       <h4>What this document shows</h4>
-      <p>Every reason runs the <strong>same four-step loop</strong>. Rather than go deep on one, the table below shows <strong>what we'll do for each reason across the four steps</strong> — then we walk the one we've already specced, <strong>Location is Far</strong>, end-to-end as the worked example.</p>
+      <p>Every reason runs the <strong>same four-step loop</strong>. Rather than go deep on one, the table below shows <strong>what we'll do for each reason across the four steps</strong> — then the two decided reasons, <strong>Location is Far</strong> and <strong>the customer said no</strong>, are walked end-to-end as worked examples.</p>
     </div>
   </div>
 </section>
@@ -413,7 +403,7 @@
       <div class="node s1"><div class="n">Step 1 · Show</div><h4>Reason in context</h4><p>Surface the fixed reason list at the decline / install-failure moment; the CSP picks the one that fits.</p></div>
       <div class="node s2"><div class="n">Step 2 · Assist / Verify &amp; Capture</div><h4>Make the answer deliberate</h4><p>Show him what we already know, let him decide, verify by that assist (no Ops layer), and capture the decision + its data.</p></div>
       <div class="node s3"><div class="n">Step 3 · Emit Signal</div><h4>Send to the owning service</h4><p>Push one clean, self-describing signal to the service that owns that problem. We don't act — we inform.</p></div>
-      <div class="node s4"><div class="n">Step 4 · Build Consequence</div><h4>The owner acts</h4><p>Past a threshold, the owning service changes behaviour so the CSP stops getting that kind of clutter.</p></div>
+      <div class="node s4"><div class="n">Step 4 · Analyse &amp; Build Consequence</div><h4>The owner acts</h4><p>The owning service analyses the signals and, past a threshold, changes behaviour so the CSP stops getting that kind of clutter.</p></div>
     </div>
     <div class="loopback"><span class="ico">↻</span><span><b>The self-learning loop:</b> each captured reason teaches the service that owns it, so the clutter the CSP used to decline stops arriving — fewer bad offers → fewer declines → a cleaner supply map every month.</span></div>
   </div>
@@ -434,7 +424,7 @@
           <th class="kshow">1 · Show</th>
           <th class="kcap">2 · Assist &amp; Capture</th>
           <th class="kemit">3 · Emit signal</th>
-          <th class="kcons">4 · Build consequence</th>
+          <th class="kcons">4 · Analyse &amp; build consequence</th>
           <th>Status</th>
         </tr></thead>
         <tbody>
@@ -491,10 +481,15 @@
 <section id="steps">
   <div class="wrap">
     <div class="sec-head">
-      <span class="eyebrow">Location is Far · the worked example</span>
-      <h2>The one we've specced, through all four steps</h2>
-      <p>Location is Far is signed off on both sides — the <a href="https://ashish-raj-wiom.github.io/coverage-decline-assist-prd/" style="color:var(--sys-ink)">CSP-side PRD</a> and the <a href="https://ashish-raj-wiom.github.io/genie-coverage-integration-prd/" style="color:var(--sys-ink)">Genie PRD</a>. Here it is end to end.</p>
+      <span class="eyebrow">Worked examples · two reasons</span>
+      <h2>Two reasons, step by step</h2>
+      <p>The two decided loops in full — <strong>Location is Far</strong> (built) and <strong>the customer said no</strong> (proposed). Click a reason to expand its four steps; the other four aren't designed yet.</p>
     </div>
+
+    <details class="archive" id="wex-far" open>
+      <summary><span class="tag">go-live 19 Aug</span> Location is Far — the full four steps <span class="chev">›</span></summary>
+      <div class="archbody">
+        <p style="font-size:13.3px; margin:12px 0 2px; color:var(--ink2)">Signed off on both sides — the <a href="https://ashish-raj-wiom.github.io/coverage-decline-assist-prd/" style="color:var(--sys-ink)">CSP-side PRD</a> and the <a href="https://ashish-raj-wiom.github.io/genie-coverage-integration-prd/" style="color:var(--sys-ink)">Genie PRD</a>.</p>
 
     <div class="steprail">
 
@@ -559,7 +554,7 @@
       <div class="step act">
         <div class="mk">4</div>
         <div class="body">
-          <div class="lbl">Build Consequence</div>
+          <div class="lbl">Analyse &amp; Build Consequence</div>
           <h3>Genie drops the point for that CSP <span class="owner genie">Genie acts</span></h3>
           <p>Using the signal, Genie applies its own threshold: once a CSP's <strong>point (active or splitter)</strong> crosses the bar, Genie <strong>stops counting it in the distance calc for him</strong>. From then he <strong>isn't surfaced for new bookings near it</strong> — so DAS never routes them to him. The clutter is gone from his feed, and the booking goes to a CSP who will install. What the threshold is, and what "de-list" means, is <strong>Genie's to decide</strong> — out of scope of our PRDs.</p>
           <div class="thresh">
@@ -573,9 +568,9 @@
 
     </div>
 
-    <div class="sec-head" style="margin-top:36px; margin-bottom:16px">
+    <div class="sec-head" style="margin-top:30px; margin-bottom:14px">
       <span class="eyebrow">Success metrics · Location is Far</span>
-      <h3 style="font-size:20px; margin-top:6px">How we'll know it worked</h3>
+      <h3 style="font-size:19px; margin-top:6px">How we'll know it worked</h3>
     </div>
     <div class="stats" style="grid-template-columns:repeat(2,1fr)">
       <div class="stat up"><div class="dir">● our success</div><div class="m">Every deliberate decline emits a valid point-level signal to Genie</div><div class="k">the loop is clean and complete — what this layer owns</div></div>
@@ -584,6 +579,54 @@
       <div class="stat down"><div class="dir">▼ loop outcome</div><div class="m">Prevented mis-routes — tasks never created for a CSP near a rejected point</div><div class="k">clutter removed before it's even offered</div></div>
     </div>
     <p style="font-size:12.5px; color:var(--muted); margin-top:12px">Success is a <strong>trustworthy signal</strong>, not fewer declines or making CSPs reconsider — a confirmed "too far" is good information the routing system needs. The reconsideration rate is a signal-quality diagnostic, not a target. Loop outcomes are Genie-driven, tracked at the loop level.</p>
+      </div>
+    </details>
+
+    <details class="archive" id="wex-cust" style="margin-top:12px">
+      <summary><span class="tag">proposed</span> The customer said no — the full four steps <span class="chev">›</span></summary>
+      <div class="archbody">
+        <p style="font-size:13.3px; margin:12px 0 2px; color:var(--ink2)">Owning service: the <strong>customer backend</strong>. Proposed, for discussion — not yet specced.</p>
+        <div class="steprail">
+
+          <div class="step cap"><div class="mk">1</div><div class="body">
+            <div class="lbl">Show</div>
+            <h3>Show the reason list <span class="owner here">this layer</span></h3>
+            <p>The CSP picks <strong>"the customer said no"</strong> from the same fixed list.</p>
+          </div></div>
+
+          <div class="step cap"><div class="mk">2</div><div class="body">
+            <div class="lbl">Assist / Verify &amp; Capture</div>
+            <h3>Confirm with the CSP, then capture <span class="owner here">this layer</span></h3>
+            <p>We show a short confirm — <em>"we'll check this with the customer"</em> — so the CSP knows the claim will be verified. On his confirm, we mark the <strong>deliberate decline</strong>. There's no further CSP-side assist; the real check happens with the customer, in Step 4.</p>
+            <div class="interrupt" style="margin-top:14px">
+              <div class="ttl">⚠︎ Mark this as "customer said no"?</div>
+              <p>We'll confirm with the customer before anything is cancelled.</p>
+              <div class="btnrow">
+                <div class="btn primary">Yes, mark decline</div>
+                <div class="btn ghost">Go back</div>
+              </div>
+            </div>
+            <p style="font-size:11.5px; color:var(--muted); margin-top:9px">Illustration — exact copy &amp; flow live in Figma.</p>
+          </div></div>
+
+          <div class="step"><div class="mk">3</div><div class="body">
+            <div class="lbl">Emit Signal</div>
+            <h3>Send to the customer backend <span class="owner here">this layer</span></h3>
+            <p>We push a <strong>"customer refused, verify"</strong> signal to the <strong>customer backend</strong> — the booking, the CSP, and the claim. We don't cancel or refund anything ourselves; the customer backend owns that.</p>
+          </div></div>
+
+          <div class="step act"><div class="mk">4</div><div class="body">
+            <div class="lbl">Analyse &amp; Build Consequence</div>
+            <h3>Customer backend verifies with the customer <span class="owner genie">Customer backend acts</span></h3>
+            <p>The customer backend contacts the customer and acts on the answer:</p>
+            <pre class="mermaid">flowchart TD
+  V["Customer backend verifies with the customer"] -->|"True — didn't want it"| C["Cancel booking + refund"]
+  V -->|"False — does want it"| W["Keep booking · signal back that the CSP was wrong"]</pre>
+          </div></div>
+
+        </div>
+      </div>
+    </details>
   </div>
 </section>
 
@@ -652,7 +695,7 @@
 
 <footer>
   <div class="wrap">
-    <p><strong>Decline Intelligence — every reason, one 4-step loop.</strong> Concept built on the CSP decline analysis (Jun–Aug 2026). The spine — Show → Assist/Verify &amp; Capture → Emit Signal → Build Consequence — applies to all six reasons; <strong>Location is Far</strong> (~65% of declines) is signed off (CSP + Genie PRDs), go-live expected 19 Aug. This is a capture + system-of-record layer; Genie, the customer-side, Supply, Availability and Analytics act on the signals it publishes. Owning services for the five non-built reasons are proposed, for discussion. Ashish Raj.</p>
+    <p><strong>Decline Intelligence — every reason, one 4-step loop.</strong> Concept built on the CSP decline analysis (Jun–Aug 2026). The spine — Show → Assist/Verify &amp; Capture → Emit Signal → Analyse &amp; Build Consequence — applies to all six reasons; <strong>Location is Far</strong> (~65% of declines) is signed off (CSP + Genie PRDs), go-live expected 19 Aug. This is a capture + system-of-record layer; Genie, the customer-side, Supply, Availability and Analytics act on the signals it publishes. Owning services for the five non-built reasons are proposed, for discussion. Ashish Raj.</p>
   </div>
 </footer>
 
@@ -688,7 +731,17 @@
   (function(){
     if(!window.mermaid) return;
     var dark=(document.documentElement.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'))==='dark';
-    try{ mermaid.initialize({startOnLoad:false, securityLevel:'strict', theme:dark?'dark':'neutral', flowchart:{htmlLabels:true}}); mermaid.run({querySelector:'.mermaid'}); }catch(e){}
+    try{ mermaid.initialize({startOnLoad:false, securityLevel:'strict', theme:dark?'dark':'neutral', flowchart:{htmlLabels:true}}); }catch(e){}
+    function run(scope){
+      if(!window.mermaid) return;
+      var nodes=[].slice.call((scope||document).querySelectorAll('.mermaid:not([data-processed="true"])'))
+        .filter(function(m){ var d=m.closest('details'); return !d || d.open; });
+      if(nodes.length){ try{ mermaid.run({nodes:nodes}); }catch(e){} }
+    }
+    run(document);
+    document.querySelectorAll('details').forEach(function(d){
+      d.addEventListener('toggle', function(){ if(d.open) run(d); });
+    });
   })();
 </script>
 </body>
