@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Decline Intelligence — Service not available · a self-learning loop</title>
+<title>Decline Intelligence — every reason, one 4-step loop</title>
 <style>
   :root{
     color-scheme: light;
@@ -88,7 +88,7 @@
   .sec-head p{margin-top:10px; font-size:16px}
 
   /* 5-step loop ribbon */
-  .loop{margin:30px 0 6px; display:grid; grid-template-columns:repeat(5,1fr); gap:10px; position:relative}
+  .loop{margin:30px 0 6px; display:grid; grid-template-columns:repeat(4,1fr); gap:10px; position:relative}
   .node{background:var(--surface); border:1px solid var(--tile); border-radius:13px; padding:15px 14px 14px; position:relative}
   .node .n{font-size:10.5px; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--muted)}
   .node h4{margin:7px 0 5px; font-size:14.5px; color:var(--ink)}
@@ -96,8 +96,7 @@
   .node::after{content:"→"; position:absolute; right:-13px; top:34px; color:var(--muted); font-size:15px; z-index:2}
   .node:last-child::after{content:""}
   .node.s1{border-top:3px solid var(--csp)} .node.s2{border-top:3px solid var(--csp)}
-  .node.s3{border-top:3px solid var(--sys)} .node.s4{border-top:3px solid var(--sys)}
-  .node.s5{border-top:3px solid var(--learn)}
+  .node.s3{border-top:3px solid var(--sys)} .node.s4{border-top:3px solid var(--learn)}
   .loopback{margin-top:12px; display:flex; align-items:center; gap:12px; background:var(--learn-wash); border:1px dashed var(--learn); border-radius:11px; padding:12px 16px; color:var(--ink2); font-size:13.5px}
   .loopback .ico{color:var(--learn); font-size:19px; font-weight:700}
   .loopback b{color:var(--ink)}
@@ -271,12 +270,13 @@
 
 <header class="hero">
   <div class="wrap">
-    <div class="kick"><span class="dot"></span><span class="eyebrow">CSP Decline Intelligence · Scope 1 · one reason, end-to-end</span></div>
+    <div class="kick"><span class="dot"></span><span class="eyebrow">CSP Decline Intelligence · the self-learning loop · every reason</span></div>
     <h1>Send each CSP only the bookings<br>he'll actually install</h1>
-    <p class="lede">When a CSP won't install a booking, he tells us <b>why he's declining</b> — and today we throw that signal away and re-offer blindly, often to the wrong CSP again. This turns declines into a <b>self-learning loop</b>: capture the reason in context, help the CSP avoid a careless decline, verify it's real, and let the right service act on it. We start with the <b>single biggest reason of all</b>. The objective — <b>filter the clutter, so every CSP gets only quality, serviceable bookings.</b></p>
+    <p class="lede">When a CSP won't install a booking, he tells us <b>why</b> — and today we throw that reason away and re-offer blindly, often to the wrong CSP again. This turns <b>every decline reason</b> into a <b>self-learning loop</b>: show the reason in context, assist the CSP so his answer is deliberate, capture it, <b>send a clean signal to the service that owns that problem</b>, and let that service build the consequence. One spine, <b>four steps</b>, applied to every reason — and we built the biggest reason, <b>"Location is Far"</b>, first, end-to-end.</p>
     <div class="metastrip">
-      <span><b>Reason in scope:</b> "Service not available at this location" (~65% of all declines)</span>
-      <span><b>Builds on:</b> the CSP decline analysis (Jun–Aug 2026)</span>
+      <span><b>Spine:</b> Show → Assist/Verify &amp; Capture → Emit Signal → Build Consequence</span>
+      <span><b>Reasons:</b> 6 finalised · Location is Far ≈ 65% of declines</span>
+      <span><b>Built first:</b> <a href="https://ashish-raj-wiom.github.io/coverage-decline-assist-prd/" style="color:var(--sys-ink)">CSP PRD</a> · <a href="https://ashish-raj-wiom.github.io/genie-coverage-integration-prd/" style="color:var(--sys-ink)">Genie PRD</a> (signed off)</span>
       <span><b>Status:</b> concept for review</span>
     </div>
   </div>
@@ -318,25 +318,25 @@
       <p class="cnote">The two reasoned drops sit inside a leakier funnel — the biggest leak isn't a decline at all: <strong>~10,969 tasks (56%) time out before acceptance</strong>, plus customer cancellations (~805) and ~713 still in progress.</p>
     </div>
 
-    <h3 style="margin:26px 0 9px">The reasons a CSP picks, and how often</h3>
-    <p style="font-size:13.5px; margin-bottom:11px">Both reasoned drops draw from the same list. Here's how the ~3.2k declines split by reason:</p>
+    <h3 style="margin:26px 0 9px">The reasons — the finalised set</h3>
+    <p style="font-size:13.5px; margin-bottom:11px">Both reasoned drops draw from the same fixed list. After the analysis, the list was cleaned up and signed off as these <strong>six</strong> (exact copy in Figma / the <a href="https://ashish-raj-wiom.github.io/decline-reason-set-prd/" style="color:var(--sys-ink)">Reason Set PRD</a>). One reason dwarfs the rest:</p>
     <div class="twrap">
       <table>
-        <thead><tr><th>Decline reason</th><th class="num">Share of declines</th><th style="width:42%">Distribution</th></tr></thead>
+        <thead><tr><th>Decline reason (finalised)</th><th class="num">Share of declines</th><th style="width:38%">Distribution</th></tr></thead>
         <tbody>
-          <tr class="hi"><td><b>Service not available at this location</b></td><td class="num"><b>64.7%</b></td><td><span class="bar" style="width:97%"></span></td></tr>
-          <tr><td>Network setup is currently not possible</td><td class="num">13.6%</td><td><span class="bar" style="width:20%"></span></td></tr>
-          <tr><td>Customer is not interested anymore</td><td class="num">7.4%</td><td><span class="bar" style="width:11%"></span></td></tr>
-          <tr><td>Required device is currently unavailable</td><td class="num">7.1%</td><td><span class="bar" style="width:11%"></span></td></tr>
-          <tr><td>Installation could not be scheduled</td><td class="num">3.7%</td><td><span class="bar" style="width:6%"></span></td></tr>
-          <tr><td>Customer did not agree with the plan price</td><td class="num">3.4%</td><td><span class="bar" style="width:5%"></span></td></tr>
+          <tr class="hi"><td><b>Location is Far</b> <span style="color:var(--muted)">— the cable can't reach this place</span></td><td class="num"><b>~65%</b></td><td><span class="bar" style="width:97%"></span></td></tr>
+          <tr><td>The customer said no</td><td class="num">~11%</td><td><span class="bar" style="width:16%"></span></td></tr>
+          <tr><td>I don't have a device right now</td><td class="num">~7%</td><td><span class="bar" style="width:11%"></span></td></tr>
+          <tr><td>I couldn't understand the address <span style="color:var(--muted)">— new</span></td><td class="num">new</td><td><span class="bar" style="width:4%"></span></td></tr>
+          <tr><td>No one free to install it <span style="color:var(--muted)">— ladka nahi hai · new</span></td><td class="num">new</td><td><span class="bar" style="width:4%"></span></td></tr>
+          <tr><td>Another reason <span style="color:var(--muted)">— free text</span></td><td class="num">—</td><td><span class="bar" style="width:2%"></span></td></tr>
         </tbody>
       </table>
     </div>
-    <p style="font-size:12.8px; color:var(--muted); margin-top:10px">The install-failure list uses the same set — coverage, customer-refused, price, backhaul, schedule, device — so this picture covers both capture points.</p>
+    <p style="font-size:12.8px; color:var(--muted); margin-top:10px">Shares are approximate, from the Jun–Aug 2026 analysis: "Location is Far" absorbs the old redundant "network setup" reason; "the customer said no" folds in the old price reason; "could not be scheduled" was dropped. "Address" and "no technician" are new reasons, not separately measured before. The same six apply at both capture points.</p>
     <div class="callout" style="margin-top:20px">
-      <h4>Where we start</h4>
-      <p>One reason dwarfs the rest — <strong>"Service not available at this location", at ~65% of all declines</strong>. So we build the full self-learning loop for that one reason first, end-to-end. The others follow the same five-step spine later (kept in the archive). The rest of this document is that one reason.</p>
+      <h4>What this document shows</h4>
+      <p>Every reason runs the <strong>same four-step loop</strong>. Rather than go deep on one, the table below shows <strong>what we'll do for each reason across the four steps</strong> — then we walk the one we've already built, <strong>Location is Far</strong>, end-to-end as the worked example.</p>
     </div>
   </div>
 </section>
@@ -345,18 +345,91 @@
 <section id="loop">
   <div class="wrap">
     <div class="sec-head">
-      <span class="eyebrow">The loop in one picture · service not available</span>
-      <h2>Five steps, one reason, all the way around</h2>
-      <p>Here's the loop for that one reason. It only counts as built if it runs end-to-end: from the CSP's tap to Genie actually dropping him from the candidate list for that point.</p>
+      <span class="eyebrow">The loop in one picture · any reason</span>
+      <h2>Four steps, every reason, all the way around</h2>
+      <p>Every decline reason runs the same spine. Verification isn't a separate step — for most reasons the <em>assist</em> (showing the CSP what we already know) is the check, so there's <strong>no Ops-calling layer</strong> for Location is Far. It only counts as built when it runs end-to-end: from the CSP's tap to the owning service building the consequence.</p>
     </div>
     <div class="loop">
-      <div class="node s1"><div class="n">Step 1 · Show</div><h4>Reason in context</h4><p>Surface the reason at the right moment, framed as neutral signal.</p></div>
-      <div class="node s2"><div class="n">Step 2 · Assist &amp; capture</div><h4>Informed decline</h4><p>Show him the nearby points, let him decide, and capture the ones he still rejects.</p></div>
-      <div class="node s3"><div class="n">Step 3 · Verify</div><h4>Is it a false decline?</h4><p>Test the claim against our own data and aligned-incentive ground truth.</p></div>
-      <div class="node s4"><div class="n">Step 4 · Signal</div><h4>Emit to Genie</h4><p>Hand the verified signal to serviceability. We don't act — we inform.</p></div>
-      <div class="node s5"><div class="n">Step 5 · Consequence</div><h4>Genie drops him from candidates</h4><p>Past a threshold, Genie stops surfacing him for bookings near that point, so DAS never routes them to him.</p></div>
+      <div class="node s1"><div class="n">Step 1 · Show</div><h4>Reason in context</h4><p>Surface the fixed reason list at the decline / install-failure moment; the CSP picks the one that fits.</p></div>
+      <div class="node s2"><div class="n">Step 2 · Assist / Verify &amp; Capture</div><h4>Make the answer deliberate</h4><p>Show him what we already know, let him decide, verify by that assist (no Ops layer), and capture the decision + its data.</p></div>
+      <div class="node s3"><div class="n">Step 3 · Emit Signal</div><h4>Send to the owning service</h4><p>Push one clean, self-describing signal to the service that owns that problem. We don't act — we inform.</p></div>
+      <div class="node s4"><div class="n">Step 4 · Build Consequence</div><h4>The owner acts</h4><p>Past a threshold, the owning service changes behaviour so the CSP stops getting that kind of clutter.</p></div>
     </div>
-    <div class="loopback"><span class="ico">↻</span><span><b>The self-learning loop:</b> once Genie drops that active point, the CSP stops appearing as a candidate for bookings there — so DAS never sends him those, and <b>the clutter he used to decline never arrives again</b>. Fewer bad offers → fewer coverage declines → a cleaner supply map every month.</span></div>
+    <div class="loopback"><span class="ico">↻</span><span><b>The self-learning loop:</b> each captured reason teaches the service that owns it, so the clutter the CSP used to decline stops arriving — fewer bad offers → fewer declines → a cleaner supply map every month.</span></div>
+  </div>
+</section>
+
+<!-- EVERY REASON × 4 STEPS -->
+<section id="reasons-table">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Breadth first · every reason × the four steps</span>
+      <h2>What we do for each reason</h2>
+      <p>The plan for all six reasons on one page. <strong>Location is Far</strong> is built and signed off; the rest are the roadmap — same spine, different owning service. <strong>Who owns the consequence</strong> is the real difference between reasons.</p>
+    </div>
+    <div class="twrap">
+      <table>
+        <thead><tr>
+          <th style="width:14%">Reason</th>
+          <th>1 · Show</th>
+          <th>2 · Assist / Verify &amp; Capture</th>
+          <th>3 · Emit Signal → owner</th>
+          <th>4 · Build Consequence</th>
+          <th style="width:8%">Status</th>
+        </tr></thead>
+        <tbody>
+          <tr class="hi">
+            <td><b>Location is Far</b></td>
+            <td>In the reason list; on pick, run the intercept.</td>
+            <td>Show his own nearby active / splitter points (blocking modal). If he still declines, capture the deliberate "won't serve" + the exact points shown, in order. Seeing the neighbours <em>is</em> the check.</td>
+            <td>Point-level signal → <b>Genie</b> (connection + customer, CSP, rejected points).</td>
+            <td>Genie de-lists the point for this CSP → he's no longer a candidate for nearby bookings → DAS stops routing them to him.</td>
+            <td><span class="vtag keep">built</span></td>
+          </tr>
+          <tr>
+            <td><b>The customer said no</b></td>
+            <td>In the reason list.</td>
+            <td>No CSP-side assist (it's the customer's choice). Capture the deliberate "customer refused"; optional voice note.</td>
+            <td>"Refused, needs verification" → <b>Customer-side / CRM</b>.</td>
+            <td>Customer-side calls to verify: confirmed → cancel + stop routing; disproven → keep routing, record for Quality (never a CSP strike).</td>
+            <td><span class="vtag new">proposed</span></td>
+          </tr>
+          <tr>
+            <td><b>I don't have a device right now</b></td>
+            <td>In the reason list.</td>
+            <td>Capture the device shortage for this CSP (no assist needed).</td>
+            <td>"Out of device stock" → <b>Supply / Inventory</b>.</td>
+            <td>Pause routing device-needing installs to him until restocked; trigger replenishment.</td>
+            <td><span class="vtag new">proposed</span></td>
+          </tr>
+          <tr>
+            <td><b>I couldn't understand the address</b></td>
+            <td>In the reason list.</td>
+            <td>Show the address + map pin he already has; let him flag what's wrong / add a landmark. Capture the address gap.</td>
+            <td>"Address unclear" → <b>Customer / Address</b> (booking).</td>
+            <td>Re-confirm or enrich the address (landmark, corrected pin) before re-routing; better capture upstream.</td>
+            <td><span class="vtag new">proposed</span></td>
+          </tr>
+          <tr>
+            <td><b>No one free to install it</b></td>
+            <td>In the reason list.</td>
+            <td>Capture "no technician free"; assist = prompt him to pause installs / set his availability.</td>
+            <td>"No capacity now" → <b>Availability / capacity</b>.</td>
+            <td>Pause new install routing to him for the window; capacity adjusts.</td>
+            <td><span class="vtag new">proposed</span></td>
+          </tr>
+          <tr>
+            <td><b>Another reason</b></td>
+            <td>Pinned last; a free-text box appears.</td>
+            <td>Capture the free text (minimum length enforced).</td>
+            <td>Free-text → <b>Analytics</b>.</td>
+            <td>Recurring themes graduate into new named reasons — the taxonomy grows.</td>
+            <td><span class="vtag club">learn</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:12.8px; color:var(--muted); margin-top:10px">Owning services and consequences for the five non-built reasons are <strong>proposed, for discussion</strong> — the spine is fixed; the owner per reason is the open question.</p>
   </div>
 </section>
 
@@ -369,18 +442,19 @@
       <p>For this reason, the goal is to <strong>send only quality serviceable bookings to the CSP and filter out the clutter</strong> — automatically, by learning from every decline. (Success metrics are at the end of the walkthrough below.)</p>
     </div>
     <div class="callout good">
-      <h4>How this helps the customer — the answer to "what happens after Step 5"</h4>
+      <h4>How this helps the customer — the answer to "what happens after Step 4"</h4>
       <p>A customer in a genuinely-serviced area stops being sent to a CSP who'll refuse them. Their booking lands on a CSP who <em>will</em> install — first time — instead of bouncing through re-offers until it times out. The loop's payoff is not a cleaner dashboard; it's a customer who waits days less to get online.</p>
     </div>
   </div>
 </section>
 
-<!-- THE FIVE STEPS -->
+<!-- THE FOUR STEPS -->
 <section id="steps">
   <div class="wrap">
     <div class="sec-head">
-      <span class="eyebrow">Service not available · end to end</span>
-      <h2>The one reason, through all five steps</h2>
+      <span class="eyebrow">Location is Far · the worked example</span>
+      <h2>The one we built, through all four steps</h2>
+      <p>Location is Far is signed off on both sides — the <a href="https://ashish-raj-wiom.github.io/coverage-decline-assist-prd/" style="color:var(--sys-ink)">CSP-side PRD</a> and the <a href="https://ashish-raj-wiom.github.io/genie-coverage-integration-prd/" style="color:var(--sys-ink)">Genie PRD</a>. Here it is end to end.</p>
     </div>
 
     <div class="steprail">
@@ -391,8 +465,8 @@
         <div class="body">
           <div class="lbl">Show</div>
           <h3>Show the reason list <span class="owner here">this layer</span></h3>
-          <p>Step 1 does one thing: show the CSP the list of decline reasons and let him pick the one that fits. What matters here is <strong>which reasons are visible</strong>, that they read as neutral options, and that their <strong>order is randomised</strong> on every render so a reason isn't chosen just because it sits on top. The CSP taps the option matching his situation — for this exercise, that's <strong>"service not available at this location"</strong>. Nothing is interpreted or acted on yet; that starts at Step 2.</p>
-          <div class="callout" style="margin-top:14px"><h4>More about it →</h4><p style="font-size:13px">The full reason-set design — the complete list, and which reasons to keep, remove, club or add — sits in the <a href="#reason-set" style="color:var(--sys-ink)">archive</a>. Scope 1 only needs the list shown correctly.</p></div>
+          <p>Step 1 shows the CSP the fixed list of decline reasons and lets him pick. What matters: <strong>which reasons are visible</strong>, that they read as neutral options, and that their <strong>order is randomised</strong> so a reason isn't chosen just for sitting on top. He taps the one that fits — here, <strong>"Location is Far"</strong>. Nothing is interpreted yet; that starts at Step 2.</p>
+          <div class="callout" style="margin-top:14px"><h4>More →</h4><p style="font-size:13px">The full reason-set design (the finalised six, and what was kept / removed / added) is in the <a href="#reason-set" style="color:var(--sys-ink)">archive</a> and the signed-off <a href="https://ashish-raj-wiom.github.io/decline-reason-set-prd/" style="color:var(--sys-ink)">Reason Set PRD</a>.</p></div>
         </div>
       </div>
 
@@ -400,33 +474,32 @@
       <div class="step cap">
         <div class="mk">2</div>
         <div class="body">
-          <div class="lbl">Assist &amp; capture</div>
-          <h3>Help him avoid a false decline — and capture the points he's rejecting <span class="owner here">this layer</span></h3>
-          <p>Before we accept the decline, we show the CSP what we already know: he has <strong>active connections a few doors away</strong>. If he backs off, a false decline never happens. If he still declines, we capture two things — the <strong>decision</strong> (a deliberate "I won't serve here"), and <strong>the specific active or splitter points we just showed him</strong> that he's declaring un-serviceable. Those points, not just the booking, are the unit we learn on — and <strong>only a point we actually showed him can ever be flagged</strong>, never one he never saw.</p>
+          <div class="lbl">Assist / Verify &amp; Capture</div>
+          <h3>Make the decline deliberate — and capture the points he's rejecting <span class="owner here">this layer</span></h3>
+          <p>Before the decline is finalised we show the CSP what we already know: he has <strong>active connections a few doors away</strong>. That assist <em>is</em> the verification — our own data is already in front of him, so there's <strong>no Ops-calling layer</strong> for this reason. If he backs off, a false decline never happens. If he still declines, we capture two things — the <strong>deliberate decision</strong> ("I won't serve here") and <strong>the exact points we showed him</strong>, in order, that he's rejecting. Only a point he was actually shown can ever be sent on.</p>
           <div class="grid2" style="margin-top:15px; align-items:start">
             <div>
             <div class="interrupt">
-              <div class="ttl">⚠︎ Are you sure service isn't available here?</div>
-              <p>You have <strong>3 active connections</strong> within 150&nbsp;m of this address:</p>
+              <div class="ttl">⚠︎ You already have 2 connections near here</div>
+              <p>This new connection is only <strong>40&nbsp;m</strong> away — the cable won't be long:</p>
               <div class="connlist">
-                <div class="conn"><span class="pin">●</span> House 42, same lane <span class="d">40 m</span></div>
-                <div class="conn"><span class="pin">●</span> Green Apt, Block B <span class="d">95 m</span></div>
-                <div class="conn"><span class="pin">●</span> Shop 7, main road <span class="d">150 m</span></div>
+                <div class="conn"><span class="pin">●</span> Ram Kumar · B-12 Saket Ext <span class="d">40 m</span></div>
+                <div class="conn"><span class="pin">●</span> Preeti Sharma · A-8 Neb Sarai <span class="d">200 m</span></div>
               </div>
               <div class="btnrow">
-                <div class="btn ghost">Let me re-check</div>
-                <div class="btn primary">Still not serviceable</div>
+                <div class="btn primary">I won't be able to connect</div>
+                <div class="btn ghost">OK, I'll connect</div>
               </div>
             </div>
-            <p style="font-size:11.5px; color:var(--muted); margin-top:9px">Illustration only — the exact Step 2 UX flow will be finalised by the solutions team.</p>
+            <p style="font-size:11.5px; color:var(--muted); margin-top:9px">Illustration — exact copy &amp; flow live in Figma / the CSP PRD.</p>
             </div>
             <div>
               <h4 style="color:var(--ink); margin-bottom:7px">What we record</h4>
               <div class="card" style="padding:14px 16px">
-                <p style="font-size:13.3px; margin-bottom:8px"><strong>"Let me re-check"</strong> → decline avoided. The booking keeps its best CSP. Nothing else happens.</p>
-                <p style="font-size:13.3px"><strong>"Still not serviceable"</strong> → a <em>deliberate</em> decline, made despite seeing live neighbours. We log it against the <strong>points we showed him</strong> as one flag: <em>"this CSP won't serve this point."</em></p>
+                <p style="font-size:13.3px; margin-bottom:8px"><strong>"OK, I'll connect"</strong> → decline avoided. The booking stays with him; no signal sent. The back-off is logged for measurement.</p>
+                <p style="font-size:13.3px"><strong>"I won't be able to connect"</strong> → a <em>deliberate</em> decline. We record it and the <strong>points shown</strong>, in order, as the ones he rejects — and the booking is removed with a confirmation.</p>
               </div>
-              <div class="callout" style="margin-top:12px"><p style="font-size:12.8px">Showing the neighbours is what converts a careless tap into a high-confidence claim. It's the cheapest false-decline filter we have — and it happens before Step 3 ever runs.</p></div>
+              <div class="callout" style="margin-top:12px"><p style="font-size:12.8px">Showing the neighbours turns a careless tap into a high-confidence claim — the cheapest false-decline filter there is, and no human check needed. If no points come back in time, the decline still completes but <strong>no signal is sent</strong> (no informed decision).</p></div>
             </div>
           </div>
         </div>
@@ -436,60 +509,42 @@
       <div class="step">
         <div class="mk">3</div>
         <div class="body">
-          <div class="lbl">Verify</div>
-          <h3>Verify the claim — Ops calling <span class="owner tbd">TBD</span></h3>
-          <p>We never act on a single tap. But note: <strong>whatever data we hold about this location has already been shown to the CSP</strong> in the Step 2 popup — so re-checking our own data here adds nothing. The one thing data can't settle is his actual claim: that the connection is <strong>genuinely too far for him to serve</strong>. That needs a human check.</p>
-          <div class="card" style="margin-top:14px; padding:6px 18px">
-            <div class="vsig hi">
-              <div class="conf">Ops calling</div>
-              <div class="vb"><h4>Ops calls to validate "it's too far"</h4>
-                <p>Ops follows up with the CSP to confirm the connection is really beyond his reach, as he claims — not that he simply didn't want it. Only a validated "genuinely far" decline accumulates toward the consequence in Step 5.</p>
-              </div>
-            </div>
-          </div>
-          <div class="callout warn" style="margin-top:14px"><h4>TBD</h4><p>The ops-calling flow — who calls, when, and how a validated "too far" decline is recorded — still needs to be worked out. A verification layer matters more for intent reasons like "customer said no"; for coverage, ops calling is the one check our own data can't make.</p></div>
+          <div class="lbl">Emit Signal</div>
+          <h3>Push the signal to Genie <span class="owner genie">Genie owns it next</span></h3>
+          <p>This is the scope boundary. We <strong>build no candidate list, route nothing, de-list no one</strong>. We <strong>push</strong> one clean, self-describing, point-level signal — <em>"CSP X declined connection Y for Location is Far, after being shown these points, in this order"</em> — to Genie. Pushed, not left in a table to poll. We're the system-of-record; Genie owns the decision.</p>
+          <div class="callout" style="margin-top:12px"><p style="font-size:12.8px"><strong>How routing works:</strong> <b>Genie</b> builds each booking's candidate-CSP list by distance from every CSP's active points; <b>DAS</b> then routes among those candidates. We only feed Genie the signal that changes which points count — <b>DAS is affected only indirectly</b>.</p></div>
         </div>
       </div>
 
       <!-- STEP 4 -->
-      <div class="step">
+      <div class="step act">
         <div class="mk">4</div>
         <div class="body">
-          <div class="lbl">Signal</div>
-          <h3>Emit the verified signal to Genie <span class="owner genie">Genie acts</span></h3>
-          <p>This is the scope boundary. We <strong>build no candidate list, route nothing, and de-list no one ourselves</strong>. We publish a clean, verified, point-level signal — <em>"CSP X, ≥N validated not-serviceable flags for point P"</em> — and Genie reads it. We are the trusted system-of-record; Genie owns the decision.</p>
-          <div class="callout" style="margin-top:12px"><p style="font-size:12.8px"><strong>How the CSP system works:</strong> <b>Genie</b> builds each booking's candidate-CSP list by distance from every CSP's active connection points; <b>DAS</b> then routes among those candidates. Neither is us — we only feed Genie the signal that changes which active points count.</p></div>
-        </div>
-      </div>
-
-      <!-- STEP 5 -->
-      <div class="step act">
-        <div class="mk">5</div>
-        <div class="body">
-          <div class="lbl">Consequence</div>
+          <div class="lbl">Build Consequence</div>
           <h3>Genie drops the point for that CSP <span class="owner genie">Genie acts</span></h3>
-          <p>Using the signal, Genie applies a threshold: once a CSP's <strong>point (active or splitter point)</strong> crosses the flag bar, Genie <strong>stops counting that point in the distance calc for this CSP</strong>. From then on he <strong>isn't surfaced as a candidate for new bookings near that point</strong> — so DAS never routes them to him, because we've learned he won't install there. The clutter is gone from his feed, and the booking goes to a CSP who will.</p>
+          <p>Using the signal, Genie applies its own threshold: once a CSP's <strong>point (active or splitter)</strong> crosses the bar, Genie <strong>stops counting it in the distance calc for him</strong>. From then he <strong>isn't surfaced for new bookings near it</strong> — so DAS never routes them to him. The clutter is gone from his feed, and the booking goes to a CSP who will install. What the threshold is, and what "de-list" means, is <strong>Genie's to decide</strong> — out of scope of our PRDs.</p>
           <div class="thresh">
-            <div class="pt"><div class="cnt">&gt;2</div><div class="lab">validated flags on a point</div></div>
+            <div class="pt"><div class="cnt">≥N</div><div class="lab">signals on a point</div></div>
             <div class="arrow">→</div>
-            <div class="res"><b>Genie stops counting that active point</b> for this CSP → he's not a candidate for nearby bookings → DAS routes them elsewhere.</div>
+            <div class="res"><b>Genie stops counting that point</b> for this CSP → not a candidate for nearby bookings → DAS routes them elsewhere.</div>
           </div>
-          <p style="font-size:12.6px; color:var(--muted); margin-top:10px">Threshold (&gt;2) is illustrative — Genie owns the exact bar. Every flagged point is one the CSP was shown in Step 2 and still rejected.</p>
+          <p style="font-size:12.6px; color:var(--muted); margin-top:10px">Threshold is Genie's own. Every point sent is one the CSP was shown in Step 2 and still rejected.</p>
         </div>
       </div>
 
     </div>
 
     <div class="sec-head" style="margin-top:36px; margin-bottom:16px">
-      <span class="eyebrow">Success metrics</span>
+      <span class="eyebrow">Success metrics · Location is Far</span>
       <h3 style="font-size:20px; margin-top:6px">How we'll know it worked</h3>
     </div>
     <div class="stats" style="grid-template-columns:repeat(2,1fr)">
-      <div class="stat down"><div class="dir">▼ should fall</div><div class="m">% declines for "location too far / not serviceable"</div><div class="k">the clutter is leaving the system</div></div>
-      <div class="stat down"><div class="dir">▼ should fall</div><div class="m">Median distance of a booking from the CSP</div><div class="k">CSPs get bookings genuinely near them</div></div>
-      <div class="stat down"><div class="dir">▼ should fall</div><div class="m">Customer wait-time to install</div><div class="k">next booking lands on the right CSP first time</div></div>
-      <div class="stat up"><div class="dir">▲ Step 2 is working</div><div class="m">% of tasks the CSP reconsidered when shown nearby active connections</div><div class="k">false declines caught before they happen</div></div>
+      <div class="stat up"><div class="dir">● our success</div><div class="m">Every deliberate decline emits a valid point-level signal to Genie</div><div class="k">the loop is clean and complete — what this layer owns</div></div>
+      <div class="stat down"><div class="dir">▼ loop outcome</div><div class="m">First-routed CSP declines "too far" less often</div><div class="k">Genie stops routing far bookings to him → fewer re-routes</div></div>
+      <div class="stat down"><div class="dir">▼ loop outcome</div><div class="m">Share of "Location is Far" declines</div><div class="k">far / irrelevant bookings stop reaching the wrong CSP</div></div>
+      <div class="stat down"><div class="dir">▼ loop outcome</div><div class="m">Prevented mis-routes — tasks never created for a CSP near a rejected point</div><div class="k">clutter removed before it's even offered</div></div>
     </div>
+    <p style="font-size:12.5px; color:var(--muted); margin-top:12px">Success is a <strong>trustworthy signal</strong>, not fewer declines or making CSPs reconsider — a confirmed "too far" is good information the routing system needs. The reconsideration rate is a signal-quality diagnostic, not a target. Loop outcomes are Genie-driven, tracked at the loop level.</p>
   </div>
 </section>
 
@@ -499,42 +554,25 @@
     <div class="sec-head">
       <span class="eyebrow">Archive · out of current scope</span>
       <h2>Parked for later</h2>
-      <p>Scope 1 is one reason, built fully. The material below is kept for reference — it applies the same five-step spine to other reasons and capture ideas, to be picked up once the coverage loop is live.</p>
+      <p>Location is Far is built fully. The material below is extra depth kept for reference — the finalised reason list, capture ideas, and the per-reason detail behind the table above. The same four-step spine applies to every reason.</p>
     </div>
 
-    <details class="archive" id="reason-set">
-      <summary><span class="tag">Reason-set</span> Redefining the full reason list (remove / club / add / randomise) <span class="chev">›</span></summary>
+    <details class="archive" id="reason-set" open>
+      <summary><span class="tag">Reason-set</span> The finalised reason list (signed off) <span class="chev">›</span></summary>
       <div class="archbody">
-        <p style="font-size:13.8px; margin-top:12px">The shared decline / install-failure list needs a clean-up before it can be fully trusted. Deferred so Scope&nbsp;1 stays a single full loop rather than a wide input-only change — but here is the intended redesign.</p>
+        <p style="font-size:13.8px; margin-top:12px">The shared decline / install-failure list was cleaned up and <strong>signed off</strong> (see the <a href="https://ashish-raj-wiom.github.io/decline-reason-set-prd/" style="color:var(--sys-ink)">Reason Set PRD</a>). What changed from the old list: the redundant "network setup not possible" was <strong>removed</strong> (folds into Location is Far); the old "price" reason folds into "the customer said no"; "could not be scheduled" was dropped; "address" and "no technician" were <strong>added</strong>; order is randomised each render with "Another reason" pinned last.</p>
 
-        <h4 style="margin:18px 0 8px; color:var(--ink)">Today's list, and the verdict on each</h4>
-        <div class="twrap">
-          <table>
-            <thead><tr><th>Reason (today)</th><th class="num">Share</th><th>Verdict</th></tr></thead>
-            <tbody>
-              <tr><td>Service not available at this location</td><td class="num">64.7%</td><td><span class="vtag keep">keep · Scope-1 focus</span></td></tr>
-              <tr><td>Network setup is currently not possible</td><td class="num">13.6%</td><td><span class="vtag drop">remove · redundant, fold into coverage</span></td></tr>
-              <tr><td>Customer is not interested anymore</td><td class="num">7.4%</td><td><span class="vtag club">club → Customer refused</span></td></tr>
-              <tr><td>Required device is currently unavailable</td><td class="num">7.1%</td><td><span class="vtag keep">keep</span></td></tr>
-              <tr><td>Installation could not be scheduled</td><td class="num">3.7%</td><td><span class="vtag keep">keep</span></td></tr>
-              <tr><td>Customer did not agree with the plan price</td><td class="num">3.4%</td><td><span class="vtag club">club → Customer refused</span></td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p style="font-size:13px; margin-top:12px"><strong>The changes:</strong> remove the redundant coverage duplicate ("network setup not possible"); club the two customer-intent reasons into one ("Customer refused"); add the new reasons below; and randomise order on every render so no reason gets a free ride to the top.</p>
-
-        <h4 style="margin:18px 0 8px; color:var(--ink)">Proposed final list</h4>
+        <h4 style="margin:18px 0 8px; color:var(--ink)">The finalised list</h4>
         <div class="rlist" style="max-width:540px">
           <div class="rt">Why can't you install this?</div>
-          <div class="rrow"><span class="rd"></span>Service not available at this location</div>
-          <div class="rrow"><span class="rd"></span>Required device is currently unavailable</div>
-          <div class="rrow"><span class="rd"></span>Customer refused <span class="sh">clubbed</span></div>
-          <div class="rrow"><span class="rd"></span>Installation could not be scheduled</div>
-          <div class="rrow"><span class="rd"></span>Could not understand the address <span class="sh">new</span></div>
-          <div class="rrow"><span class="rd"></span>Technician not available &nbsp;·&nbsp; ladka nahi hai <span class="sh">new</span></div>
-          <div class="rrow"><span class="rd"></span>Other — tell us more <span class="sh">new · pinned last</span></div>
+          <div class="rrow"><span class="rd"></span>Location is Far <span class="sh">≈65%</span></div>
+          <div class="rrow"><span class="rd"></span>The customer said no</div>
+          <div class="rrow"><span class="rd"></span>I don't have a device right now</div>
+          <div class="rrow"><span class="rd"></span>I couldn't understand the address <span class="sh">new</span></div>
+          <div class="rrow"><span class="rd"></span>No one free to install it &nbsp;·&nbsp; ladka nahi hai <span class="sh">new</span></div>
+          <div class="rrow"><span class="rd"></span>Another reason — tell us more <span class="sh">free text · pinned last</span></div>
         </div>
-        <p style="font-size:12.5px; color:var(--muted); margin-top:9px">Order randomised each render; "Other" pinned last. <strong>"Technician not available"</strong> can hand off to the Availability service — prompting the CSP to pause installs for the day.</p>
+        <p style="font-size:12.5px; color:var(--muted); margin-top:9px">Exact English / Hindi copy lives in Figma; the list is config-driven and add-only. <strong>"No one free to install it"</strong> can hand off to the Availability service — prompting the CSP to pause installs for the day.</p>
       </div>
     </details>
 
@@ -567,7 +605,7 @@
     <details class="archive" style="margin-top:12px">
       <summary><span class="tag">Analysis</span> Where does the CSP actually install? (offline) <span class="chev">›</span></summary>
       <div class="archbody">
-        <p style="font-size:13.8px; margin-top:12px">A separate offline analysis of existing install data — which attributes move install probability (zone, distance, address quality, plan, tenure, nearby density) across cuts. Not part of the live loop; findings feed serviceability, the same target as Step 5.</p>
+        <p style="font-size:13.8px; margin-top:12px">A separate offline analysis of existing install data — which attributes move install probability (zone, distance, address quality, plan, tenure, nearby density) across cuts. Not part of the live loop; findings feed serviceability (Genie) — the same target as Step 4.</p>
       </div>
     </details>
   </div>
@@ -575,7 +613,7 @@
 
 <footer>
   <div class="wrap">
-    <p><strong>Decline Intelligence — "Service not available" loop.</strong> Scope 1 concept built on the CSP decline analysis (Jun–Aug 2026). This reason is ~65% of all declines. This feature is a capture + system-of-record layer; Genie, DAS, Quality and the customer-side systems act on the signals it publishes. Illustrative UI, thresholds and the "point" unit are for discussion, not final spec. Ashish Raj.</p>
+    <p><strong>Decline Intelligence — every reason, one 4-step loop.</strong> Concept built on the CSP decline analysis (Jun–Aug 2026). The spine — Show → Assist/Verify &amp; Capture → Emit Signal → Build Consequence — applies to all six reasons; <strong>Location is Far</strong> (~65% of declines) is built and signed off (CSP + Genie PRDs). This is a capture + system-of-record layer; Genie, the customer-side, Supply, Availability and Analytics act on the signals it publishes. Owning services for the five non-built reasons are proposed, for discussion. Ashish Raj.</p>
   </div>
 </footer>
 
