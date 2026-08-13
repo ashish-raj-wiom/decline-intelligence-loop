@@ -238,6 +238,13 @@
   tr:last-child td{border-bottom:none}
   td b{color:var(--ink); font-weight:660}
   .yes{color:var(--csp); font-weight:700} .no{color:var(--muted)}
+  /* reason × step table — colour-coded steps + owner chips */
+  th.kshow, th.kcap{color:var(--csp)} th.kemit{color:var(--sys-ink)} th.kcons{color:var(--learn)}
+  table.rxtab td{font-size:13px; line-height:1.42}
+  table.rxtab td.reason{white-space:nowrap}
+  .own{display:inline-block; font-size:11px; font-weight:700; padding:1px 8px; border-radius:20px; background:var(--sys-wash); color:var(--sys-ink); white-space:nowrap; margin-top:6px}
+  .own.g{background:var(--learn-wash); color:var(--learn)}
+  td.emit{border-left:1px solid var(--hair)} td.cons{border-left:1px solid var(--hair)}
 
   /* interactive reason explorer */
   .rx{margin-top:6px}
@@ -397,71 +404,69 @@
       <h2>What we do for each reason</h2>
       <p>The plan for all six reasons on one page. <strong>Location is Far</strong> is signed off, with go-live expected <strong>14 Aug</strong>; the rest are the roadmap — same spine, different owning service. <strong>Who owns the consequence</strong> is the real difference between reasons.</p>
     </div>
-    <div class="rx">
-      <div class="rx-tabs" role="tablist">
-        <button class="rx-tab active" data-r="far"><span class="rx-dot"></span>Location is Far <span class="rx-badge go">go-live 14 Aug</span></button>
-        <button class="rx-tab" data-r="cust"><span class="rx-dot"></span>The customer said no <span class="rx-badge prop">proposed</span></button>
-        <button class="rx-tab" data-r="dev"><span class="rx-dot"></span>No device right now <span class="rx-badge prop">proposed</span></button>
-        <button class="rx-tab" data-r="addr"><span class="rx-dot"></span>Address unclear <span class="rx-badge prop">proposed</span></button>
-        <button class="rx-tab" data-r="tech"><span class="rx-dot"></span>No one free to install <span class="rx-badge prop">proposed</span></button>
-        <button class="rx-tab" data-r="other"><span class="rx-dot"></span>Another reason <span class="rx-badge learn">learn</span></button>
-      </div>
-
-      <div class="rx-panel show" data-r="far">
-        <div class="rx-flow">
-          <div class="rx-card k-show"><div class="rx-n">1 · Show</div><h4>Reason list</h4><p>On pick, run the intercept.</p></div>
-          <div class="rx-card k-cap"><div class="rx-n">2 · Assist &amp; Capture</div><h4>Show nearby points</h4><p>Blocking modal of his own active / splitter points. Still declines → capture the deliberate "won't serve" + the exact points shown, in order.</p></div>
-          <div class="rx-card k-emit"><div class="rx-n">3 · Emit Signal</div><h4>Push point-level signal</h4><p>Connection + customer, CSP, rejected points.<span class="rx-owner">→ Genie</span></p></div>
-          <div class="rx-card k-cons"><div class="rx-n">4 · Consequence</div><h4>De-list the point</h4><p>Not a candidate for nearby bookings → DAS stops routing them to him.<span class="rx-owner">Genie</span></p></div>
-        </div>
-      </div>
-
-      <div class="rx-panel" data-r="cust">
-        <div class="rx-flow">
-          <div class="rx-card k-show"><div class="rx-n">1 · Show</div><h4>Reason list</h4><p>CSP picks "the customer said no".</p></div>
-          <div class="rx-card k-cap"><div class="rx-n">2 · Assist &amp; Capture</div><h4>Confirm with the CSP</h4><p>Show a confirm — we'll check this with the customer. On his confirm, mark the deliberate decline.</p></div>
-          <div class="rx-card k-emit"><div class="rx-n">3 · Emit Signal</div><h4>Send to verify</h4><p>"Customer refused, verify."<span class="rx-owner">→ Customer backend</span></p></div>
-          <div class="rx-card k-cons"><div class="rx-n">4 · Consequence</div><h4>Backend verifies</h4><p><b>True</b> → cancel booking + refund (owns the workflow). <b>False</b> → signal back that the CSP was wrong.<span class="rx-owner">Customer backend</span></p></div>
-        </div>
-      </div>
-
-      <div class="rx-panel" data-r="dev">
-        <div class="rx-flow">
-          <div class="rx-card k-show"><div class="rx-n">1 · Show</div><h4>Reason list</h4><p>CSP picks "no device right now".</p></div>
-          <div class="rx-card k-cap"><div class="rx-n">2 · Assist &amp; Capture</div><h4>Capture the shortage</h4><p>Record that this CSP has no device (no assist needed). <em>Detail pending.</em></p></div>
-          <div class="rx-card k-emit"><div class="rx-n">3 · Emit Signal</div><h4>Send stock signal</h4><p>"Out of device stock."<span class="rx-owner">→ Supply / Inventory</span></p></div>
-          <div class="rx-card k-cons"><div class="rx-n">4 · Consequence</div><h4>Pause + restock</h4><p>Hold device-needing installs to him until restocked; trigger replenishment.<span class="rx-owner">Supply / Inventory</span></p></div>
-        </div>
-      </div>
-
-      <div class="rx-panel" data-r="addr">
-        <div class="rx-flow">
-          <div class="rx-card k-show"><div class="rx-n">1 · Show</div><h4>Reason list</h4><p>CSP picks "couldn't understand the address".</p></div>
-          <div class="rx-card k-cap"><div class="rx-n">2 · Assist &amp; Capture</div><h4>Show the address</h4><p>Show the address + map pin; let him flag what's wrong or add a landmark. Capture the gap.</p></div>
-          <div class="rx-card k-emit"><div class="rx-n">3 · Emit Signal</div><h4>Flag the address</h4><p>"Address unclear."<span class="rx-owner">→ Customer / Address</span></p></div>
-          <div class="rx-card k-cons"><div class="rx-n">4 · Consequence</div><h4>Fix the address</h4><p>Re-confirm or enrich it before re-routing; better capture upstream.<span class="rx-owner">Customer / Address</span></p></div>
-        </div>
-      </div>
-
-      <div class="rx-panel" data-r="tech">
-        <div class="rx-flow">
-          <div class="rx-card k-show"><div class="rx-n">1 · Show</div><h4>Reason list</h4><p>CSP picks "no one free to install".</p></div>
-          <div class="rx-card k-cap"><div class="rx-n">2 · Assist &amp; Capture</div><h4>Capture + pause</h4><p>Capture "no technician free"; prompt him to pause installs / set his availability.</p></div>
-          <div class="rx-card k-emit"><div class="rx-n">3 · Emit Signal</div><h4>Send capacity signal</h4><p>"No capacity now."<span class="rx-owner">→ Availability</span></p></div>
-          <div class="rx-card k-cons"><div class="rx-n">4 · Consequence</div><h4>Pause routing</h4><p>Hold new install routing to him for the window; capacity adjusts.<span class="rx-owner">Availability</span></p></div>
-        </div>
-      </div>
-
-      <div class="rx-panel" data-r="other">
-        <div class="rx-flow">
-          <div class="rx-card k-show"><div class="rx-n">1 · Show</div><h4>Pinned last</h4><p>A free-text box appears.</p></div>
-          <div class="rx-card k-cap"><div class="rx-n">2 · Assist &amp; Capture</div><h4>Capture free text</h4><p>Record the note (minimum length enforced).</p></div>
-          <div class="rx-card k-emit"><div class="rx-n">3 · Emit Signal</div><h4>Send for clustering</h4><p>Free-text.<span class="rx-owner">→ Analytics</span></p></div>
-          <div class="rx-card k-cons"><div class="rx-n">4 · Consequence</div><h4>Grow the taxonomy</h4><p>Recurring themes graduate into new named reasons.<span class="rx-owner">Analytics</span></p></div>
-        </div>
-      </div>
+    <div class="twrap">
+      <table class="rxtab">
+        <thead><tr>
+          <th class="reason">Reason</th>
+          <th class="kshow">1 · Show</th>
+          <th class="kcap">2 · Assist &amp; Capture</th>
+          <th class="kemit">3 · Emit signal</th>
+          <th class="kcons">4 · Build consequence</th>
+          <th>Status</th>
+        </tr></thead>
+        <tbody>
+          <tr class="hi">
+            <td class="reason"><b>Location is Far</b></td>
+            <td>Reason list → run the intercept.</td>
+            <td>Blocking modal of his nearby active / splitter points. Still declines → capture the deliberate "won't serve" + the exact points shown, in order.</td>
+            <td class="emit">Point-level signal — connection + customer, CSP, rejected points.<br><span class="own g">→ Genie</span></td>
+            <td class="cons">De-lists the point → not a candidate for nearby bookings → DAS stops routing them to him.<br><span class="own g">Genie</span></td>
+            <td><span class="vtag keep">go-live 14&nbsp;Aug</span></td>
+          </tr>
+          <tr>
+            <td class="reason"><b>The customer said no</b></td>
+            <td>Reason list.</td>
+            <td>Show a confirm — "we'll check this with the customer". On his confirm, mark the deliberate decline.</td>
+            <td class="emit">"Customer refused, verify".<br><span class="own">→ Customer backend</span></td>
+            <td class="cons">Backend verifies. <b>True</b> → cancel + refund (owns the workflow). <b>False</b> → signal back that the CSP was wrong.<br><span class="own">Customer backend</span></td>
+            <td><span class="vtag new">proposed</span></td>
+          </tr>
+          <tr>
+            <td class="reason"><b>I don't have a device</b></td>
+            <td>Reason list.</td>
+            <td>Capture the device shortage for this CSP. <em>Detail pending.</em></td>
+            <td class="emit">"Out of device stock".<br><span class="own">→ Supply / Inventory</span></td>
+            <td class="cons">Hold device-needing installs to him until restocked; trigger replenishment.<br><span class="own">Supply / Inventory</span></td>
+            <td><span class="vtag new">proposed</span></td>
+          </tr>
+          <tr>
+            <td class="reason"><b>Couldn't understand address</b></td>
+            <td>Reason list.</td>
+            <td>Show the address + map pin; let him flag what's wrong / add a landmark. Capture the gap.</td>
+            <td class="emit">"Address unclear".<br><span class="own">→ Customer / Address</span></td>
+            <td class="cons">Re-confirm or enrich the address before re-routing; better capture upstream.<br><span class="own">Customer / Address</span></td>
+            <td><span class="vtag new">proposed</span></td>
+          </tr>
+          <tr>
+            <td class="reason"><b>No one free to install</b></td>
+            <td>Reason list.</td>
+            <td>Capture "no technician free"; prompt him to pause installs / set his availability.</td>
+            <td class="emit">"No capacity now".<br><span class="own">→ Availability</span></td>
+            <td class="cons">Pause new install routing to him for the window; capacity adjusts.<br><span class="own">Availability</span></td>
+            <td><span class="vtag new">proposed</span></td>
+          </tr>
+          <tr>
+            <td class="reason"><b>Another reason</b></td>
+            <td>Pinned last; free-text box.</td>
+            <td>Capture the free text (minimum length enforced).</td>
+            <td class="emit">Free text.<br><span class="own">→ Analytics</span></td>
+            <td class="cons">Recurring themes graduate into new named reasons — the taxonomy grows.<br><span class="own">Analytics</span></td>
+            <td><span class="vtag club">learn</span></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <p style="font-size:12.8px; color:var(--muted); margin-top:16px">Tap a reason to see its four-step loop. <strong>Location is Far</strong> is signed off; the owning services and consequences for the other five are <strong>proposed, for discussion</strong> — the spine is fixed, the owner per reason is the open question.</p>
+    <p style="font-size:12.8px; color:var(--muted); margin-top:12px"><strong>Location is Far</strong> is signed off; the owning services and consequences for the other five are <strong>proposed, for discussion</strong> — the spine is fixed, the owner per reason is the open question.</p>
   </div>
 </section>
 
@@ -659,15 +664,6 @@
       var cur=r.getAttribute('data-theme');
       if(!cur){cur=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';}
       r.setAttribute('data-theme', cur==='dark'?'light':'dark');
-    });
-
-    // Interactive reason explorer — click a reason, show its 4-step flow
-    document.querySelectorAll('.rx-tab').forEach(function(t){
-      t.addEventListener('click',function(){
-        var r=t.getAttribute('data-r');
-        document.querySelectorAll('.rx-tab').forEach(function(x){ x.classList.toggle('active', x===t); });
-        document.querySelectorAll('.rx-panel').forEach(function(p){ p.classList.toggle('show', p.getAttribute('data-r')===r); });
-      });
     });
 
     // Links pointing to a <details> (e.g. the archive) open and scroll to it
