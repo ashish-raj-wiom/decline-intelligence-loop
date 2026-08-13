@@ -429,8 +429,7 @@
             <td>Show his nearby active / splitter points; on his choice, capture the outcome:
               <pre class="mermaid">flowchart TD
   S["Show nearby points"] -->|"OK, I'll connect"| N["No decline · no signal"]
-  S -->|"I won't connect"| Y["Capture + push to Genie"]
-  S -->|"No points in time"| Z["Decline · no signal"]</pre>
+  S -->|"I won't connect"| Y["Capture + push to Genie"]</pre>
             </td>
             <td class="emit">Point-level signal — connection + customer, CSP, rejected points.<br><span class="own g">→ Genie</span></td>
             <td class="cons">De-lists the point → not a candidate for nearby bookings → DAS stops routing them to him.<br><span class="own g">Genie</span></td>
