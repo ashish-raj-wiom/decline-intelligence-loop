@@ -448,8 +448,17 @@
           </tr>
           <tr>
             <td class="reason"><b>I don't have a device</b></td>
-            <td></td><td></td><td class="emit"></td><td class="cons"></td>
-            <td><span class="vtag tbd">not proposed yet</span></td>
+            <td>Reason list.</td>
+            <td>Branch on the system's device count for this CSP:
+              <pre class="mermaid">flowchart TD
+  A["Check system inventory"] -->|"0 available"| B["Register decline + nudge to order (opens ordering flow)"]
+  A -->|"1+ available"| C["Show devices — has them?"]
+  C -->|"Yes"| D["No decline"]
+  C -->|"No"| E["Register decline + 'we'll audit your inventory'"]</pre>
+            </td>
+            <td class="emit">Order / inventory-mismatch signal.<br><span class="own">→ Ops / ACS</span></td>
+            <td class="cons">Ops talks with the CSP and updates his inventory.<br><span class="own">Ops / ACS</span></td>
+            <td><span class="vtag new">proposed</span></td>
           </tr>
           <tr>
             <td class="reason"><b>Couldn't understand address</b></td>
@@ -469,7 +478,8 @@
         </tbody>
       </table>
     </div>
-    <p style="font-size:12.8px; color:var(--muted); margin-top:12px"><strong>Location is Far</strong> is signed off (go-live 19 Aug) and <strong>"the customer said no"</strong> is proposed — only these two loops are decided. The other four are <strong>not proposed yet</strong>; blank cells mean the loop hasn't been designed. Flowcharts show the if / else branches.</p>
+    <p style="font-size:12.8px; color:var(--muted); margin-top:12px"><strong>Location is Far</strong> is signed off (go-live 19 Aug); <strong>"the customer said no"</strong> and <strong>"I don't have a device"</strong> are proposed. The other three are <strong>not proposed yet</strong> — blank cells mean the loop hasn't been designed. Flowcharts show the if / else branches.</p>
+    <p style="font-size:12.5px; color:var(--muted); margin-top:8px"><strong>Dependency (device):</strong> a parallel feature that <strong>stops sending bookings to a CSP with 0 devices</strong> is under development. If it ships first, the "0 available" branch won't trigger — but this story still handles that case as a fallback.</p>
   </div>
 </section>
 
