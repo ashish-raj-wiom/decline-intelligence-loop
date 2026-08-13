@@ -384,10 +384,6 @@
       </table>
     </div>
     <p style="font-size:12.8px; color:var(--muted); margin-top:10px">Shares are approximate, from the Jun–Aug 2026 analysis: "Location is Far" absorbs the old redundant "network setup" reason; "the customer said no" folds in the old price reason; "could not be scheduled" was dropped. "Address" and "no technician" are new reasons, not separately measured before. The same six apply at both capture points.</p>
-    <div class="callout" style="margin-top:20px">
-      <h4>What this document shows</h4>
-      <p>Every reason runs the <strong>same four-step loop</strong>. Rather than go deep on one, the table below shows <strong>what we'll do for each reason across the four steps</strong> — then the two decided reasons, <strong>Location is Far</strong> and <strong>the customer said no</strong>, are walked end-to-end as worked examples.</p>
-    </div>
   </div>
 </section>
 
@@ -500,7 +496,7 @@
           <div class="lbl">Show</div>
           <h3>Show the reason list <span class="owner here">this layer</span></h3>
           <p>Step 1 shows the CSP the fixed list of decline reasons and lets him pick. What matters: <strong>which reasons are visible</strong>, that they read as neutral options, and that their <strong>order is randomised</strong> so a reason isn't chosen just for sitting on top. He taps the one that fits — here, <strong>"Location is Far"</strong>. Nothing is interpreted yet; that starts at Step 2.</p>
-          <div class="callout" style="margin-top:14px"><h4>More →</h4><p style="font-size:13px">The full reason-set design (the finalised six, and what was kept / removed / added) is in the <a href="#reason-set" style="color:var(--sys-ink)">archive</a> and the signed-off <a href="https://ashish-raj-wiom.github.io/decline-reason-set-prd/" style="color:var(--sys-ink)">Reason Set PRD</a>.</p></div>
+          <div class="callout" style="margin-top:14px"><h4>More →</h4><p style="font-size:13px">The finalised six reasons, and what was kept / removed / added, are in the signed-off <a href="https://ashish-raj-wiom.github.io/decline-reason-set-prd/" style="color:var(--sys-ink)">Reason Set PRD</a>.</p></div>
         </div>
       </div>
 
@@ -630,68 +626,6 @@
   </div>
 </section>
 
-<!-- ARCHIVE -->
-<section id="archive">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow">Archive · out of current scope</span>
-      <h2>Parked for later</h2>
-      <p>Location is Far is specced fully (go-live expected 19 Aug). The material below is extra depth kept for reference — the finalised reason list, capture ideas, and the per-reason detail behind the table above. The same four-step spine applies to every reason.</p>
-    </div>
-
-    <details class="archive" id="reason-set" open>
-      <summary><span class="tag">Reason-set</span> The finalised reason list (signed off) <span class="chev">›</span></summary>
-      <div class="archbody">
-        <p style="font-size:13.8px; margin-top:12px">The shared decline / install-failure list was cleaned up and <strong>signed off</strong> (see the <a href="https://ashish-raj-wiom.github.io/decline-reason-set-prd/" style="color:var(--sys-ink)">Reason Set PRD</a>). What changed from the old list: the redundant "network setup not possible" was <strong>removed</strong> (folds into Location is Far); the old "price" reason folds into "the customer said no"; "could not be scheduled" was dropped; "address" and "no technician" were <strong>added</strong>; order is randomised each render with "Another reason" pinned last.</p>
-
-        <h4 style="margin:18px 0 8px; color:var(--ink)">The finalised list</h4>
-        <div class="rlist" style="max-width:540px">
-          <div class="rt">Why can't you install this?</div>
-          <div class="rrow"><span class="rd"></span>Location is Far <span class="sh">≈65%</span></div>
-          <div class="rrow"><span class="rd"></span>The customer said no</div>
-          <div class="rrow"><span class="rd"></span>I don't have a device right now</div>
-          <div class="rrow"><span class="rd"></span>I couldn't understand the address <span class="sh">new</span></div>
-          <div class="rrow"><span class="rd"></span>No one free to install it &nbsp;·&nbsp; ladka nahi hai <span class="sh">new</span></div>
-          <div class="rrow"><span class="rd"></span>Another reason — tell us more <span class="sh">free text · pinned last</span></div>
-        </div>
-        <p style="font-size:12.5px; color:var(--muted); margin-top:9px">Exact English / Hindi copy lives in Figma; the list is config-driven and add-only. <strong>"No one free to install it"</strong> can hand off to the Availability service — prompting the CSP to pause installs for the day.</p>
-      </div>
-    </details>
-
-    <details class="archive" style="margin-top:12px">
-      <summary><span class="tag">Reason</span> "Customer refused" — customer-side verification loop <span class="chev">›</span></summary>
-      <div class="archbody">
-        <p style="font-size:13.8px; margin-top:12px">When a CSP says the customer refused, today we don't validate it — we just re-offer to the next CSP, breaking their experience if the first CSP was right. The same spine applies, but the verification and the action live on the <strong>customer side</strong>, not here: this layer would only emit a <em>"customer-refused, needs verification"</em> signal, and the customer-side system owns the contact and the outcome.</p>
-        <div class="brow">
-          <div class="bq">Customer: "Yes, I don't want it"</div>
-          <div class="bans stop"><div class="act">▣ Cancel &amp; stop routing</div><p>CSP was right. Customer-side cancels + fast-refunds; no other CSP wastes a visit.</p></div>
-        </div>
-        <div class="brow">
-          <div class="bq">Customer: "No, I do want it"</div>
-          <div class="bans go"><div class="act">▶ Keep routing + record</div><p>Booking stays alive. The disproven claim is recorded for Quality to evaluate — never surfaced to the CSP as a strike.</p></div>
-        </div>
-        <div class="brow">
-          <div class="bq">Customer: no response</div>
-          <div class="bans hold"><div class="act">◷ As usual</div><p>No new information — fall back to today's behaviour. We lose nothing.</p></div>
-        </div>
-      </div>
-    </details>
-
-    <details class="archive" style="margin-top:12px">
-      <summary><span class="tag">Capture · TBD</span> Voice recording on decline <span class="chev">›</span></summary>
-      <div class="archbody">
-        <p style="font-size:13.8px; margin-top:12px">Optional short voice note at decline — the rawest signal, a fallback for when the fixed list still misses the nuance. Mined for themes that graduate into the taxonomy. Rollout timing TBD.</p>
-      </div>
-    </details>
-
-    <details class="archive" style="margin-top:12px">
-      <summary><span class="tag">Analysis</span> Where does the CSP actually install? (offline) <span class="chev">›</span></summary>
-      <div class="archbody">
-        <p style="font-size:13.8px; margin-top:12px">A separate offline analysis of existing install data — which attributes move install probability (zone, distance, address quality, plan, tenure, nearby density) across cuts. Not part of the live loop; findings feed serviceability (Genie) — the same target as Step 4.</p>
-      </div>
-    </details>
-  </div>
-</section>
 
 <footer>
   <div class="wrap">
