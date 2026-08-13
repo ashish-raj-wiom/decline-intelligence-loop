@@ -389,9 +389,9 @@
           <tr>
             <td><b>The customer said no</b></td>
             <td>In the reason list.</td>
-            <td>No CSP-side assist (it's the customer's choice). Capture the deliberate "customer refused"; optional voice note.</td>
-            <td>"Refused, needs verification" → <b>Customer-side / CRM</b>.</td>
-            <td>Customer-side calls to verify: confirmed → cancel + stop routing; disproven → keep routing, record for Quality (never a CSP strike).</td>
+            <td>Show a confirm — we'll check this with the customer; if the CSP confirms, mark the deliberate decline.</td>
+            <td>"Customer refused, verify" → <b>Customer backend</b>.</td>
+            <td>Customer backend verifies with the customer. <b>True</b> → cancels the booking + refunds (it owns the workflow). <b>False</b> → signals back to the CSP that his decline was not correct.</td>
             <td><span class="vtag new">proposed</span></td>
           </tr>
           <tr>
