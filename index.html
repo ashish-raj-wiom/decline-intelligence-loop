@@ -317,11 +317,11 @@
   <div class="wrap">
     <div class="kick"><span class="dot"></span><span class="eyebrow">CSP Decline Intelligence · the self-learning loop · every reason</span></div>
     <h1>Send each CSP only the bookings<br>he'll actually install</h1>
-    <p class="lede">When a CSP won't install a booking, he tells us <b>why</b> — and today we throw that reason away and re-offer blindly, often to the wrong CSP again. This turns <b>every decline reason</b> into a <b>self-learning loop</b>: show the reason in context, assist the CSP so his answer is deliberate, capture it, <b>send a clean signal to the service that owns that problem</b>, and let that service build the consequence. One spine, <b>four steps</b>, applied to every reason — and we've specced the biggest reason, <b>"Location is Far"</b>, first, end-to-end (go-live expected 14 Aug).</p>
+    <p class="lede">When a CSP won't install a booking, he tells us <b>why</b> — and today we throw that reason away and re-offer blindly, often to the wrong CSP again. This turns <b>every decline reason</b> into a <b>self-learning loop</b>: show the reason in context, assist the CSP so his answer is deliberate, capture it, <b>send a clean signal to the service that owns that problem</b>, and let that service build the consequence. One spine, <b>four steps</b>, applied to every reason — and we've specced the biggest reason, <b>"Location is Far"</b>, first, end-to-end (go-live expected 19 Aug).</p>
     <div class="metastrip">
       <span><b>Spine:</b> Show → Assist/Verify &amp; Capture → Emit Signal → Build Consequence</span>
       <span><b>Reasons:</b> 6 finalised · Location is Far ≈ 65% of declines</span>
-      <span><b>First in line:</b> <a href="https://ashish-raj-wiom.github.io/coverage-decline-assist-prd/" style="color:var(--sys-ink)">CSP PRD</a> · <a href="https://ashish-raj-wiom.github.io/genie-coverage-integration-prd/" style="color:var(--sys-ink)">Genie PRD</a> (signed off · go-live 14 Aug)</span>
+      <span><b>First in line:</b> <a href="https://ashish-raj-wiom.github.io/coverage-decline-assist-prd/" style="color:var(--sys-ink)">CSP PRD</a> · <a href="https://ashish-raj-wiom.github.io/genie-coverage-integration-prd/" style="color:var(--sys-ink)">Genie PRD</a> (signed off · go-live 19 Aug)</span>
       <span><b>Status:</b> concept for review</span>
     </div>
   </div>
@@ -410,7 +410,7 @@
     <div class="sec-head">
       <span class="eyebrow">Breadth first · every reason × the four steps</span>
       <h2>What we do for each reason</h2>
-      <p>The plan for all six reasons on one page. <strong>Location is Far</strong> is signed off, with go-live expected <strong>14 Aug</strong>; the rest are the roadmap — same spine, different owning service. <strong>Who owns the consequence</strong> is the real difference between reasons.</p>
+      <p>The plan for all six reasons on one page. <strong>Location is Far</strong> is signed off, with go-live expected <strong>19 Aug</strong>; the rest are the roadmap — same spine, different owning service. <strong>Who owns the consequence</strong> is the real difference between reasons.</p>
     </div>
     <div class="twrap">
       <table class="rxtab">
@@ -433,7 +433,7 @@
             </td>
             <td class="emit">Point-level signal — connection + customer, CSP, rejected points.<br><span class="own g">→ Genie</span></td>
             <td class="cons">De-lists the point → not a candidate for nearby bookings → DAS stops routing them to him.<br><span class="own g">Genie</span></td>
-            <td><span class="vtag keep">go-live 14&nbsp;Aug</span></td>
+            <td><span class="vtag keep">go-live 1914&nbsp;Augnbsp;Aug</span></td>
           </tr>
           <tr>
             <td class="reason"><b>The customer said no</b></td>
@@ -468,7 +468,7 @@
         </tbody>
       </table>
     </div>
-    <p style="font-size:12.8px; color:var(--muted); margin-top:12px"><strong>Location is Far</strong> is signed off (go-live 14 Aug) and <strong>"the customer said no"</strong> is proposed — only these two loops are decided. The other four are <strong>not proposed yet</strong>; blank cells mean the loop hasn't been designed. Flowcharts show the if / else branches.</p>
+    <p style="font-size:12.8px; color:var(--muted); margin-top:12px"><strong>Location is Far</strong> is signed off (go-live 19 Aug) and <strong>"the customer said no"</strong> is proposed — only these two loops are decided. The other four are <strong>not proposed yet</strong>; blank cells mean the loop hasn't been designed. Flowcharts show the if / else branches.</p>
   </div>
 </section>
 
@@ -593,7 +593,7 @@
     <div class="sec-head">
       <span class="eyebrow">Archive · out of current scope</span>
       <h2>Parked for later</h2>
-      <p>Location is Far is specced fully (go-live expected 14 Aug). The material below is extra depth kept for reference — the finalised reason list, capture ideas, and the per-reason detail behind the table above. The same four-step spine applies to every reason.</p>
+      <p>Location is Far is specced fully (go-live expected 19 Aug). The material below is extra depth kept for reference — the finalised reason list, capture ideas, and the per-reason detail behind the table above. The same four-step spine applies to every reason.</p>
     </div>
 
     <details class="archive" id="reason-set" open>
@@ -652,7 +652,7 @@
 
 <footer>
   <div class="wrap">
-    <p><strong>Decline Intelligence — every reason, one 4-step loop.</strong> Concept built on the CSP decline analysis (Jun–Aug 2026). The spine — Show → Assist/Verify &amp; Capture → Emit Signal → Build Consequence — applies to all six reasons; <strong>Location is Far</strong> (~65% of declines) is signed off (CSP + Genie PRDs), go-live expected 14 Aug. This is a capture + system-of-record layer; Genie, the customer-side, Supply, Availability and Analytics act on the signals it publishes. Owning services for the five non-built reasons are proposed, for discussion. Ashish Raj.</p>
+    <p><strong>Decline Intelligence — every reason, one 4-step loop.</strong> Concept built on the CSP decline analysis (Jun–Aug 2026). The spine — Show → Assist/Verify &amp; Capture → Emit Signal → Build Consequence — applies to all six reasons; <strong>Location is Far</strong> (~65% of declines) is signed off (CSP + Genie PRDs), go-live expected 19 Aug. This is a capture + system-of-record layer; Genie, the customer-side, Supply, Availability and Analytics act on the signals it publishes. Owning services for the five non-built reasons are proposed, for discussion. Ashish Raj.</p>
   </div>
 </footer>
 
