@@ -442,8 +442,8 @@
             <td>Show a confirm — "we'll check this with the customer". On his confirm, mark the deliberate decline.</td>
             <td class="emit">"Customer refused, verify".<br><span class="own">→ Customer backend</span></td>
             <td class="cons"><pre class="mermaid">flowchart TD
-  V["Backend verifies"] -->|"True"| C["Cancel booking + refund"]
-  V -->|"False"| W["Signal back: CSP was wrong"]</pre><span class="own">Customer backend</span></td>
+  V["Ask the customer — chat/call/IVR/WhatsApp"] -->|"Doesn't want it"| C["Cancel booking + refund"]
+  V -->|"Wants it"| W["Keep · signal CSP was wrong"]</pre><span class="own">Customer backend</span></td>
             <td><span class="vtag new">proposed</span></td>
           </tr>
           <tr>
@@ -623,11 +623,11 @@
 
           <div class="step act"><div class="mk">4</div><div class="body">
             <div class="lbl">Analyse &amp; Build Consequence</div>
-            <h3>Customer backend verifies with the customer <span class="owner genie">Customer backend acts</span></h3>
-            <p>The customer backend contacts the customer and acts on the answer:</p>
+            <h3>Ask the customer — he decides <span class="owner genie">Customer backend owns it</span></h3>
+            <p>The customer is asked — via <strong>chat / call / IVR / WhatsApp</strong>, whichever the customer side finds fit — whether he wants the installation done. His answer decides:</p>
             <pre class="mermaid">flowchart TD
-  V["Customer backend verifies with the customer"] -->|"True — didn't want it"| C["Cancel booking + refund"]
-  V -->|"False — does want it"| W["Keep booking · signal back that the CSP was wrong"]</pre>
+  V["Ask the customer — chat / call / IVR / WhatsApp"] -->|"Doesn't want it"| C["Cancel booking + refund"]
+  V -->|"Wants it"| W["Keep booking · signal back that the CSP was wrong"]</pre>
           </div></div>
 
         </div>
