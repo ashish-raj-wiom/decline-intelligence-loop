@@ -253,6 +253,11 @@
   table.rxtab th.reason{width:10%} table.rxtab th.kshow{width:10%}
   table.rxtab th.kcap{width:30%} table.rxtab th.kemit{width:14%} table.rxtab th.kcons{width:24%}
   table.rxtab td{font-size:13.3px}
+  /* leadership one-pager: roadmap table + problem/objective/guardrail cards */
+  table.rmap td:first-child, table.rmap th:first-child{width:34px; text-align:center; color:var(--muted); font-variant-numeric:tabular-nums}
+  table.rmap td{font-size:13.3px}
+  #onepager .grid3 .card h3{font-size:14px; margin-bottom:6px}
+  #onepager .grid3 .card p{font-size:13.3px; max-width:none}
 
   /* interactive reason explorer */
   .rx{margin-top:6px}
@@ -315,32 +320,48 @@
 
 <header class="hero">
   <div class="wrap">
-    <div class="kick"><span class="dot"></span><span class="eyebrow">CSP Decline Intelligence · the self-learning loop · every reason</span></div>
+    <div class="kick"><span class="dot"></span><span class="eyebrow">Decline Intelligence · one-pager for leadership</span></div>
     <h1>Send each CSP only the bookings<br>he'll actually install</h1>
-    <p class="lede">When a CSP won't install a booking, he tells us <b>why</b> — and today we throw that reason away and re-offer blindly, often to the wrong CSP again. This turns <b>every decline reason</b> into a <b>self-learning loop</b>: show the reason in context, assist the CSP so his answer is deliberate, capture it, <b>send a clean signal to the service that owns that problem</b>, and let that service build the consequence. One spine, <b>four steps</b>, applied to every reason — and we've specced the biggest reason, <b>"Location is Far"</b>, first, end-to-end (go-live expected 19 Aug).</p>
+    <p class="lede">Turn <b>every decline reason</b> into a <b>self-learning loop</b> — capture the reason in context, send a clean signal to the service that owns that problem, and let it fix the root cause. <b>Each reason is a roadmap item</b>; we start by cleaning up the reason list itself.</p>
     <div class="metastrip">
       <span><b>Spine:</b> Show → Assist/Verify &amp; Capture → Emit Signal → Analyse &amp; Build Consequence</span>
-      <span><b>Reasons:</b> 6 finalised · Location is Far ≈ 65% of declines</span>
-      <span><b>First in line:</b> <a href="https://ashish-raj-wiom.github.io/coverage-decline-assist-prd/" style="color:var(--sys-ink)">CSP PRD</a> · <a href="https://ashish-raj-wiom.github.io/genie-coverage-integration-prd/" style="color:var(--sys-ink)">Genie PRD</a> (signed off · go-live 19 Aug)</span>
-      <span><b>Status:</b> concept for review</span>
+      <span><b>First live:</b> Location is Far (≈65% of declines) · go-live 19 Aug</span>
+      <span><b>Status:</b> for leadership review</span>
     </div>
   </div>
 </header>
 
 <main>
 
-<!-- WHY / OBJECTIVE -->
-<section id="why">
+<!-- ONE-PAGER (leadership) -->
+<section id="onepager">
   <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow">Why we're doing this</span>
-      <h2>The objective</h2>
-      <p>Across every reason, the goal is to <strong>send only quality, serviceable bookings to the CSP and filter out the clutter</strong> — automatically, by learning from every decline. Each reason feeds the service that can fix it, so the wrong bookings stop arriving.</p>
+    <div class="grid3">
+      <div class="card csp"><h3>Problem</h3><p>When a CSP declines a booking he tells us <em>why</em> — but today we throw that reason away and re-offer blindly, often to the wrong CSP again. Bookings bounce through re-offers until they time out, and the customer waits days to get online.</p></div>
+      <div class="card sys"><h3>Objective</h3><p>Send only quality, <strong>serviceable</strong> bookings to each CSP — automatically, by learning from every decline. Each reason feeds the service that can fix it, so the wrong bookings stop arriving.</p></div>
+      <div class="card learn"><h3>Guardrail</h3><p>This layer only <strong>captures &amp; emits signals</strong> — it never routes, cancels, refunds or de-lists. The owning service (Genie, Customer backend, Ops…) acts. Only data the CSP was shown is used, and he is <strong>never blocked</strong> from declining.</p></div>
     </div>
-    <div class="callout good">
-      <h4>How this helps the customer</h4>
-      <p>A customer in a genuinely-serviced area stops being sent to a CSP who'll refuse them. Their booking lands on a CSP who <em>will</em> install — first time — instead of bouncing through re-offers until it times out. The loop's payoff is not a cleaner dashboard; it's a customer who waits days less to get online.</p>
+
+    <div class="sec-head" style="margin-top:38px">
+      <span class="eyebrow">Roadmap · each reason is an item</span>
+      <h2>Roadmap</h2>
+      <p>Clean up the reason list first, then build the loop reason by reason — biggest first. Click a row for its detail.</p>
     </div>
+    <div class="twrap">
+      <table class="rmap">
+        <thead><tr><th>#</th><th>Roadmap item</th><th>What it delivers</th><th>Signal → owner</th><th>Status</th><th>Details</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td><b>Improve the reasons list</b></td><td>Redefine the decline reasons — drop redundant ones, add "address" &amp; "no technician", randomise the order.</td><td>—</td><td><span class="vtag keep">signed off</span></td><td><a href="https://ashish-raj-wiom.github.io/decline-reason-set-prd/" style="color:var(--sys-ink)">Reason Set PRD ↗</a></td></tr>
+          <tr><td>2</td><td><b>Location is Far</b></td><td>Show his nearby points; capture the deliberate decline + the points he rejects.</td><td>Genie</td><td><span class="vtag keep">go-live 19&nbsp;Aug</span></td><td><a href="#wex-far" style="color:var(--sys-ink)">Details ↓</a></td></tr>
+          <tr><td>3</td><td><b>The customer said no</b></td><td>Confirm with the CSP; the customer decides via chat / call / IVR / WhatsApp.</td><td>Customer backend</td><td><span class="vtag new">proposed</span></td><td><a href="#wex-cust" style="color:var(--sys-ink)">Details ↓</a></td></tr>
+          <tr><td>4</td><td><b>I don't have a device</b></td><td>Branch on inventory — order nudge / inventory audit; Ops updates his stock.</td><td>Ops / ACS</td><td><span class="vtag new">proposed</span></td><td><a href="#reasons-table" style="color:var(--sys-ink)">Details ↓</a></td></tr>
+          <tr><td>5</td><td><b>Couldn't understand the address</b></td><td>—</td><td>—</td><td><span class="vtag tbd">not proposed yet</span></td><td>—</td></tr>
+          <tr><td>6</td><td><b>No one free to install</b></td><td>—</td><td>—</td><td><span class="vtag tbd">not proposed yet</span></td><td>—</td></tr>
+          <tr><td>7</td><td><b>Another reason</b></td><td>—</td><td>—</td><td><span class="vtag tbd">not proposed yet</span></td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:12.5px; color:var(--muted); margin-top:12px">Below this one-pager: the four-step loop, what we do for each reason, and the full worked examples.</p>
   </div>
 </section>
 
