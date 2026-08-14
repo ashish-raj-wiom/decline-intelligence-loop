@@ -249,9 +249,9 @@
   table.rxtab .mermaid{margin:4px 0 6px; text-align:left}
   table.rxtab .mermaid svg{max-width:100% !important; height:auto}
   /* let the reason table use the full real-estate, not the 1000px column */
-  #reasons-table > .wrap{max-width:1500px}
-  table.rxtab th.reason{width:10%} table.rxtab th.kshow{width:10%}
-  table.rxtab th.kcap{width:30%} table.rxtab th.kemit{width:14%} table.rxtab th.kcons{width:24%}
+  #onepager > .wrap{max-width:1500px}
+  table.rxtab th.reason{width:10%} table.rxtab th.kshow{width:9%}
+  table.rxtab th.kcap{width:21%} table.rxtab th.kemit{width:12%} table.rxtab th.kcons{width:19%} table.rxtab th.kmetric{width:17%}
   table.rxtab td{font-size:13.3px}
   /* leadership one-pager: roadmap table + problem/objective/guardrail cards */
   table.rmap td:first-child, table.rmap th:first-child{width:34px; text-align:center; color:var(--muted); font-variant-numeric:tabular-nums}
@@ -342,26 +342,99 @@
       <div class="card learn"><h3>Guardrail</h3><p>This layer only <strong>captures &amp; emits signals</strong> — it never routes, cancels, refunds or de-lists. The owning service (Genie, Customer backend, Ops…) acts. Only data the CSP was shown is used, and he is <strong>never blocked</strong> from declining.</p></div>
     </div>
 
-    <div class="sec-head" style="margin-top:38px">
+    <div class="sec-head" style="margin-top:36px; margin-bottom:12px">
+      <span class="eyebrow">The loop · four steps, every reason</span>
+      <h2 style="font-size:21px">How the loop works</h2>
+    </div>
+    <div class="loop">
+      <div class="node s1"><div class="n">Step 1 · Show</div><h4>Reason in context</h4><p>The CSP picks a reason from the fixed list.</p></div>
+      <div class="node s2"><div class="n">Step 2 · Assist &amp; Capture</div><h4>Make it deliberate</h4><p>Show what we know, let him decide, capture the outcome — the assist is the check.</p></div>
+      <div class="node s3"><div class="n">Step 3 · Emit Signal</div><h4>Send to the owner</h4><p>Push one clean signal to the service that owns that problem. We inform, not act.</p></div>
+      <div class="node s4"><div class="n">Step 4 · Analyse &amp; Build</div><h4>The owner acts</h4><p>That service analyses the signals and changes behaviour so the clutter stops.</p></div>
+    </div>
+    <div class="loopback"><span class="ico">↻</span><span><b>Self-learning:</b> each captured reason teaches the service that owns it, so the clutter the CSP used to decline stops arriving.</span></div>
+
+    <div class="callout good" style="margin-top:22px">
+      <h4>Foundation · Improve the reasons list &nbsp;<span class="vtag keep">signed off</span></h4>
+      <p>Before the per-reason loops, the decline reason set itself was redefined and signed off — drop redundant reasons, add "address" &amp; "no technician", randomise the order. <a href="https://ashish-raj-wiom.github.io/decline-reason-set-prd/" style="color:var(--sys-ink)">Reason Set PRD ↗</a></p>
+    </div>
+
+    <div class="sec-head" style="margin-top:30px">
       <span class="eyebrow">Roadmap · each reason is an item</span>
-      <h2>Roadmap</h2>
-      <p>Clean up the reason list first, then build the loop reason by reason — biggest first. Click a row for its detail.</p>
+      <h2>Roadmap — every reason, four steps, metrics</h2>
+      <p>Built biggest-first. Reasons with a "Details ↓" link have a full worked example below.</p>
     </div>
     <div class="twrap">
-      <table class="rmap">
-        <thead><tr><th>#</th><th>Roadmap item</th><th>What it delivers</th><th>Signal → owner</th><th>Status</th><th>Details</th></tr></thead>
+      <table class="rxtab">
+        <thead><tr>
+          <th class="reason">Reason</th>
+          <th class="kshow">1 · Show</th>
+          <th class="kcap">2 · Assist &amp; Capture</th>
+          <th class="kemit">3 · Emit → owner</th>
+          <th class="kcons">4 · Analyse &amp; build</th>
+          <th class="kmetric">Metrics we track</th>
+          <th>Status</th>
+        </tr></thead>
         <tbody>
-          <tr><td>1</td><td><b>Improve the reasons list</b></td><td>Redefine the decline reasons — drop redundant ones, add "address" &amp; "no technician", randomise the order.</td><td>—</td><td><span class="vtag keep">signed off</span></td><td><a href="https://ashish-raj-wiom.github.io/decline-reason-set-prd/" style="color:var(--sys-ink)">Reason Set PRD ↗</a></td></tr>
-          <tr><td>2</td><td><b>Location is Far</b></td><td>Show his nearby points; capture the deliberate decline + the points he rejects.</td><td>Genie</td><td><span class="vtag keep">go-live 19&nbsp;Aug</span></td><td><a href="#wex-far" style="color:var(--sys-ink)">Details ↓</a></td></tr>
-          <tr><td>3</td><td><b>The customer said no</b></td><td>Confirm with the CSP; the customer decides via chat / call / IVR / WhatsApp.</td><td>Customer backend</td><td><span class="vtag new">proposed</span></td><td><a href="#wex-cust" style="color:var(--sys-ink)">Details ↓</a></td></tr>
-          <tr><td>4</td><td><b>I don't have a device</b></td><td>Branch on inventory — order nudge / inventory audit; Ops updates his stock.</td><td>Ops / ACS</td><td><span class="vtag new">proposed</span></td><td><a href="#reasons-table" style="color:var(--sys-ink)">Details ↓</a></td></tr>
-          <tr><td>5</td><td><b>Couldn't understand the address</b></td><td>—</td><td>—</td><td><span class="vtag tbd">not proposed yet</span></td><td>—</td></tr>
-          <tr><td>6</td><td><b>No one free to install</b></td><td>—</td><td>—</td><td><span class="vtag tbd">not proposed yet</span></td><td>—</td></tr>
-          <tr><td>7</td><td><b>Another reason</b></td><td>—</td><td>—</td><td><span class="vtag tbd">not proposed yet</span></td><td>—</td></tr>
+          <tr class="hi">
+            <td class="reason"><b>Location is Far</b><br><a href="#wex-far" style="font-size:11px; color:var(--sys-ink)">Details ↓</a></td>
+            <td>Reason list → run the intercept.</td>
+            <td>Show his nearby points; capture the outcome:
+              <pre class="mermaid">flowchart TD
+  S["Show nearby points"] -->|"OK, I'll connect"| N["No decline · no signal"]
+  S -->|"I won't connect"| Y["Capture + push to Genie"]</pre>
+            </td>
+            <td class="emit">Point-level signal — connection + customer, CSP, rejected points.<br><span class="own g">→ Genie</span></td>
+            <td class="cons">De-lists the point → not a candidate for nearby bookings → DAS stops routing them to him.<br><span class="own g">Genie</span></td>
+            <td>Signal integrity (100% of deliberate declines emit a valid signal); first-CSP "too far" declines ↓; coverage-decline share ↓; prevented mis-routes.</td>
+            <td><span class="vtag keep">go-live 19&nbsp;Aug</span></td>
+          </tr>
+          <tr>
+            <td class="reason"><b>The customer said no</b><br><a href="#wex-cust" style="font-size:11px; color:var(--sys-ink)">Details ↓</a></td>
+            <td>Reason list.</td>
+            <td>Show a confirm — "we'll check this with the customer". On his confirm, mark the deliberate decline.</td>
+            <td class="emit">"Customer refused, verify".<br><span class="own">→ Customer backend</span></td>
+            <td class="cons"><pre class="mermaid">flowchart TD
+  V["Ask the customer — chat/call/IVR/WhatsApp"] -->|"Doesn't want it"| C["Cancel booking + refund"]
+  V -->|"Wants it"| W["Keep · signal CSP was wrong"]</pre><span class="own">Customer backend</span></td>
+            <td>Refusals verified with the customer; cancel-vs-keep split; false-decline rate (customer actually wanted it).</td>
+            <td><span class="vtag new">proposed</span></td>
+          </tr>
+          <tr>
+            <td class="reason"><b>I don't have a device</b></td>
+            <td>Reason list.</td>
+            <td>Branch on the system's device count:
+              <pre class="mermaid">flowchart TD
+  A["Check system inventory"] -->|"0 available"| B["Register decline + nudge to order (opens ordering flow)"]
+  A -->|"1+ available"| C["Show devices — has them?"]
+  C -->|"Yes"| D["No decline"]
+  C -->|"No"| E["Register decline + 'we'll audit your inventory'"]</pre>
+            </td>
+            <td class="emit">Order / inventory-mismatch signal.<br><span class="own">→ Ops / ACS</span></td>
+            <td class="cons">Ops talks with the CSP and updates his inventory.<br><span class="own">Ops / ACS</span></td>
+            <td>Inventory-mismatch rate (system stock vs reality); order-nudge conversion; device declines ↓ after fixes.</td>
+            <td><span class="vtag new">proposed</span></td>
+          </tr>
+          <tr>
+            <td class="reason"><b>Couldn't understand address</b></td>
+            <td></td><td></td><td class="emit"></td><td class="cons"></td><td></td>
+            <td><span class="vtag tbd">not proposed yet</span></td>
+          </tr>
+          <tr>
+            <td class="reason"><b>No one free to install</b></td>
+            <td></td><td></td><td class="emit"></td><td class="cons"></td><td></td>
+            <td><span class="vtag tbd">not proposed yet</span></td>
+          </tr>
+          <tr>
+            <td class="reason"><b>Another reason</b></td>
+            <td></td><td></td><td class="emit"></td><td class="cons"></td><td></td>
+            <td><span class="vtag tbd">not proposed yet</span></td>
+          </tr>
         </tbody>
       </table>
     </div>
-    <p style="font-size:12.5px; color:var(--muted); margin-top:12px">Below this one-pager: the four-step loop, what we do for each reason, and the full worked examples.</p>
+    <p style="font-size:12.8px; color:var(--muted); margin-top:12px"><strong>Location is Far</strong> is signed off (go-live 19 Aug); <strong>"the customer said no"</strong> and <strong>"I don't have a device"</strong> are proposed. The other three are <strong>not proposed yet</strong> — blank cells mean the loop hasn't been designed; metrics for proposed reasons are indicative.</p>
+    <p style="font-size:12.5px; color:var(--muted); margin-top:8px"><strong>Dependency (device):</strong> a parallel feature that <strong>stops sending bookings to a CSP with 0 devices</strong> is under development. If it ships first, the "0 available" branch won't trigger — but this story still handles that case as a fallback.</p>
   </div>
 </section>
 
@@ -408,101 +481,7 @@
   </div>
 </section>
 
-<!-- LOOP -->
-<section id="loop">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow">The loop in one picture · any reason</span>
-      <h2>Four steps, every reason, all the way around</h2>
-      <p>Every decline reason runs the same spine. Verification isn't a separate step — for most reasons the <em>assist</em> (showing the CSP what we already know) is the check, so there's <strong>no Ops-calling layer</strong> for Location is Far. It only counts as built when it runs end-to-end: from the CSP's tap to the owning service building the consequence.</p>
-    </div>
-    <div class="loop">
-      <div class="node s1"><div class="n">Step 1 · Show</div><h4>Reason in context</h4><p>Surface the fixed reason list at the decline / install-failure moment; the CSP picks the one that fits.</p></div>
-      <div class="node s2"><div class="n">Step 2 · Assist / Verify &amp; Capture</div><h4>Make the answer deliberate</h4><p>Show him what we already know, let him decide, verify by that assist (no Ops layer), and capture the decision + its data.</p></div>
-      <div class="node s3"><div class="n">Step 3 · Emit Signal</div><h4>Send to the owning service</h4><p>Push one clean, self-describing signal to the service that owns that problem. We don't act — we inform.</p></div>
-      <div class="node s4"><div class="n">Step 4 · Analyse &amp; Build Consequence</div><h4>The owner acts</h4><p>The owning service analyses the signals and, past a threshold, changes behaviour so the CSP stops getting that kind of clutter.</p></div>
-    </div>
-    <div class="loopback"><span class="ico">↻</span><span><b>The self-learning loop:</b> each captured reason teaches the service that owns it, so the clutter the CSP used to decline stops arriving — fewer bad offers → fewer declines → a cleaner supply map every month.</span></div>
-  </div>
-</section>
 
-<!-- EVERY REASON × 4 STEPS -->
-<section id="reasons-table">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow">Breadth first · every reason × the four steps</span>
-      <h2>What we do for each reason</h2>
-      <p>The plan for all six reasons on one page. <strong>Location is Far</strong> is signed off, with go-live expected <strong>19 Aug</strong>; the rest are the roadmap — same spine, different owning service. <strong>Who owns the consequence</strong> is the real difference between reasons.</p>
-    </div>
-    <div class="twrap">
-      <table class="rxtab">
-        <thead><tr>
-          <th class="reason">Reason</th>
-          <th class="kshow">1 · Show</th>
-          <th class="kcap">2 · Assist &amp; Capture</th>
-          <th class="kemit">3 · Emit signal</th>
-          <th class="kcons">4 · Analyse &amp; build consequence</th>
-          <th>Status</th>
-        </tr></thead>
-        <tbody>
-          <tr class="hi">
-            <td class="reason"><b>Location is Far</b></td>
-            <td>Reason list → run the intercept.</td>
-            <td>Show his nearby active / splitter points; on his choice, capture the outcome:
-              <pre class="mermaid">flowchart TD
-  S["Show nearby points"] -->|"OK, I'll connect"| N["No decline · no signal"]
-  S -->|"I won't connect"| Y["Capture + push to Genie"]</pre>
-            </td>
-            <td class="emit">Point-level signal — connection + customer, CSP, rejected points.<br><span class="own g">→ Genie</span></td>
-            <td class="cons">De-lists the point → not a candidate for nearby bookings → DAS stops routing them to him.<br><span class="own g">Genie</span></td>
-            <td><span class="vtag keep">go-live 19&nbsp;Aug</span></td>
-          </tr>
-          <tr>
-            <td class="reason"><b>The customer said no</b></td>
-            <td>Reason list.</td>
-            <td>Show a confirm — "we'll check this with the customer". On his confirm, mark the deliberate decline.</td>
-            <td class="emit">"Customer refused, verify".<br><span class="own">→ Customer backend</span></td>
-            <td class="cons"><pre class="mermaid">flowchart TD
-  V["Ask the customer — chat/call/IVR/WhatsApp"] -->|"Doesn't want it"| C["Cancel booking + refund"]
-  V -->|"Wants it"| W["Keep · signal CSP was wrong"]</pre><span class="own">Customer backend</span></td>
-            <td><span class="vtag new">proposed</span></td>
-          </tr>
-          <tr>
-            <td class="reason"><b>I don't have a device</b></td>
-            <td>Reason list.</td>
-            <td>Branch on the system's device count for this CSP:
-              <pre class="mermaid">flowchart TD
-  A["Check system inventory"] -->|"0 available"| B["Register decline + nudge to order (opens ordering flow)"]
-  A -->|"1+ available"| C["Show devices — has them?"]
-  C -->|"Yes"| D["No decline"]
-  C -->|"No"| E["Register decline + 'we'll audit your inventory'"]</pre>
-            </td>
-            <td class="emit">Order / inventory-mismatch signal.<br><span class="own">→ Ops / ACS</span></td>
-            <td class="cons">Ops talks with the CSP and updates his inventory.<br><span class="own">Ops / ACS</span></td>
-            <td><span class="vtag new">proposed</span></td>
-          </tr>
-          <tr>
-            <td class="reason"><b>Couldn't understand address</b></td>
-            <td></td><td></td><td class="emit"></td><td class="cons"></td>
-            <td><span class="vtag tbd">not proposed yet</span></td>
-          </tr>
-          <tr>
-            <td class="reason"><b>No one free to install</b></td>
-            <td></td><td></td><td class="emit"></td><td class="cons"></td>
-            <td><span class="vtag tbd">not proposed yet</span></td>
-          </tr>
-          <tr>
-            <td class="reason"><b>Another reason</b></td>
-            <td></td><td></td><td class="emit"></td><td class="cons"></td>
-            <td><span class="vtag tbd">not proposed yet</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <p style="font-size:12.8px; color:var(--muted); margin-top:12px"><strong>Location is Far</strong> is signed off (go-live 19 Aug); <strong>"the customer said no"</strong> and <strong>"I don't have a device"</strong> are proposed. The other three are <strong>not proposed yet</strong> — blank cells mean the loop hasn't been designed. Flowcharts show the if / else branches.</p>
-    <p style="font-size:12.5px; color:var(--muted); margin-top:8px"><strong>Dependency (device):</strong> a parallel feature that <strong>stops sending bookings to a CSP with 0 devices</strong> is under development. If it ships first, the "0 available" branch won't trigger — but this story still handles that case as a fallback.</p>
-  </div>
-</section>
 
 <!-- THE FOUR STEPS -->
 <section id="steps">
