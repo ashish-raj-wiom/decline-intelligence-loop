@@ -264,6 +264,8 @@
   table.rxtab th.reason{width:10%} table.rxtab th.kshow{width:9%}
   table.rxtab th.kcap{width:21%} table.rxtab th.kemit{width:12%} table.rxtab th.kcons{width:19%} table.rxtab th.kmetric{width:17%}
   table.rxtab td{font-size:13.3px}
+  table.rxtab ul.mlist{margin:0; padding-left:1.05em; list-style:disc}
+  table.rxtab ul.mlist li{margin:1px 0}
   /* leadership one-pager: roadmap table + problem/objective/guardrail cards */
   table.rmap td:first-child, table.rmap th:first-child{width:34px; text-align:center; color:var(--muted); font-variant-numeric:tabular-nums}
   table.rmap td{font-size:13.3px}
@@ -402,7 +404,7 @@
             </td>
             <td class="emit">Point-level signal — connection + customer, CSP, rejected points.<br><span class="own g">→ Genie</span></td>
             <td class="cons">De-lists the point → not a candidate for nearby bookings → DAS stops routing them to him.<br><span class="own g">Genie</span></td>
-            <td>Signal integrity (100% of deliberate declines emit a valid signal); first-CSP "too far" declines ↓; coverage-decline share ↓; prevented mis-routes.</td>
+            <td><ul class="mlist"><li>Signal integrity — 100% of deliberate declines emit a valid signal</li><li>First-CSP "too far" declines ↓</li><li>Coverage-decline share ↓</li><li>Prevented mis-routes</li></ul></td>
             <td><span class="vtag keep">go-live 19&nbsp;Aug</span></td>
           </tr>
           <tr>
@@ -413,7 +415,7 @@
             <td class="cons"><pre class="mermaid">flowchart TD
   V["Ask the customer — chat/call/IVR/WhatsApp"] -->|"Doesn't want it"| C["Cancel booking + refund"]
   V -->|"Wants it"| W["Keep · signal CSP was wrong"]</pre><span class="own">Customer backend</span></td>
-            <td>Refusals verified with the customer; cancel-vs-keep split; false-decline rate (customer actually wanted it).</td>
+            <td><ul class="mlist"><li>Refusals verified with the customer</li><li>Cancel-vs-keep split</li><li>False-decline rate (customer actually wanted it)</li></ul></td>
             <td><span class="vtag new">proposed</span></td>
           </tr>
           <tr>
@@ -428,7 +430,7 @@
             </td>
             <td class="emit">Order / inventory-mismatch signal.<br><span class="own">→ Ops / ACS</span></td>
             <td class="cons">Ops talks with the CSP and updates his inventory.<br><span class="own">Ops / ACS</span></td>
-            <td>Inventory-mismatch rate (system stock vs reality); order-nudge conversion; device declines ↓ after fixes.</td>
+            <td><ul class="mlist"><li>Inventory-mismatch rate (system stock vs reality)</li><li>Order-nudge conversion</li><li>Device declines ↓ after fixes</li></ul></td>
             <td><span class="vtag new">proposed</span></td>
           </tr>
           <tr>
@@ -444,7 +446,7 @@
             <td class="cons"><pre class="mermaid">flowchart TD
   A["Booking to route"] -->|"CSP available"| B["Allocate to him"]
   A -->|"CSP unavailable"| C["Skip him · allocate to another CSP"]</pre><span class="own">Availability service → DAS</span><br><span style="color:var(--muted)">(to be built later)</span></td>
-            <td>Availability-marking rate; bookings correctly skipped for unavailable CSPs; "no one free" declines ↓ once availability is honoured.</td>
+            <td><ul class="mlist"><li>Availability-marking rate</li><li>Bookings correctly skipped for unavailable CSPs</li><li>"No one free" declines ↓ once availability is honoured</li></ul></td>
             <td><span class="vtag new">proposed</span></td>
           </tr>
           <tr>
