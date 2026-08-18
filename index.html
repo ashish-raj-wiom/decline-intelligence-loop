@@ -395,13 +395,13 @@
         <tbody>
           <tr class="hi">
             <td class="reason"><b>Location is Far</b><br><a class="detbtn" href="#wex-far">Details</a></td>
-            <td>Reason list → run the intercept.</td>
+            <td>Reason list.</td>
             <td>Show his nearby points; capture the outcome:
               <pre class="mermaid">flowchart TD
-  S["Show nearby points"] -->|"OK, I'll connect"| N["No decline · no signal"]
-  S -->|"I won't connect"| Y["Capture + push to Genie"]</pre>
+  S["Show nearby points"] -->|"OK, I'll connect"| N["No decline · nothing logged"]
+  S -->|"I won't connect"| Y["Capture → write to the decline table"]</pre>
             </td>
-            <td class="emit">Point-level signal — connection + customer, CSP, rejected points.<br><span class="own g">→ Genie</span></td>
+            <td class="emit">Point-level record written to the <b>decline table</b> — connection + customer, CSP, rejected points.<br><span class="own g">→ Genie reads</span></td>
             <td class="cons">De-lists the point → not a candidate for nearby bookings → DAS stops routing them to him.<br><span class="own g">Genie</span></td>
             <td><ul class="mlist"><li>Signal integrity — 100% of deliberate declines emit a valid signal</li><li>"Too far" declines ↓ (across all attempts)</li><li>Fewer re-routes to first acceptance</li><li>Prevented mis-routes</li></ul></td>
             <td><span class="vtag keep">go-live 21&nbsp;Aug</span></td>
@@ -580,7 +580,7 @@
         <div class="body">
           <div class="lbl">Assist / Verify &amp; Capture</div>
           <h3>Make the decline deliberate — and capture the points he's rejecting <span class="owner here">this layer</span></h3>
-          <p>Before the decline is finalised we show the CSP what we already know: he has <strong>active connections a few doors away</strong>. That assist <em>is</em> the verification — our own data is already in front of him, so there's <strong>no Ops-calling layer</strong> for this reason. If he backs off, a false decline never happens. If he still declines, we capture two things — the <strong>deliberate decision</strong> ("I won't serve here") and <strong>the exact points we showed him</strong>, in order, that he's rejecting. Only a point he was actually shown can ever be sent on.</p>
+          <p>Before the decline is finalised we show the CSP what we already know: he has <strong>active connections a few doors away</strong>. That assist <em>is</em> the verification — our own data is already in front of him, so there's <strong>no Ops-calling layer</strong> for this reason. If he backs off, a false decline never happens. If he still declines, we capture two things — the <strong>deliberate decision</strong> ("I won't serve here") and <strong>the exact points we showed him</strong>, in order, that he's rejecting. Only a point he was actually shown can ever be logged.</p>
           <div class="grid2" style="margin-top:15px; align-items:start">
             <div>
             <div class="interrupt">
@@ -600,10 +600,10 @@
             <div>
               <h4 style="color:var(--ink); margin-bottom:7px">What we record</h4>
               <div class="card" style="padding:14px 16px">
-                <p style="font-size:13.3px; margin-bottom:8px"><strong>"OK, I'll connect"</strong> → decline avoided. The booking stays with him; no signal sent. The back-off is logged for measurement.</p>
+                <p style="font-size:13.3px; margin-bottom:8px"><strong>"OK, I'll connect"</strong> → decline avoided. The booking stays with him; no decline is recorded. The back-off is logged for measurement.</p>
                 <p style="font-size:13.3px"><strong>"I won't be able to connect"</strong> → a <em>deliberate</em> decline. We record it and the <strong>points shown</strong>, in order, as the ones he rejects — and the booking is removed with a confirmation.</p>
               </div>
-              <div class="callout" style="margin-top:12px"><p style="font-size:12.8px">Showing the neighbours turns a careless tap into a high-confidence claim — the cheapest false-decline filter there is, and no human check needed. If no points come back in time, the decline still completes but <strong>no signal is sent</strong> (no informed decision).</p></div>
+              <div class="callout" style="margin-top:12px"><p style="font-size:12.8px">Showing the neighbours turns a careless tap into a high-confidence claim — the cheapest false-decline filter there is, and no human check needed. If no points come back in time, the decline still completes but <strong>nothing is logged</strong> (no informed decision).</p></div>
             </div>
           </div>
         </div>
@@ -614,9 +614,9 @@
         <div class="mk">3</div>
         <div class="body">
           <div class="lbl">Emit Signal</div>
-          <h3>Push the signal to Genie <span class="owner genie">Genie owns it next</span></h3>
-          <p>This is the scope boundary. We <strong>build no candidate list, route nothing, de-list no one</strong>. We <strong>push</strong> one clean, self-describing, point-level signal — <em>"CSP X declined connection Y for Location is Far, after being shown these points, in this order"</em> — to Genie. Pushed, not left in a table to poll. We're the system-of-record; Genie owns the decision.</p>
-          <div class="callout" style="margin-top:12px"><p style="font-size:12.8px"><strong>How routing works:</strong> <b>Genie</b> builds each booking's candidate-CSP list by distance from every CSP's active points; <b>DAS</b> then routes among those candidates. We only feed Genie the signal that changes which points count — <b>DAS is affected only indirectly</b>.</p></div>
+          <h3>Log the decline for Genie to read <span class="owner genie">Genie owns it next</span></h3>
+          <p>This is the scope boundary. We <strong>build no candidate list, route nothing, de-list no one</strong>. We <strong>write</strong> one clean, point-level record — <em>"CSP X declined connection Y for Location is Far, after being shown these points, in this order"</em> — to the pre-existing <strong>decline table</strong>. Genie reads from that table. We're the system-of-record; Genie owns the decision.</p>
+          <div class="callout" style="margin-top:12px"><p style="font-size:12.8px"><strong>How routing works:</strong> <b>Genie</b> builds each booking's candidate-CSP list by distance from every CSP's active points; <b>DAS</b> then routes among those candidates. We only log the record Genie reads to change which points count — <b>DAS is affected only indirectly</b>.</p></div>
         </div>
       </div>
 
@@ -626,13 +626,13 @@
         <div class="body">
           <div class="lbl">Analyse &amp; Build Consequence</div>
           <h3>Genie drops the point for that CSP <span class="owner genie">Genie acts</span></h3>
-          <p>Using the signal, Genie applies its own threshold: once a CSP's <strong>point (active or splitter)</strong> crosses the bar, Genie <strong>stops counting it in the distance calc for him</strong>. From then he <strong>isn't surfaced for new bookings near it</strong> — so DAS never routes them to him. The clutter is gone from his feed, and the booking goes to a CSP who will install. What the threshold is, and what "de-list" means, is <strong>Genie's to decide</strong> — out of scope of our PRDs.</p>
+          <p>Using the logged declines, Genie applies its own threshold: once a CSP's <strong>point (active or splitter)</strong> crosses the bar, Genie <strong>stops counting it in the distance calc for him</strong>. From then he <strong>isn't surfaced for new bookings near it</strong> — so DAS never routes them to him. The clutter is gone from his feed, and the booking goes to a CSP who will install. What the threshold is, and what "de-list" means, is <strong>Genie's to decide</strong> — out of scope of our PRDs.</p>
           <div class="thresh">
-            <div class="pt"><div class="cnt">≥N</div><div class="lab">signals on a point</div></div>
+            <div class="pt"><div class="cnt">≥N</div><div class="lab">declines on a point</div></div>
             <div class="arrow">→</div>
             <div class="res"><b>Genie stops counting that point</b> for this CSP → not a candidate for nearby bookings → DAS routes them elsewhere.</div>
           </div>
-          <p style="font-size:12.6px; color:var(--muted); margin-top:10px">Threshold is Genie's own. Every point sent is one the CSP was shown in Step 2 and still rejected.</p>
+          <p style="font-size:12.6px; color:var(--muted); margin-top:10px">Threshold is Genie's own. Every point logged is one the CSP was shown in Step 2 and still rejected.</p>
         </div>
       </div>
 
@@ -643,9 +643,9 @@
       <h3 style="font-size:19px; margin-top:6px">How we'll know it worked</h3>
     </div>
     <div class="stats" style="grid-template-columns:repeat(2,1fr)">
-      <div class="stat up"><div class="dir">● our success</div><div class="m">Every deliberate decline emits a valid point-level signal to Genie</div><div class="k">the loop is clean and complete — what this layer owns</div></div>
-      <div class="stat down"><div class="dir">▼ loop outcome</div><div class="m">First-routed CSP declines "too far" less often</div><div class="k">Genie stops routing far bookings to him → fewer re-routes</div></div>
-      <div class="stat down"><div class="dir">▼ loop outcome</div><div class="m">Share of "Location is Far" declines</div><div class="k">far / irrelevant bookings stop reaching the wrong CSP</div></div>
+      <div class="stat up"><div class="dir">● our success</div><div class="m">Every deliberate decline writes a valid point-level record to the decline table</div><div class="k">the loop is clean and complete — what this layer owns</div></div>
+      <div class="stat down"><div class="dir">▼ loop outcome</div><div class="m">"Too far" declines ↓ (across all attempts)</div><div class="k">far / irrelevant bookings stop reaching a CSP who can't serve</div></div>
+      <div class="stat down"><div class="dir">▼ loop outcome</div><div class="m">Fewer re-routes to first acceptance</div><div class="k">Genie stops routing far bookings to the wrong CSP → the booking is accepted in fewer hops</div></div>
       <div class="stat down"><div class="dir">▼ loop outcome</div><div class="m">Prevented mis-routes — tasks never created for a CSP near a rejected point</div><div class="k">clutter removed before it's even offered</div></div>
     </div>
     <p style="font-size:12.5px; color:var(--muted); margin-top:12px">Success is a <strong>trustworthy signal</strong>, not fewer declines or making CSPs reconsider — a confirmed "too far" is good information the routing system needs. The reconsideration rate is a signal-quality diagnostic, not a target. Loop outcomes are Genie-driven, tracked at the loop level.</p>
