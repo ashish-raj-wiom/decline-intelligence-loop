@@ -414,7 +414,7 @@
             <td class="emit">"Customer refused, verify".<br><span class="own">→ Customer backend</span></td>
             <td class="cons"><pre class="mermaid">flowchart TD
   V["Ask the customer — chat/call/IVR/WhatsApp"] -->|"Doesn't want it"| C["Cancel booking + refund"]
-  V -->|"Wants it"| W["Keep · signal CSP was wrong"]</pre><span class="own">Customer backend</span></td>
+  V -->|"Wants it"| W["Keep · CSP-was-wrong signal → Quality OS"]</pre><span class="own">Customer backend · Quality OS</span></td>
             <td><ul class="mlist"><li>Refusals verified with the customer</li><li>Cancel-vs-keep split</li><li>False-decline rate (customer actually wanted it)</li></ul></td>
             <td><span class="vtag new">proposed</span></td>
           </tr>
@@ -683,11 +683,11 @@
 
           <div class="step act"><div class="mk">4</div><div class="body">
             <div class="lbl">Analyse &amp; Build Consequence</div>
-            <h3>Ask the customer — he decides <span class="owner genie">Customer backend owns it</span></h3>
+            <h3>Ask the customer — he decides <span class="owner genie">Customer backend · Quality OS</span></h3>
             <p>The customer is asked — via <strong>chat / call / IVR / WhatsApp</strong>, whichever the customer side finds fit — whether he wants the installation done. His answer decides:</p>
             <pre class="mermaid">flowchart TD
   V["Ask the customer — chat / call / IVR / WhatsApp"] -->|"Doesn't want it"| C["Cancel booking + refund"]
-  V -->|"Wants it"| W["Keep booking · signal back that the CSP was wrong"]</pre>
+  V -->|"Wants it"| W["Keep booking · CSP-was-wrong signal → Quality OS"]</pre>
           </div></div>
 
         </div>
