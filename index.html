@@ -338,7 +338,7 @@
     <p class="lede">Turn <b>every decline reason</b> into a <b>self-learning loop</b> — capture the reason in context, send a clean signal to the service that owns that problem, and let it fix the root cause. <b>Each reason is a roadmap item</b>; we start by cleaning up the reason list itself.</p>
     <div class="metastrip">
       <span><b>Spine:</b> Show → Assist/Verify &amp; Capture → Emit Signal → Analyse &amp; Build Consequence</span>
-      <span><b>First live:</b> Location is Far (≈65% of declines) · go-live 19 Aug</span>
+      <span><b>First live:</b> Location is Far (≈65% of declines) · go-live 21 Aug</span>
       <span><b>Status:</b> for leadership review</span>
     </div>
   </div>
@@ -378,7 +378,7 @@
         <p>Redefine the decline reason set — drop redundant reasons, add "address" &amp; "no technician", randomise the order. Ships with the first release.</p>
       </div>
       <div class="rmi-m">
-        <span class="vtag keep">go-live 19&nbsp;Aug</span>
+        <span class="vtag keep">go-live 21&nbsp;Aug</span>
         <a class="detbtn" href="#wex-reasons">Details</a>
       </div>
     </div>
@@ -405,7 +405,7 @@
             <td class="emit">Point-level signal — connection + customer, CSP, rejected points.<br><span class="own g">→ Genie</span></td>
             <td class="cons">De-lists the point → not a candidate for nearby bookings → DAS stops routing them to him.<br><span class="own g">Genie</span></td>
             <td><ul class="mlist"><li>Signal integrity — 100% of deliberate declines emit a valid signal</li><li>First-CSP "too far" declines ↓</li><li>Coverage-decline share ↓</li><li>Prevented mis-routes</li></ul></td>
-            <td><span class="vtag keep">go-live 19&nbsp;Aug</span></td>
+            <td><span class="vtag keep">go-live 21&nbsp;Aug</span></td>
           </tr>
           <tr>
             <td class="reason"><b>The customer said no</b><br><a class="detbtn" href="#wex-cust">Details</a></td>
@@ -466,7 +466,7 @@
         </tbody>
       </table>
     </div>
-    <p style="font-size:12.8px; color:var(--muted); margin-top:12px"><strong>Location is Far</strong> is signed off (go-live 19 Aug); <strong>"the customer said no"</strong>, <strong>"I don't have a device"</strong>, <strong>"couldn't understand address"</strong> and <strong>"no one free to install"</strong> are proposed. Only <strong>"Another reason"</strong> is <strong>not proposed yet</strong> — blank cells mean the loop hasn't been designed; metrics for proposed reasons are indicative.</p>
+    <p style="font-size:12.8px; color:var(--muted); margin-top:12px"><strong>Location is Far</strong> is signed off (go-live 21 Aug); <strong>"the customer said no"</strong>, <strong>"I don't have a device"</strong>, <strong>"couldn't understand address"</strong> and <strong>"no one free to install"</strong> are proposed. Only <strong>"Another reason"</strong> is <strong>not proposed yet</strong> — blank cells mean the loop hasn't been designed; metrics for proposed reasons are indicative.</p>
     <p style="font-size:12.5px; color:var(--muted); margin-top:8px"><strong>Dependency (device):</strong> a parallel feature that <strong>stops sending bookings to a CSP with 0 devices</strong> is under development. If it ships first, the "0 available" branch won't trigger — but this story still handles that case as a fallback.</p>
   </div>
 </section>
@@ -526,7 +526,7 @@
     </div>
 
     <details class="archive" id="wex-reasons">
-      <summary><span class="tag">go-live 19 Aug</span> 1 · Improve the reasons list — what changed &amp; why <span class="chev">›</span></summary>
+      <summary><span class="tag">go-live 21 Aug</span> 1 · Improve the reasons list — what changed &amp; why <span class="chev">›</span></summary>
       <div class="archbody">
         <p style="font-size:13.5px; margin:12px 0 6px">The list the CSP picks from was redefined and <strong>signed off</strong> (<a href="https://ashish-raj-wiom.github.io/decline-reason-set-prd/" style="color:var(--sys-ink)">Reason Set PRD</a>). Here's what was captured before, what's proposed, and why.</p>
 
@@ -562,7 +562,7 @@
     </details>
 
     <details class="archive" id="wex-far">
-      <summary><span class="tag">go-live 19 Aug</span> Location is Far — the full four steps <span class="chev">›</span></summary>
+      <summary><span class="tag">go-live 21 Aug</span> Location is Far — the full four steps <span class="chev">›</span></summary>
       <div class="archbody">
         <p style="font-size:13.3px; margin:12px 0 2px; color:var(--ink2)">Signed off on both sides — the <a href="https://ashish-raj-wiom.github.io/coverage-decline-assist-prd/" style="color:var(--sys-ink)">CSP-side PRD</a> and the <a href="https://ashish-raj-wiom.github.io/genie-coverage-integration-prd/" style="color:var(--sys-ink)">Genie PRD</a>.</p>
 
@@ -743,7 +743,7 @@
 
 <footer>
   <div class="wrap">
-    <p><strong>Decline Intelligence — every reason, one 4-step loop.</strong> Concept built on the CSP decline analysis (Jun–Aug 2026). The spine — Show → Assist/Verify &amp; Capture → Emit Signal → Analyse &amp; Build Consequence — applies to all six reasons; <strong>Location is Far</strong> (~65% of declines) is signed off (CSP + Genie PRDs), go-live expected 19 Aug. This is a capture + system-of-record layer; Genie, the customer-side, Supply, Availability and Analytics act on the signals it publishes. Owning services for the five non-built reasons are proposed, for discussion. Ashish Raj.</p>
+    <p><strong>Decline Intelligence — every reason, one 4-step loop.</strong> Concept built on the CSP decline analysis (Jun–Aug 2026). The spine — Show → Assist/Verify &amp; Capture → Emit Signal → Analyse &amp; Build Consequence — applies to all six reasons; <strong>Location is Far</strong> (~65% of declines) is signed off (CSP + Genie PRDs), go-live expected 21 Aug. This is a capture + system-of-record layer; Genie, the customer-side, Supply, Availability and Analytics act on the signals it publishes. Owning services for the five non-built reasons are proposed, for discussion. Ashish Raj.</p>
   </div>
 </footer>
 
