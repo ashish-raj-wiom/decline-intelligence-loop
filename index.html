@@ -439,12 +439,12 @@
             <td>Show the <b>address + customer voice message + call CTA</b>; <b>nudge</b> him to call the customer (not forced — never blocked). Post-call, if still unresolved, capture <b>free-text (what's wrong)</b> + the case:
               <pre class="mermaid">flowchart TD
   S["Nudge: call the customer"] -->|"Now clear"| N["No decline"]
-  S -->|"Reached · still wrong"| A["Decline + free-text defect"]
-  S -->|"Couldn't reach"| B["Decline + 'couldn't reach'"]</pre>
+  S -->|"Spoke · still wrong"| A["Decline + free-text defect"]
+  S -->|"No answer"| B["Decline + 'customer didn't answer'"]</pre>
             </td>
             <td class="emit">Full-context signal — booking, customer, CSP, address shown, voice-msg, <b>call recording</b>, call outcome, free-text defect / case.<br><span class="own">→ Ops</span></td>
             <td class="cons">Ops confirms with the customer (and CSP if needed). <b>Confirmed →</b> writes a clean address to the <b>customer profile</b>, used by future allocations. <b>Unresponsive after N tries →</b> leave the address as-is — no cancel / reschedule / routing hold; the booking re-routes normally. Only an Ops update changes anything, and only forward.<br><span class="own">Ops</span></td>
-            <td><ul class="mlist"><li>Call-made rate</li><li>On-call resolution (no decline)</li><li>Reached-but-wrong vs couldn't-reach split</li><li>Ops address-update rate</li><li>Unresponsive-drop rate</li><li>Repeat-defect by customer / area</li></ul></td>
+            <td><ul class="mlist"><li>Call-made rate</li><li>On-call resolution (no decline)</li><li>Spoke-but-wrong vs no-answer split</li><li>Ops address-update rate</li><li>Unresponsive-drop rate</li><li>Repeat-defect by customer / area</li></ul></td>
             <td><span class="vtag new">proposed</span></td>
           </tr>
           <tr>
